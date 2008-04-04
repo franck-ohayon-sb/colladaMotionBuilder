@@ -1,0 +1,67 @@
+# Sconstruct for FCollada Library and Test executable for Linux
+import os
+import glob
+import shutil
+import string
+execfile("../SconsCommon.py")
+
+# Parse the arguments.
+ifdebug = ARGUMENTS.get('debug', "0") #Default is Retail.
+ifnumber = ARGUMENTS.get('target', "0") #Default is help.
+ifunicode = ARGUMENTS.get('unicode', "0") #Default is non-unicode.
+ifshared = ARGUMENTS.get('shared', "0") #Default is non-static.
+cdebug = int(ifdebug)
+cnumber = int(ifnumber)
+cunicode = int(ifunicode)
+cshared = int(ifshared)
+
+# This is the name of the build.
+buildName = BuildName(ifdebug, ifunicode, ifshared)
+
+# Specific Help text.
+Help("""
+==========================USER HELP=======================================
+Type 'scons debug=x unicode=x target=1' to compile files for Linux.
+    If debug=0, version of code compiled is release.
+       debug=1, version of code compiled is debug.
+    If unicode=0, the libraries built doesn't support unicode. 
+       unicode=1, the libraries built supports unicode.
+    If shared=0, the archiving plug-in is built for FCollada static.
+       shared=1, the archiving plug-in is built for FCollada shared.
+    If target=1, all libraries are built.
+Add '-c' at the end of the command line with target 2 or 3 to clean 
+	up object files.
+==========================================================================""")
+
+if cnumber == 0:
+    print "=====================ATTENTION================================="
+    print "Please type 'scons -h' to see what to type in the command line."
+    print "==============================================================="    
+
+# Build all.
+elif cnumber == 1:
+    buildString = "scons debug=" + ifdebug + " shared=" + ifshared + " unicode=" + ifunicode + " target="
+    os.system(buildString + "2")
+    os.system(buildString + "3")
+
+# FCollada Library.
+elif cnumber == 2:
+	print 'This will build the FArchiveXML static plugin.'
+	outputFolder = "Output/FArchiveXML/" + buildName + "/Intermediate"
+	if not os.path.exists(outputFolder):
+		os.makedirs(outputFolder)
+	SConscript('FArchiveXML/Sconscript', build_dir=outputFolder, duplicate=0)
+
+# FArchiveBinary plug-in?
+elif cnumber == 3:
+	if cshared == 1 and os.path.exists("FArchiveBinary"):
+		print 'This will build the FArchiveBinary plug-in.'
+		outputFolder = "Output/FArchiveBinary/" + buildName + "/Intermediate"
+		if not os.path.exists(outputFolder): os.makedirs(outputFolder)
+		SConscript('FArchiveBinary/Sconscript', build_dir=outputFolder, duplicate=0)
+	else: print 'Skipping the FArchiveBinary plug-in'
+
+# In case target number is not in this list.
+else:
+    print "Target number un-recognized. Type 'scons -h' to know which targets are available."
+

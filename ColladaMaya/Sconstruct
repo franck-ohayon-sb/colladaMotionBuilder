@@ -1,0 +1,138 @@
+#Sconstruct for Win32 for FCollada and FGUIViewer
+#by Veronique Laforte, Dec. 14th 2006
+import os
+import glob
+import shutil
+import string
+
+ifdebug = ARGUMENTS.get('debug', "0") #Default is Retail.
+ifversion = ARGUMENTS.get('version', "70") #Default is Maya7.0
+ifnumber = ARGUMENTS.get('target', "0") #Default is help
+ifshared = ARGUMENTS.get('shared', "0") #Default is static, both will be built anyhow.
+
+os.system('chmod -R 766 Output')
+print "Getting directory and file permissions."
+
+#A specific help section.
+Help("""
+==========================USER HELP=======================================
+Type 'scons debug=x version=x target=1' to compile files for Linux.
+    If debug=0, version of code compiled is retail.
+       debug=1, version of code compiled is debug.
+    If version=70, ColladaMaya 7.0 is used.
+       version=80, ColladaMaya 8.0 is used.
+       version=85, ColladaMaya 8.5 is used.
+NOTE: Make sure that FCollada debug or retail has been compiled.
+To install the files, please log in as root, and type
+    'scons debug=x version=x target=99' with the same options for debug
+	and version as you used for the compilation step.
+==========================================================================""")
+
+if int(ifnumber) == 0:
+    print "=====================ATTENTION================================="
+    print "Please type 'scons -h' to see what to type in the command line."
+    print "==============================================================="    
+
+elif int(ifnumber) == 1:
+    if int(ifdebug) == 0:
+        cdebug = int(0)
+    elif int(ifdebug) == 1:
+        cdebug = int(1)
+    else:
+        print "Debug variable should be set to 1 for debug, and 0 for release."
+    if int(ifversion) == 70:
+        cversion = int(70)    
+    elif int(ifversion) == 80:
+        cversion = int(80)
+    elif int(ifversion) == 85:
+	cversion = int(85)
+    else:
+        print "Only versions 7.0, 8.0 and 8.5 of Maya are supported in this release."
+    
+    cdebug = int(ifdebug)
+    command1 = 'scons debug=' + str(cdebug) + ' version=' + str(cversion) + ' target=2'
+    command2 = 'scons debug=' + str(cdebug) + ' version=' + str(cversion) + ' target=100'
+    print command2
+    os.system(command2)
+    print command1
+    os.system(command1 + ' shared=0')
+    os.system(command1 + ' shared=1')
+
+
+#ColladaMaya Library.
+elif int(ifnumber) == 2:
+    if int(ifdebug):
+        if int(ifversion) == 70:
+	        SConscript('Sconscript', build_dir='Output/Debug70/Intermediate', duplicate=0)
+	elif int(ifversion) == 80:
+	        SConscript('Sconscript', build_dir='Output/Debug80/Intermediate', duplicate=0)
+	else:
+		SConscript('Sconscript', build_dir='Output/Debug85/Intermediate', duplicate=0)
+    else:
+	if int(ifversion) == 70:
+	        SConscript('Sconscript', build_dir='Output/Retail70/Intermediate', duplicate=0)
+	elif int(ifversion) == 80:
+	        SConscript('Sconscript', build_dir='Output/Retail80/Intermediate', duplicate=0)
+	else:
+		SConscript('Sconscript', build_dir='Output/Retail85/Intermediate', duplicate=0)
+
+#Move all the necessary files.
+elif int(ifnumber) == 99:
+    if int(ifversion) == 80:
+        smayapath = '/usr/aw/maya8.0/'
+        if int(ifdebug):
+            soutput = 'Output/Debug80'
+        else:
+            soutput = 'Output/Retail80'
+    elif int(ifversion) == 70:
+        smayapath = '/usr/aw/maya7.0/'
+        if int(ifdebug):
+            soutput = 'Output/Debug70'
+        else:
+            soutput = 'Output/Retail70'
+    else:
+	smayapath = '/usr/autodesk/maya8.5/'
+        if int(ifdebug):
+            soutput = 'Output/Debug85'
+        else:
+            soutput = 'Output/Retail85'
+
+    os.system('cp ' + soutput + '/libCOLLADA.so ' + soutput + '/COLLADA.so')
+    os.system('cp ' + soutput + '/COLLADA.so ' + smayapath + 'bin/plug-ins/')
+    for name in glob.glob('scripts/co*.mel'):
+        print "Copying file " + name
+        shutil.copy2(name, smayapath + 'scripts/others/')
+    for name in glob.glob('scripts/AE*.mel'):
+        print "Copying file " + name
+        shutil.copy2(name, smayapath + 'scripts/AETemplates/')
+    for name in glob.glob('scripts/*.xpm'):
+        print "Copying file " + name
+        shutil.copy2(name, smayapath + 'icons/')
+    
+
+#Figure out directories for DEBUG vs. RETAIL versions of code, with unicode.
+elif int(ifnumber) == 100:
+    if int(ifversion) == 80:
+        numv = int(80)
+    elif int(ifversion) == 70:
+        numv = int(70)
+    else:
+	numv = int(85)
+    if int(ifdebug):
+        sdbg = str('Debug')
+    else:
+        sdbg = str('Retail')
+    stype = sdbg + str(numv)
+
+    print "Checking and building Output Tree"
+    if not os.path.exists('Output'): os.mkdir('Output')
+    os.chdir('Output')
+    if not os.path.exists(stype): os.mkdir(stype)
+    os.chdir(stype)
+    if not os.path.exists('Intermediate'): os.mkdir('Intermediate')
+    os.chdir('../..')
+
+
+#In case target number is not in this list.
+else:
+    print "Target number un-recognized. Type 'scons -h' to know which targets are available."

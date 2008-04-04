@@ -1,0 +1,464 @@
+global proc string AEcolladafxPasses_beginCallback( int $iLayout )
+{
+    string $sNodeName;
+
+    // Find the requested instance of our colladafxPasses AE template.
+    string $sLayout = "colladafxPasses_AEinstance" + $iLayout;
+    if ( `layout -exists $sLayout` )
+    {
+        // Get the name of the colladafxPasses node associated with this layout.
+        setParent $sLayout;
+        $sNodeName = `nameField -q -object nfNode`;
+
+        $sLayout = AEcolladafxPasses_closestAncestor( "scrollLayout" );
+        setParent $sLayout;
+    }
+    return $sNodeName;
+}
+
+
+global proc AEcolladafxPasses_beginNew( string $sNodeAttr )
+{
+    global int $gAEcolladafxPasses_bNew;    // OUT: true because not same node
+    global int $gAEcolladafxPasses_iLayout; // OUT: new template instance id        
+    global int $gAEcolladafxPasses_nLayout; // UPD: highest used instance id
+
+    // Assign a unique serial number to identify this AE template instance.
+    $gAEcolladafxPasses_iLayout = ++$gAEcolladafxPasses_nLayout;
+    $gAEcolladafxPasses_bNew    = true; 
+
+    // Create a uniquely named hidden layout.  
+    //   Callbacks use this to help find their UI elements and node name.
+    string $sLayout = "colladafxPasses_AEinstance" + $gAEcolladafxPasses_iLayout;
+    columnLayout -manage 0 $sLayout;   
+ 
+    // Stash the colladafxPasses node name in a hidden nameField.
+    // - In the event the user renames the node, the
+    //   nameField will update itself to the new name.  
+    // - Saving the name allows us to distinguish between 
+    //   refreshing an existing layout vs. switching the
+    //   layout to attach to a different colladafxPasses node.
+    string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+    nameField -manage 0
+              -object $sNodeName
+              nfNode;
+}
+
+global proc AEcolladafxPasses_beginReplace( string $sNodeAttr )
+{
+    global int $gAEcolladafxPasses_bNew;    // OUT: true if different node     
+    global int $gAEcolladafxPasses_iLayout; // OUT: template instance id        
+
+    // Get our unique layout name.  It is the current layout's first child.
+    string $sParent  = `setParent -q`;
+    string $saKids[] = `layout -q -ca $sParent`;
+    string $sKid     = $saKids[0];
+
+    // The layout name contains the id of this AE template instance.
+    //   Extract it and pass it via a global variable to our
+    //   subsequent UI building functions.
+    string $sIndex  = `match "[0-9]+" $sKid`;
+    string $sLayout = "colladafxPasses_AEinstance" + $sIndex;
+    if ( $sKid != $sLayout )
+        error -sl 1 "AEcolladafxPassesTemplate.mel internal error";
+
+    $gAEcolladafxPasses_iLayout = $sIndex;
+
+    // If this template instance is already associated with the
+    // given colladafxPasses node, clear global flag to tell subsequent
+    // UI building functions that the existing controls can be kept.
+    string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+    if ( $sNodeName == `nameField -q -object nfNode` )
+        $gAEcolladafxPasses_bNew = false;
+    else
+    {
+        $gAEcolladafxPasses_bNew = true;
+        nameField -e
+                  -object $sNodeName
+                  nfNode;
+    }
+}
+
+// build up button controls for reload
+global proc AEcolladafxPasses_buttonControl(int $iLayout)
+{
+	string $sCmdAddPass = "AEcolladafxPasses_addPass " + $iLayout;
+    string $sCmdRemovePass = "AEcolladafxPasses_removePass " + $iLayout;
+    string $sCmdAddTech = "AEcolladafxPasses_addTechniquePopup " + $iLayout;
+    string $sCmdRemoveTech = "AEcolladafxPasses_removeCurrentTechnique " + $iLayout;
+    string $sCmdLoadCgFX = "AEcolladafxPasses_fileBrowser " + $iLayout + " cg \"/renderData/shaders\"";
+    
+	rowLayout -numberOfColumns 2
+		-columnWidth2 80 120
+		-columnAlign 1 "right"
+		-columnAttach 1 "both" 2
+		-columnAttach 2 "both" 2;
+		
+	text -l "";
+	button -l "Load CgFX..." -align "center" -c $sCmdLoadCgFX;
+		
+	setParent ..;
+	
+	rowLayout -numberOfColumns 3
+		-columnWidth3 80 60 60
+		-columnAlign 1 "right"
+		-columnAttach 1 "both" 2
+		-columnAttach 2 "both" 2
+		-columnAttach 3 "both" 2;
+		
+	text -l "Techniques";
+	button -l "Add" -align "center" -c $sCmdAddTech;
+	button -l "Remove" -align "center" -c $sCmdRemoveTech;
+	
+	setParent ..;
+	
+	rowLayout -numberOfColumns 2
+		-columnWidth2 80 120
+		-columnAlign 1 "right"
+		-columnAttach 1 "both" 2
+		-columnAttach 2 "both" 2;
+		
+	string $sCmdOnSelectionChanged = "AEcolladafxPasses_onTechniqueChanged " + $iLayout;
+
+	text -l "Select\ntechnique";
+	textScrollList
+		-allowMultiSelection false 
+		-numberOfRows 4
+		-selectCommand $sCmdOnSelectionChanged
+		techniqueScrollList;
+				
+	setParent ..;
+	
+	rowLayout -numberOfColumns 3 
+ 		-columnWidth3 80 60 60
+ 		-columnAlign  1 "right"
+ 		-columnAttach 1 "both" 	2
+ 		-columnAttach 2 "both"  2
+ 		-columnAttach 3 "both"  2;
+ 		
+ 		text - l "Passes";
+ 		button -l "Add" -align "center" -c $sCmdAddPass;
+ 		button -l "Remove" -align "center" -c $sCmdRemovePass;
+ 		
+	setParent ..;	
+}
+
+global proc AEcolladafxPasses_vertShaderNew( string $sNodeAttr )
+{
+    global int $gAEcolladafxPasses_iLayout; // IN: AE instance id for callbacks
+    
+    // Create a column layout.
+    setUITemplate -pst attributeEditorTemplate;
+    columnLayout -adj 1
+                 -visible 0
+                 -rowSpacing 5
+                 colladafxPassesLayout; 
+
+	AEcolladafxPasses_buttonControl( $gAEcolladafxPasses_iLayout );
+
+    // Clean up.  Initialize the controls.
+    setParent ..;
+    setUITemplate -ppt;
+    AEcolladafxPasses_vertShaderReplace( $sNodeAttr );
+
+    // Make the layout visible.
+    layout -e
+           -visible 1
+           colladafxPassesLayout;
+}
+
+global proc string AEcolladafxPasses_stripTechName(string $sTechName)
+{
+	int $sSize = `size($sTechName)`;
+	// strips the "cfx" prefix
+	string $name = `substring $sTechName 4 $sSize`;
+	return $name;
+}
+
+global proc string AEcolladafxPasses_decorateTechName(string $sTechName)
+{
+	// add the "cfx" prefix
+	return "cfx" + $sTechName;
+}
+
+global proc AEcolladafxPasses_vertShaderReplace( string $sNodeAttr )
+{
+    global int $gAEcolladafxPasses_iLayout; // IN: AE instance id for callbacks
+    string $sNodeName = AEcolladafxPasses_beginCallback( $gAEcolladafxPasses_iLayout );
+    
+    // edit this layout
+    setParent colladafxPassesLayout;
+    
+    //print("a\n");
+    
+    // remove everything
+    textScrollList -edit -removeAll techniqueScrollList;
+    
+    // fill up the technique scroll list with values
+    string $asTechniqueNames[] = `getAttr ($sNodeName + ".cfxTechniques")`;
+    for($name in $asTechniqueNames)
+    {
+		$name = `AEcolladafxPasses_stripTechName $name`;
+		textScrollList -edit -append $name techniqueScrollList;
+    }
+    
+    // select the chosen technique
+    string $sCurrentShadingTech = `getAttr ($sNodeName + ".cfxChosenTechnique")`;
+    if( $sCurrentShadingTech != "" )
+    {
+		$sCurrentShadingTech = `AEcolladafxPasses_stripTechName $sCurrentShadingTech`;
+		textScrollList -edit -selectItem $sCurrentShadingTech techniqueScrollList;
+	}
+
+    setParent ..; // end of colladafxPassesLayout
+    
+}
+
+// Return full name of the closest ancestor layout of a given type, or "".
+global proc string AEcolladafxPasses_closestAncestor( string $sObjectTypeUI )
+{
+    string $sPrev;
+    string $sLayout = `setParent -q`;
+    while ( !`objectTypeUI -isType $sObjectTypeUI $sLayout` )
+    {
+        $sPrev = $sLayout;
+        $sLayout = `substitute "|[^|]*$" $sLayout ""`;  // drop rightmost "|name"
+        if ( $sLayout == $sPrev )
+            return "";
+    }
+    return $sLayout;
+}
+
+global proc AEcolladafxPasses_onTechniqueChanged( int $iLayout )
+{
+	string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+	setParent colladafxPassesLayout;
+	
+	string $selectedTechnique[] = `textScrollList -query -selectItem techniqueScrollList`;
+	if(size($selectedTechnique) != 0)
+	{
+		string $chosenTech = AEcolladafxPasses_decorateTechName($selectedTechnique[0]);
+		setAttr ($sNodeName + ".cfxChosenTechnique") -type "string" $chosenTech;
+	}
+	setParent ..; // we need to be at this layout level before the next call
+	AEcolladafxPasses_passLayout( ($sNodeName + ".cfxChosenTechnique") );
+}
+
+global proc AEcolladafxPasses_addTechniquePopup(int $iLayout)
+{
+	string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+	
+	string $win = `window -title ($sNodeName + " > Add New Technique")`;
+	
+	columnLayout
+		-columnAlign "center"
+		-columnAttach "both" 0
+		-rowSpacing 5
+		-adj true;
+		
+	textFieldGrp
+		-label "Name"
+		-text "technique"
+		techNameFieldGrp;
+		
+	button
+		-label "Add Technique"
+		-command ("AEcolladafxPasses_addTechnique " + $iLayout + " techNameFieldGrp " + $win);
+		
+	setParent ..;
+	
+	showWindow $win;
+}
+
+global proc AEcolladafxPasses_addTechnique(int $iLayout, string $sTextFieldGrp, string $sWin)
+{
+    string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+    setParent colladafxPassesLayout;
+    
+    string $techName = `textFieldGrp -query -text $sTextFieldGrp`;
+
+    string $sCmd = "colladafxShaderCmd -at \"" + $sNodeName + "\" \"" + $techName + "\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+    
+    // close the window
+    deleteUI $sWin;
+}
+
+global proc AEcolladafxPasses_removeCurrentTechnique( int $iLayout )
+{
+	string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+
+    string $sCmd = "colladafxShaderCmd -rt \"" + $sNodeName + "\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+global proc AEcolladafxPasses_addPass( int $iLayout )
+{
+    string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+    setParent colladafxPassesLayout;
+
+    string $sCmd = "colladafxShaderCmd -ap \"" + $sNodeName + "\" pass;\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+global proc AEcolladafxPasses_removePass( int $iLayout )
+{
+    string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+    setParent colladafxPassesLayout;
+
+    string $sCmd = "colladafxShaderCmd -rp \"" + $sNodeName + "\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+global proc AEcolladafxPasses_passLayout( string $sNodeAttr )
+{
+	// Delete old controls.
+	string $sLayoutRel = "colladafxPassesLayout";
+	string $sLayoutAbs = `setParent -q` + "|" + $sLayoutRel;
+	print("Testing existence of " + $sLayoutAbs + "\n");
+	if ( `layout -exists $sLayoutAbs` )
+        	deleteUI $sLayoutAbs;
+	
+	// Retrieve the node name.
+	string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+	
+	// extract the arribute list
+	string $chosenTechniqueName = `getAttr $sNodeAttr`;
+	
+	if($chosenTechniqueName != "")
+	{
+		print("Chosen technique = " + $chosenTechniqueName + "\n");
+		
+		string $chosenTechniquePasses[] = `getAttr ($sNodeName + "." + $chosenTechniqueName)`;
+		print("Number of passes = " + size($chosenTechniquePasses) + "\n");
+		
+		string $chosenTechniqueConnectionsName = $sNodeName + "." + $chosenTechniqueName + "_outColors";
+		print("Connection attribute name = " + $chosenTechniqueConnectionsName + "\n");
+		
+		// Create a column layout to hold the new controls.
+		setUITemplate -pst attributeEditorTemplate;
+		
+		columnLayout -adj 1
+					 -visible 0
+					 $sLayoutRel;
+	                 
+		int $i;
+		for( $i = 0; $i < size($chosenTechniquePasses); $i++ ) {
+		
+			// this line is very tricky
+			// Maya automatically allocates a new array element if the $i variable is larger than the array size
+			// Final impact: When a ColladaFXShader shading node is selected, it creates a connection with
+			// the inPass element (which is a color attribute) and the shading node's outColor attribute.
+			// One thing to remember when doing this is that ColladaMaya needs the passNames attribute
+			// (typed MStringArray) to have at least the same number of elements than in the inPass array.
+			
+			print("Adding pass to layout : " + $chosenTechniquePasses[$i] + "\n");
+			
+			int $offset = size($chosenTechniqueName) + 2;
+			int $end = size($chosenTechniquePasses[$i]);
+			string $passLabel = `substring $chosenTechniquePasses[$i] $offset $end`;
+			
+			attrNavigationControlGrp 
+				-l $passLabel
+				-attribute ( $chosenTechniqueConnectionsName + "[" + $i + "]" );
+		}
+	}
+	setParent ..;
+	setUITemplate -ppt;
+	layout -e -visible 1 $sLayoutRel;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// UTILITIES
+///////////////////////////////////////////////////////////////////////////////
+global proc AEcolladafxPasses_fileBrowser( int    $iLayout,
+                                      string $sFileFormat,
+                                      string $projectDir )
+{
+    // Determine initial directory for file browser.
+    string $sWorkspace = `workspace -q -fn`;
+    
+    // prototype: setWorkingDirectory <current project dir> <file format> <object type>;
+    setWorkingDirectory $sWorkspace $sFileFormat "colladafx";
+
+    // Set up args for callback.
+    //   In addition to the args we provide, the fileBrowser will 
+    //   append two more: the chosen file name, and file type.
+
+    // Invoke the file browser dialog.
+    fileBrowser( "AEcolladafxPasses_fileChoice " + $iLayout, "Open", "", 0 );
+}
+
+// Callback when user clicks the "Open" button in the file browser
+//   dialog, or changes the text in the file name text field.
+global proc AEcolladafxPasses_fileChoice( int    $iLayout,
+                                     string $sFile,
+                                     string $sFileType )
+{
+    // Save the current working directory so the file browser will
+    // start here next time.
+    string $currentDir = `workspace -q -dir`;
+    retainWorkingDirectory( $currentDir );
+
+	if( `match "cgfx$" $sFile` == "cgfx" ) {
+	
+		// Retrieve the node name.
+		string $sNodeName = AEcolladafxPasses_beginCallback( $iLayout );
+    
+		print("CgFX file selected: " + $sFile + "\n");
+	    string $sCmd = "colladafxShaderCmd -lfx " + $sNodeName + " \"" + $sFile + "\";\n";
+        print ( $sCmd + ";\n" );
+        eval( $sCmd );
+    }
+}
+
+// main entry
+//
+global proc AEcolladafxPassesTemplate( string $node )
+{
+    AEswatchDisplay $node;
+    
+    editorTemplate -beginScrollLayout;
+
+    editorTemplate -callCustom AEcolladafxPasses_beginNew
+                               AEcolladafxPasses_beginReplace
+                               shader;
+
+
+    editorTemplate -beginLayout "ColladaFX" -collapse false;
+    editorTemplate -callCustom AEcolladafxPasses_vertShaderNew
+                               AEcolladafxPasses_vertShaderReplace
+                               outColor;
+                
+    editorTemplate -callCustom AEcolladafxPasses_passLayout
+                               AEcolladafxPasses_passLayout
+                               cfxChosenTechnique;
+    editorTemplate -endLayout;
+    
+
+	// Those attributes are meaningless for colladafx shaders
+	string $suppressed[] = {
+		"outColor", "outTransparency", "outMatteOpacity", "outGlowColor",
+		"shader", "technique", "texCoordSource",
+		"enableHwShading",
+		"miDeriveFromMaya", "miShinyness", "miAngle", 
+		"miSpreadX", "miSpreadY", "miWhiteness", "miSpecularColor", 
+		"miReflectivity", "miRefractiveIndex", "miRefractions", 
+		"miAbsorbs", "miDiffuse", "miColor", "miTransparency", 
+		"miTranslucence", "miTranslucenceFocus", "miNormalCamera",
+		"materialAlphaGain",
+		"passNames"
+	};
+
+	for ($attr in $suppressed)
+		editorTemplate -suppress $attr;
+
+    AEdependNodeTemplate $node;
+	editorTemplate -addExtraControls;
+
+    editorTemplate -endScrollLayout;
+}                                      // AEcolladafxPasses_template

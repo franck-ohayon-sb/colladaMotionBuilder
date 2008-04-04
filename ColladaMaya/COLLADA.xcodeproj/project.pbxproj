@@ -1,0 +1,1990 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		51B910BD0AF95D4E00A53FA2 /* CFXShaderNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B70AF95D4E00A53FA2 /* CFXShaderNode.cpp */; };
+		51B910BE0AF95D4E00A53FA2 /* CFXShaderCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B80AF95D4E00A53FA2 /* CFXShaderCmd.cpp */; };
+		51B910BF0AF95D4E00A53FA2 /* CFXRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B90AF95D4E00A53FA2 /* CFXRenderState.cpp */; };
+		51B910C00AF95D4E00A53FA2 /* CFXPasses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BA0AF95D4E00A53FA2 /* CFXPasses.cpp */; };
+		51B910C10AF95D4E00A53FA2 /* CFXParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BB0AF95D4E00A53FA2 /* CFXParameter.cpp */; };
+		51B910C20AF95D4E00A53FA2 /* CFXBehavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BC0AF95D4E00A53FA2 /* CFXBehavior.cpp */; };
+		51B910C30AF95D4E00A53FA2 /* CFXShaderNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B70AF95D4E00A53FA2 /* CFXShaderNode.cpp */; };
+		51B910C40AF95D4E00A53FA2 /* CFXShaderCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B80AF95D4E00A53FA2 /* CFXShaderCmd.cpp */; };
+		51B910C50AF95D4E00A53FA2 /* CFXRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B90AF95D4E00A53FA2 /* CFXRenderState.cpp */; };
+		51B910C60AF95D4E00A53FA2 /* CFXPasses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BA0AF95D4E00A53FA2 /* CFXPasses.cpp */; };
+		51B910C70AF95D4E00A53FA2 /* CFXParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BB0AF95D4E00A53FA2 /* CFXParameter.cpp */; };
+		51B910C80AF95D4E00A53FA2 /* CFXBehavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BC0AF95D4E00A53FA2 /* CFXBehavior.cpp */; };
+		C314E59708D88F5500B32E64 /* CExportOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E608B203F500B3EA3B /* CExportOptions.cpp */; };
+		C314E59808D88F5500B32E64 /* CMeshExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E708B203F500B3EA3B /* CMeshExporter.cpp */; };
+		C314E59908D88F5500B32E64 /* CReferenceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E808B203F500B3EA3B /* CReferenceManager.cpp */; };
+		C314E59A08D88F5500B32E64 /* CRotateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E908B203F500B3EA3B /* CRotateHelper.cpp */; };
+		C314E59B08D88F5500B32E64 /* CSkewHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EA08B203F500B3EA3B /* CSkewHelper.cpp */; };
+		C314E59C08D88F5500B32E64 /* DaeAnimationLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EB08B203F500B3EA3B /* DaeAnimationLibrary.cpp */; };
+		C314E59D08D88F5500B32E64 /* DaeCameraLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EC08B203F500B3EA3B /* DaeCameraLibrary.cpp */; };
+		C314E59E08D88F5500B32E64 /* DaeControllerLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059ED08B203F500B3EA3B /* DaeControllerLibrary.cpp */; };
+		C314E59F08D88F5500B32E64 /* DaeDoc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EE08B203F500B3EA3B /* DaeDoc.cpp */; };
+		C314E5A008D88F5500B32E64 /* DaeGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EF08B203F500B3EA3B /* DaeGeometry.cpp */; };
+		C314E5A108D88F5500B32E64 /* DaeGeometryLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F008B203F500B3EA3B /* DaeGeometryLibrary.cpp */; };
+		C314E5A208D88F5500B32E64 /* DaeLightLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F108B203F500B3EA3B /* DaeLightLibrary.cpp */; };
+		C314E5A308D88F5500B32E64 /* DaeMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F208B203F500B3EA3B /* DaeMaterialLibrary.cpp */; };
+		C314E5A608D88F5500B32E64 /* DaeSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F508B203F500B3EA3B /* DaeSceneGraph.cpp */; };
+		C314E5A708D88F5500B32E64 /* DaeTextureLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F608B203F500B3EA3B /* DaeTextureLibrary.cpp */; };
+		C314E5A808D88F5500B32E64 /* DaeTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F708B203F500B3EA3B /* DaeTransform.cpp */; };
+		C314E5A908D88F5500B32E64 /* DaeTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F808B203F500B3EA3B /* DaeTranslator.cpp */; };
+		C314E5AC08D88F5500B32E64 /* CAnimationHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FB08B203F500B3EA3B /* CAnimationHelper.cpp */; };
+		C314E5AD08D88F5500B32E64 /* CDagHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FC08B203F500B3EA3B /* CDagHelper.cpp */; };
+		C314E5AE08D88F5500B32E64 /* CMeshHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FD08B203F500B3EA3B /* CMeshHelper.cpp */; };
+		C314E5B008D88F5500B32E64 /* CShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FF08B203F500B3EA3B /* CShaderHelper.cpp */; };
+		C314E5B208D88F5500B32E64 /* HIAnimCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B1BEBC08B8029000ED34BD /* HIAnimCache.cpp */; };
+		C314E5CB08D8921000B32E64 /* StdAfx.h in Headers */ = {isa = PBXBuildFile; fileRef = C314E5CA08D8921000B32E64 /* StdAfx.h */; };
+		C314E5CC08D8921000B32E64 /* StdAfx.h in Headers */ = {isa = PBXBuildFile; fileRef = C314E5CA08D8921000B32E64 /* StdAfx.h */; };
+		C3428D580BAF287300D9004F /* CAnimationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D500BAF287300D9004F /* CAnimationHelper.h */; };
+		C3428D590BAF287300D9004F /* CDagHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D510BAF287300D9004F /* CDagHelper.h */; };
+		C3428D5A0BAF287300D9004F /* CMeshHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D520BAF287300D9004F /* CMeshHelper.h */; };
+		C3428D5D0BAF287300D9004F /* CSetHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D550BAF287300D9004F /* CSetHelper.h */; };
+		C3428D5E0BAF287300D9004F /* CShaderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D560BAF287300D9004F /* CShaderHelper.h */; };
+		C3428D5F0BAF287300D9004F /* HIAnimCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D570BAF287300D9004F /* HIAnimCache.h */; };
+		C3428D600BAF287300D9004F /* CAnimationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D500BAF287300D9004F /* CAnimationHelper.h */; };
+		C3428D610BAF287300D9004F /* CDagHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D510BAF287300D9004F /* CDagHelper.h */; };
+		C3428D620BAF287300D9004F /* CMeshHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D520BAF287300D9004F /* CMeshHelper.h */; };
+		C3428D650BAF287300D9004F /* CSetHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D550BAF287300D9004F /* CSetHelper.h */; };
+		C3428D660BAF287300D9004F /* CShaderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D560BAF287300D9004F /* CShaderHelper.h */; };
+		C3428D670BAF287300D9004F /* HIAnimCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D570BAF287300D9004F /* HIAnimCache.h */; };
+		C3428D690BAF288700D9004F /* MayaConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D680BAF288700D9004F /* MayaConvert.h */; };
+		C3428D6A0BAF288700D9004F /* MayaConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D680BAF288700D9004F /* MayaConvert.h */; };
+		C3428D6C0BAF289E00D9004F /* CNURBSExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6B0BAF289E00D9004F /* CNURBSExporter.cpp */; };
+		C3428D6D0BAF289E00D9004F /* CNURBSExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6B0BAF289E00D9004F /* CNURBSExporter.cpp */; };
+		C3428D710BAF28B900D9004F /* DaeEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6E0BAF28B900D9004F /* DaeEmitter.cpp */; };
+		C3428D720BAF28B900D9004F /* DaeEmitterLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6F0BAF28B900D9004F /* DaeEmitterLibrary.cpp */; };
+		C3428D730BAF28B900D9004F /* DaeForceFieldLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D700BAF28B900D9004F /* DaeForceFieldLibrary.cpp */; };
+		C3428D740BAF28B900D9004F /* DaeEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6E0BAF28B900D9004F /* DaeEmitter.cpp */; };
+		C3428D750BAF28B900D9004F /* DaeEmitterLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6F0BAF28B900D9004F /* DaeEmitterLibrary.cpp */; };
+		C3428D760BAF28B900D9004F /* DaeForceFieldLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D700BAF28B900D9004F /* DaeForceFieldLibrary.cpp */; };
+		C3428D780BAF28C400D9004F /* CFXRenderStateStaticInit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C3428D770BAF28C400D9004F /* CFXRenderStateStaticInit.hpp */; };
+		C3428D790BAF28C400D9004F /* CFXRenderStateStaticInit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C3428D770BAF28C400D9004F /* CFXRenderStateStaticInit.hpp */; };
+		C3428D7F0BAF297D00D9004F /* StdAfx.h in Headers */ = {isa = PBXBuildFile; fileRef = C314E5CA08D8921000B32E64 /* StdAfx.h */; };
+		C3428D800BAF297D00D9004F /* CExportOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9940B7D0C3A00A6FDCF /* CExportOptions.h */; };
+		C3428D810BAF297D00D9004F /* CMeshExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9950B7D0C3A00A6FDCF /* CMeshExporter.h */; };
+		C3428D820BAF297D00D9004F /* CNURBSExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9960B7D0C3A00A6FDCF /* CNURBSExporter.h */; };
+		C3428D830BAF297D00D9004F /* CReferenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9970B7D0C3A00A6FDCF /* CReferenceManager.h */; };
+		C3428D840BAF297D00D9004F /* CRotateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9980B7D0C3A00A6FDCF /* CRotateHelper.h */; };
+		C3428D850BAF297D00D9004F /* CSkewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9990B7D0C3A00A6FDCF /* CSkewHelper.h */; };
+		C3428D860BAF297D00D9004F /* CSplineExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99A0B7D0C3A00A6FDCF /* CSplineExporter.h */; };
+		C3428D870BAF297D00D9004F /* DaeAgeiaPhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99B0B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h */; };
+		C3428D880BAF297D00D9004F /* DaeAnimationCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99C0B7D0C3A00A6FDCF /* DaeAnimationCurve.h */; };
+		C3428D890BAF297D00D9004F /* DaeAnimationLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99D0B7D0C3A00A6FDCF /* DaeAnimationLibrary.h */; };
+		C3428D8A0BAF297D00D9004F /* DaeAnimationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99E0B7D0C3A00A6FDCF /* DaeAnimationTypes.h */; };
+		C3428D8B0BAF297D00D9004F /* DaeAnimClipLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99F0B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h */; };
+		C3428D8C0BAF297D00D9004F /* DaeBaseLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A00B7D0C3A00A6FDCF /* DaeBaseLibrary.h */; };
+		C3428D8D0BAF297D00D9004F /* DaeCameraLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A10B7D0C3A00A6FDCF /* DaeCameraLibrary.h */; };
+		C3428D8E0BAF297D00D9004F /* DaeControllerLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A20B7D0C3A00A6FDCF /* DaeControllerLibrary.h */; };
+		C3428D8F0BAF297D00D9004F /* DaeDoc.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A30B7D0C3A00A6FDCF /* DaeDoc.h */; };
+		C3428D900BAF297D00D9004F /* DaeDocNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A40B7D0C3A00A6FDCF /* DaeDocNode.h */; };
+		C3428D910BAF297D00D9004F /* DaeEmitter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A50B7D0C3A00A6FDCF /* DaeEmitter.h */; };
+		C3428D920BAF297D00D9004F /* DaeEmitterLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A60B7D0C3A00A6FDCF /* DaeEmitterLibrary.h */; };
+		C3428D930BAF297D00D9004F /* DaeEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A70B7D0C3A00A6FDCF /* DaeEntity.h */; };
+		C3428D940BAF297D00D9004F /* DaeEntityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A80B7D0C3A00A6FDCF /* DaeEntityManager.h */; };
+		C3428D950BAF297D00D9004F /* DaeForceFieldLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A90B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h */; };
+		C3428D960BAF297D00D9004F /* DaeGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AA0B7D0C3A00A6FDCF /* DaeGeometry.h */; };
+		C3428D970BAF297D00D9004F /* DaeGeometryLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AB0B7D0C3A00A6FDCF /* DaeGeometryLibrary.h */; };
+		C3428D980BAF297D00D9004F /* DaeInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AC0B7D0C3A00A6FDCF /* DaeInput.h */; };
+		C3428D990BAF297D00D9004F /* DaeLightLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AD0B7D0C3A00A6FDCF /* DaeLightLibrary.h */; };
+		C3428D9A0BAF297D00D9004F /* DaeMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AE0B7D0C3A00A6FDCF /* DaeMaterialLibrary.h */; };
+		C3428D9B0BAF297D00D9004F /* DaeNativePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AF0B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h */; };
+		C3428D9C0BAF297D00D9004F /* DaePhysicsMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B00B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h */; };
+		C3428D9D0BAF297D00D9004F /* DaePhysicsModelLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B10B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h */; };
+		C3428D9E0BAF297D00D9004F /* DaePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B20B7D0C3A00A6FDCF /* DaePhysicsScene.h */; };
+		C3428D9F0BAF297D00D9004F /* DaePhysicsSceneLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B30B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h */; };
+		C3428DA00BAF297D00D9004F /* DaeSceneGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B40B7D0C3A00A6FDCF /* DaeSceneGraph.h */; };
+		C3428DA10BAF297D00D9004F /* DaeTextureLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B50B7D0C3A00A6FDCF /* DaeTextureLibrary.h */; };
+		C3428DA20BAF297D00D9004F /* DaeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B60B7D0C3A00A6FDCF /* DaeTransform.h */; };
+		C3428DA30BAF297D00D9004F /* DaeTranslator.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B70B7D0C3A00A6FDCF /* DaeTranslator.h */; };
+		C3428DA50BAF297D00D9004F /* CFXBehavior.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA030B7D0C4D00A6FDCF /* CFXBehavior.h */; };
+		C3428DA60BAF297D00D9004F /* CFXParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA040B7D0C4D00A6FDCF /* CFXParameter.h */; };
+		C3428DA70BAF297D00D9004F /* CFXPasses.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA050B7D0C4D00A6FDCF /* CFXPasses.h */; };
+		C3428DA80BAF297D00D9004F /* CFXRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA060B7D0C4D00A6FDCF /* CFXRenderState.h */; };
+		C3428DA90BAF297D00D9004F /* CFXShaderCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA070B7D0C4D00A6FDCF /* CFXShaderCmd.h */; };
+		C3428DAA0BAF297D00D9004F /* CFXShaderNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA080B7D0C4D00A6FDCF /* CFXShaderNode.h */; };
+		C3428DAB0BAF297D00D9004F /* DDSFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA090B7D0C4D00A6FDCF /* DDSFormat.h */; };
+		C3428DAC0BAF297D00D9004F /* CAnimationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D500BAF287300D9004F /* CAnimationHelper.h */; };
+		C3428DAD0BAF297D00D9004F /* CDagHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D510BAF287300D9004F /* CDagHelper.h */; };
+		C3428DAE0BAF297D00D9004F /* CMeshHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D520BAF287300D9004F /* CMeshHelper.h */; };
+		C3428DB10BAF297D00D9004F /* CSetHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D550BAF287300D9004F /* CSetHelper.h */; };
+		C3428DB20BAF297D00D9004F /* CShaderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D560BAF287300D9004F /* CShaderHelper.h */; };
+		C3428DB30BAF297D00D9004F /* HIAnimCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D570BAF287300D9004F /* HIAnimCache.h */; };
+		C3428DB40BAF297D00D9004F /* MayaConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D680BAF288700D9004F /* MayaConvert.h */; };
+		C3428DB50BAF297D00D9004F /* CFXRenderStateStaticInit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C3428D770BAF28C400D9004F /* CFXRenderStateStaticInit.hpp */; };
+		C3428DB70BAF297D00D9004F /* CExportOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E608B203F500B3EA3B /* CExportOptions.cpp */; };
+		C3428DB80BAF297D00D9004F /* CMeshExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E708B203F500B3EA3B /* CMeshExporter.cpp */; };
+		C3428DB90BAF297D00D9004F /* CReferenceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E808B203F500B3EA3B /* CReferenceManager.cpp */; };
+		C3428DBA0BAF297D00D9004F /* CRotateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E908B203F500B3EA3B /* CRotateHelper.cpp */; };
+		C3428DBB0BAF297D00D9004F /* CSkewHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EA08B203F500B3EA3B /* CSkewHelper.cpp */; };
+		C3428DBC0BAF297D00D9004F /* DaeAnimationLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EB08B203F500B3EA3B /* DaeAnimationLibrary.cpp */; };
+		C3428DBD0BAF297D00D9004F /* DaeCameraLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EC08B203F500B3EA3B /* DaeCameraLibrary.cpp */; };
+		C3428DBE0BAF297D00D9004F /* DaeControllerLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059ED08B203F500B3EA3B /* DaeControllerLibrary.cpp */; };
+		C3428DBF0BAF297D00D9004F /* DaeDoc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EE08B203F500B3EA3B /* DaeDoc.cpp */; };
+		C3428DC00BAF297D00D9004F /* DaeGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EF08B203F500B3EA3B /* DaeGeometry.cpp */; };
+		C3428DC10BAF297D00D9004F /* DaeGeometryLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F008B203F500B3EA3B /* DaeGeometryLibrary.cpp */; };
+		C3428DC20BAF297D00D9004F /* DaeLightLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F108B203F500B3EA3B /* DaeLightLibrary.cpp */; };
+		C3428DC30BAF297D00D9004F /* DaeMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F208B203F500B3EA3B /* DaeMaterialLibrary.cpp */; };
+		C3428DC40BAF297D00D9004F /* DaeSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F508B203F500B3EA3B /* DaeSceneGraph.cpp */; };
+		C3428DC50BAF297D00D9004F /* DaeTextureLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F608B203F500B3EA3B /* DaeTextureLibrary.cpp */; };
+		C3428DC60BAF297D00D9004F /* DaeTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F708B203F500B3EA3B /* DaeTransform.cpp */; };
+		C3428DC70BAF297D00D9004F /* DaeTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F808B203F500B3EA3B /* DaeTranslator.cpp */; };
+		C3428DC90BAF297D00D9004F /* CAnimationHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FB08B203F500B3EA3B /* CAnimationHelper.cpp */; };
+		C3428DCA0BAF297D00D9004F /* CDagHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FC08B203F500B3EA3B /* CDagHelper.cpp */; settings = {COMPILER_FLAGS = "-O0"; }; };
+		C3428DCB0BAF297D00D9004F /* CMeshHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FD08B203F500B3EA3B /* CMeshHelper.cpp */; };
+		C3428DCD0BAF297D00D9004F /* CShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FF08B203F500B3EA3B /* CShaderHelper.cpp */; };
+		C3428DCE0BAF297D00D9004F /* HIAnimCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B1BEBC08B8029000ED34BD /* HIAnimCache.cpp */; };
+		C3428DCF0BAF297D00D9004F /* CSplineExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE8099179DB009F66BE /* CSplineExporter.cpp */; };
+		C3428DD00BAF297D00D9004F /* DaeAgeiaPhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE9099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp */; };
+		C3428DD10BAF297D00D9004F /* DaeAnimationCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEA099179DB009F66BE /* DaeAnimationCurve.cpp */; };
+		C3428DD20BAF297D00D9004F /* DaeAnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEB099179DB009F66BE /* DaeAnimationTypes.cpp */; };
+		C3428DD30BAF297D00D9004F /* DaeAnimClipLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEC099179DB009F66BE /* DaeAnimClipLibrary.cpp */; };
+		C3428DD40BAF297D00D9004F /* DaeBaseLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCED099179DB009F66BE /* DaeBaseLibrary.cpp */; };
+		C3428DD50BAF297D00D9004F /* DaeNativePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEE099179DB009F66BE /* DaeNativePhysicsScene.cpp */; };
+		C3428DD60BAF297D00D9004F /* DaePhysicsMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEF099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp */; };
+		C3428DD70BAF297D00D9004F /* DaePhysicsModelLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF0099179DB009F66BE /* DaePhysicsModelLibrary.cpp */; };
+		C3428DD80BAF297D00D9004F /* DaePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF1099179DB009F66BE /* DaePhysicsScene.cpp */; };
+		C3428DD90BAF297D00D9004F /* DaePhysicsSceneLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF2099179DB009F66BE /* DaePhysicsSceneLibrary.cpp */; };
+		C3428DDA0BAF297D00D9004F /* MayaConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD0C09917A32009F66BE /* MayaConvert.cpp */; };
+		C3428DDB0BAF297D00D9004F /* CSetHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD7409918790009F66BE /* CSetHelper.cpp */; };
+		C3428DDC0BAF297D00D9004F /* DaeDocNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAD0A93B8A300B15814 /* DaeDocNode.cpp */; };
+		C3428DDD0BAF297D00D9004F /* DaeEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAE0A93B8A300B15814 /* DaeEntity.cpp */; };
+		C3428DDE0BAF297D00D9004F /* DaeEntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAF0A93B8A300B15814 /* DaeEntityManager.cpp */; };
+		C3428DDF0BAF297D00D9004F /* CFXShaderNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B70AF95D4E00A53FA2 /* CFXShaderNode.cpp */; };
+		C3428DE00BAF297D00D9004F /* CFXShaderCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B80AF95D4E00A53FA2 /* CFXShaderCmd.cpp */; settings = {COMPILER_FLAGS = "-O0"; }; };
+		C3428DE10BAF297D00D9004F /* CFXRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B90AF95D4E00A53FA2 /* CFXRenderState.cpp */; };
+		C3428DE20BAF297D00D9004F /* CFXPasses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BA0AF95D4E00A53FA2 /* CFXPasses.cpp */; };
+		C3428DE30BAF297D00D9004F /* CFXParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BB0AF95D4E00A53FA2 /* CFXParameter.cpp */; };
+		C3428DE40BAF297D00D9004F /* CFXBehavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BC0AF95D4E00A53FA2 /* CFXBehavior.cpp */; };
+		C3428DE50BAF297D00D9004F /* CNURBSExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6B0BAF289E00D9004F /* CNURBSExporter.cpp */; };
+		C3428DE60BAF297D00D9004F /* DaeEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6E0BAF28B900D9004F /* DaeEmitter.cpp */; };
+		C3428DE70BAF297D00D9004F /* DaeEmitterLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6F0BAF28B900D9004F /* DaeEmitterLibrary.cpp */; };
+		C3428DE80BAF297D00D9004F /* DaeForceFieldLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D700BAF28B900D9004F /* DaeForceFieldLibrary.cpp */; };
+		C3428DEB0BAF297D00D9004F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35D1D170A93BE7700B15814 /* OpenGL.framework */; };
+		C3428DEC0BAF297D00D9004F /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B6FA4C0B7D0E2E00A6FDCF /* GLUT.framework */; };
+		C354BCF3099179DB009F66BE /* CSplineExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE8099179DB009F66BE /* CSplineExporter.cpp */; };
+		C354BCF4099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE9099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp */; };
+		C354BCF5099179DB009F66BE /* DaeAnimationCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEA099179DB009F66BE /* DaeAnimationCurve.cpp */; };
+		C354BCF6099179DB009F66BE /* DaeAnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEB099179DB009F66BE /* DaeAnimationTypes.cpp */; };
+		C354BCF7099179DB009F66BE /* DaeAnimClipLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEC099179DB009F66BE /* DaeAnimClipLibrary.cpp */; };
+		C354BCF8099179DB009F66BE /* DaeBaseLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCED099179DB009F66BE /* DaeBaseLibrary.cpp */; };
+		C354BCF9099179DB009F66BE /* DaeNativePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEE099179DB009F66BE /* DaeNativePhysicsScene.cpp */; };
+		C354BCFA099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEF099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp */; };
+		C354BCFB099179DB009F66BE /* DaePhysicsModelLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF0099179DB009F66BE /* DaePhysicsModelLibrary.cpp */; };
+		C354BCFC099179DB009F66BE /* DaePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF1099179DB009F66BE /* DaePhysicsScene.cpp */; };
+		C354BCFD099179DB009F66BE /* DaePhysicsSceneLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF2099179DB009F66BE /* DaePhysicsSceneLibrary.cpp */; };
+		C354BCFE099179DB009F66BE /* CSplineExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE8099179DB009F66BE /* CSplineExporter.cpp */; };
+		C354BCFF099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE9099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp */; };
+		C354BD00099179DB009F66BE /* DaeAnimationCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEA099179DB009F66BE /* DaeAnimationCurve.cpp */; };
+		C354BD01099179DB009F66BE /* DaeAnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEB099179DB009F66BE /* DaeAnimationTypes.cpp */; };
+		C354BD02099179DB009F66BE /* DaeAnimClipLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEC099179DB009F66BE /* DaeAnimClipLibrary.cpp */; };
+		C354BD03099179DB009F66BE /* DaeBaseLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCED099179DB009F66BE /* DaeBaseLibrary.cpp */; };
+		C354BD04099179DB009F66BE /* DaeNativePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEE099179DB009F66BE /* DaeNativePhysicsScene.cpp */; };
+		C354BD05099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEF099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp */; };
+		C354BD06099179DB009F66BE /* DaePhysicsModelLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF0099179DB009F66BE /* DaePhysicsModelLibrary.cpp */; };
+		C354BD07099179DB009F66BE /* DaePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF1099179DB009F66BE /* DaePhysicsScene.cpp */; };
+		C354BD08099179DB009F66BE /* DaePhysicsSceneLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF2099179DB009F66BE /* DaePhysicsSceneLibrary.cpp */; };
+		C354BD0D09917A32009F66BE /* MayaConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD0C09917A32009F66BE /* MayaConvert.cpp */; };
+		C354BD0E09917A32009F66BE /* MayaConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD0C09917A32009F66BE /* MayaConvert.cpp */; };
+		C354BD7509918790009F66BE /* CSetHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD7409918790009F66BE /* CSetHelper.cpp */; };
+		C354BD7609918790009F66BE /* CSetHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD7409918790009F66BE /* CSetHelper.cpp */; };
+		C35D1CB50A93B8A300B15814 /* DaeDocNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAD0A93B8A300B15814 /* DaeDocNode.cpp */; };
+		C35D1CB60A93B8A300B15814 /* DaeEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAE0A93B8A300B15814 /* DaeEntity.cpp */; };
+		C35D1CB70A93B8A300B15814 /* DaeEntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAF0A93B8A300B15814 /* DaeEntityManager.cpp */; };
+		C35D1CBD0A93B8A300B15814 /* DaeDocNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAD0A93B8A300B15814 /* DaeDocNode.cpp */; };
+		C35D1CBE0A93B8A300B15814 /* DaeEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAE0A93B8A300B15814 /* DaeEntity.cpp */; };
+		C35D1CBF0A93B8A300B15814 /* DaeEntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAF0A93B8A300B15814 /* DaeEntityManager.cpp */; };
+		C35D1D180A93BE7700B15814 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35D1D170A93BE7700B15814 /* OpenGL.framework */; };
+		C35D1D190A93BE7700B15814 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35D1D170A93BE7700B15814 /* OpenGL.framework */; };
+		C3B6F9B90B7D0C3A00A6FDCF /* CExportOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9940B7D0C3A00A6FDCF /* CExportOptions.h */; };
+		C3B6F9BA0B7D0C3A00A6FDCF /* CMeshExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9950B7D0C3A00A6FDCF /* CMeshExporter.h */; };
+		C3B6F9BB0B7D0C3A00A6FDCF /* CNURBSExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9960B7D0C3A00A6FDCF /* CNURBSExporter.h */; };
+		C3B6F9BC0B7D0C3A00A6FDCF /* CReferenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9970B7D0C3A00A6FDCF /* CReferenceManager.h */; };
+		C3B6F9BD0B7D0C3A00A6FDCF /* CRotateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9980B7D0C3A00A6FDCF /* CRotateHelper.h */; };
+		C3B6F9BE0B7D0C3A00A6FDCF /* CSkewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9990B7D0C3A00A6FDCF /* CSkewHelper.h */; };
+		C3B6F9BF0B7D0C3A00A6FDCF /* CSplineExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99A0B7D0C3A00A6FDCF /* CSplineExporter.h */; };
+		C3B6F9C00B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99B0B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h */; };
+		C3B6F9C10B7D0C3A00A6FDCF /* DaeAnimationCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99C0B7D0C3A00A6FDCF /* DaeAnimationCurve.h */; };
+		C3B6F9C20B7D0C3A00A6FDCF /* DaeAnimationLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99D0B7D0C3A00A6FDCF /* DaeAnimationLibrary.h */; };
+		C3B6F9C30B7D0C3A00A6FDCF /* DaeAnimationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99E0B7D0C3A00A6FDCF /* DaeAnimationTypes.h */; };
+		C3B6F9C40B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99F0B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h */; };
+		C3B6F9C50B7D0C3A00A6FDCF /* DaeBaseLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A00B7D0C3A00A6FDCF /* DaeBaseLibrary.h */; };
+		C3B6F9C60B7D0C3A00A6FDCF /* DaeCameraLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A10B7D0C3A00A6FDCF /* DaeCameraLibrary.h */; };
+		C3B6F9C70B7D0C3A00A6FDCF /* DaeControllerLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A20B7D0C3A00A6FDCF /* DaeControllerLibrary.h */; };
+		C3B6F9C80B7D0C3A00A6FDCF /* DaeDoc.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A30B7D0C3A00A6FDCF /* DaeDoc.h */; };
+		C3B6F9C90B7D0C3A00A6FDCF /* DaeDocNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A40B7D0C3A00A6FDCF /* DaeDocNode.h */; };
+		C3B6F9CA0B7D0C3A00A6FDCF /* DaeEmitter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A50B7D0C3A00A6FDCF /* DaeEmitter.h */; };
+		C3B6F9CB0B7D0C3A00A6FDCF /* DaeEmitterLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A60B7D0C3A00A6FDCF /* DaeEmitterLibrary.h */; };
+		C3B6F9CC0B7D0C3A00A6FDCF /* DaeEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A70B7D0C3A00A6FDCF /* DaeEntity.h */; };
+		C3B6F9CD0B7D0C3A00A6FDCF /* DaeEntityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A80B7D0C3A00A6FDCF /* DaeEntityManager.h */; };
+		C3B6F9CE0B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A90B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h */; };
+		C3B6F9CF0B7D0C3A00A6FDCF /* DaeGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AA0B7D0C3A00A6FDCF /* DaeGeometry.h */; };
+		C3B6F9D00B7D0C3A00A6FDCF /* DaeGeometryLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AB0B7D0C3A00A6FDCF /* DaeGeometryLibrary.h */; };
+		C3B6F9D10B7D0C3A00A6FDCF /* DaeInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AC0B7D0C3A00A6FDCF /* DaeInput.h */; };
+		C3B6F9D20B7D0C3A00A6FDCF /* DaeLightLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AD0B7D0C3A00A6FDCF /* DaeLightLibrary.h */; };
+		C3B6F9D30B7D0C3A00A6FDCF /* DaeMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AE0B7D0C3A00A6FDCF /* DaeMaterialLibrary.h */; };
+		C3B6F9D40B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AF0B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h */; };
+		C3B6F9D50B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B00B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h */; };
+		C3B6F9D60B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B10B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h */; };
+		C3B6F9D70B7D0C3A00A6FDCF /* DaePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B20B7D0C3A00A6FDCF /* DaePhysicsScene.h */; };
+		C3B6F9D80B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B30B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h */; };
+		C3B6F9D90B7D0C3A00A6FDCF /* DaeSceneGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B40B7D0C3A00A6FDCF /* DaeSceneGraph.h */; };
+		C3B6F9DA0B7D0C3A00A6FDCF /* DaeTextureLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B50B7D0C3A00A6FDCF /* DaeTextureLibrary.h */; };
+		C3B6F9DB0B7D0C3A00A6FDCF /* DaeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B60B7D0C3A00A6FDCF /* DaeTransform.h */; };
+		C3B6F9DC0B7D0C3A00A6FDCF /* DaeTranslator.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B70B7D0C3A00A6FDCF /* DaeTranslator.h */; };
+		C3B6F9DE0B7D0C3A00A6FDCF /* CExportOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9940B7D0C3A00A6FDCF /* CExportOptions.h */; };
+		C3B6F9DF0B7D0C3A00A6FDCF /* CMeshExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9950B7D0C3A00A6FDCF /* CMeshExporter.h */; };
+		C3B6F9E00B7D0C3A00A6FDCF /* CNURBSExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9960B7D0C3A00A6FDCF /* CNURBSExporter.h */; };
+		C3B6F9E10B7D0C3A00A6FDCF /* CReferenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9970B7D0C3A00A6FDCF /* CReferenceManager.h */; };
+		C3B6F9E20B7D0C3A00A6FDCF /* CRotateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9980B7D0C3A00A6FDCF /* CRotateHelper.h */; };
+		C3B6F9E30B7D0C3A00A6FDCF /* CSkewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9990B7D0C3A00A6FDCF /* CSkewHelper.h */; };
+		C3B6F9E40B7D0C3A00A6FDCF /* CSplineExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99A0B7D0C3A00A6FDCF /* CSplineExporter.h */; };
+		C3B6F9E50B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99B0B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h */; };
+		C3B6F9E60B7D0C3A00A6FDCF /* DaeAnimationCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99C0B7D0C3A00A6FDCF /* DaeAnimationCurve.h */; };
+		C3B6F9E70B7D0C3A00A6FDCF /* DaeAnimationLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99D0B7D0C3A00A6FDCF /* DaeAnimationLibrary.h */; };
+		C3B6F9E80B7D0C3A00A6FDCF /* DaeAnimationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99E0B7D0C3A00A6FDCF /* DaeAnimationTypes.h */; };
+		C3B6F9E90B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99F0B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h */; };
+		C3B6F9EA0B7D0C3A00A6FDCF /* DaeBaseLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A00B7D0C3A00A6FDCF /* DaeBaseLibrary.h */; };
+		C3B6F9EB0B7D0C3A00A6FDCF /* DaeCameraLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A10B7D0C3A00A6FDCF /* DaeCameraLibrary.h */; };
+		C3B6F9EC0B7D0C3A00A6FDCF /* DaeControllerLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A20B7D0C3A00A6FDCF /* DaeControllerLibrary.h */; };
+		C3B6F9ED0B7D0C3A00A6FDCF /* DaeDoc.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A30B7D0C3A00A6FDCF /* DaeDoc.h */; };
+		C3B6F9EE0B7D0C3A00A6FDCF /* DaeDocNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A40B7D0C3A00A6FDCF /* DaeDocNode.h */; };
+		C3B6F9EF0B7D0C3A00A6FDCF /* DaeEmitter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A50B7D0C3A00A6FDCF /* DaeEmitter.h */; };
+		C3B6F9F00B7D0C3A00A6FDCF /* DaeEmitterLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A60B7D0C3A00A6FDCF /* DaeEmitterLibrary.h */; };
+		C3B6F9F10B7D0C3A00A6FDCF /* DaeEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A70B7D0C3A00A6FDCF /* DaeEntity.h */; };
+		C3B6F9F20B7D0C3A00A6FDCF /* DaeEntityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A80B7D0C3A00A6FDCF /* DaeEntityManager.h */; };
+		C3B6F9F30B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A90B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h */; };
+		C3B6F9F40B7D0C3A00A6FDCF /* DaeGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AA0B7D0C3A00A6FDCF /* DaeGeometry.h */; };
+		C3B6F9F50B7D0C3A00A6FDCF /* DaeGeometryLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AB0B7D0C3A00A6FDCF /* DaeGeometryLibrary.h */; };
+		C3B6F9F60B7D0C3A00A6FDCF /* DaeInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AC0B7D0C3A00A6FDCF /* DaeInput.h */; };
+		C3B6F9F70B7D0C3A00A6FDCF /* DaeLightLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AD0B7D0C3A00A6FDCF /* DaeLightLibrary.h */; };
+		C3B6F9F80B7D0C3A00A6FDCF /* DaeMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AE0B7D0C3A00A6FDCF /* DaeMaterialLibrary.h */; };
+		C3B6F9F90B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AF0B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h */; };
+		C3B6F9FA0B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B00B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h */; };
+		C3B6F9FB0B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B10B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h */; };
+		C3B6F9FC0B7D0C3A00A6FDCF /* DaePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B20B7D0C3A00A6FDCF /* DaePhysicsScene.h */; };
+		C3B6F9FD0B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B30B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h */; };
+		C3B6F9FE0B7D0C3A00A6FDCF /* DaeSceneGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B40B7D0C3A00A6FDCF /* DaeSceneGraph.h */; };
+		C3B6F9FF0B7D0C3A00A6FDCF /* DaeTextureLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B50B7D0C3A00A6FDCF /* DaeTextureLibrary.h */; };
+		C3B6FA000B7D0C3A00A6FDCF /* DaeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B60B7D0C3A00A6FDCF /* DaeTransform.h */; };
+		C3B6FA010B7D0C3A00A6FDCF /* DaeTranslator.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B70B7D0C3A00A6FDCF /* DaeTranslator.h */; };
+		C3B6FA0A0B7D0C4D00A6FDCF /* CFXBehavior.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA030B7D0C4D00A6FDCF /* CFXBehavior.h */; };
+		C3B6FA0B0B7D0C4D00A6FDCF /* CFXParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA040B7D0C4D00A6FDCF /* CFXParameter.h */; };
+		C3B6FA0C0B7D0C4D00A6FDCF /* CFXPasses.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA050B7D0C4D00A6FDCF /* CFXPasses.h */; };
+		C3B6FA0D0B7D0C4D00A6FDCF /* CFXRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA060B7D0C4D00A6FDCF /* CFXRenderState.h */; };
+		C3B6FA0E0B7D0C4D00A6FDCF /* CFXShaderCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA070B7D0C4D00A6FDCF /* CFXShaderCmd.h */; };
+		C3B6FA0F0B7D0C4D00A6FDCF /* CFXShaderNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA080B7D0C4D00A6FDCF /* CFXShaderNode.h */; };
+		C3B6FA100B7D0C4D00A6FDCF /* DDSFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA090B7D0C4D00A6FDCF /* DDSFormat.h */; };
+		C3B6FA110B7D0C4D00A6FDCF /* CFXBehavior.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA030B7D0C4D00A6FDCF /* CFXBehavior.h */; };
+		C3B6FA120B7D0C4D00A6FDCF /* CFXParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA040B7D0C4D00A6FDCF /* CFXParameter.h */; };
+		C3B6FA130B7D0C4D00A6FDCF /* CFXPasses.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA050B7D0C4D00A6FDCF /* CFXPasses.h */; };
+		C3B6FA140B7D0C4D00A6FDCF /* CFXRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA060B7D0C4D00A6FDCF /* CFXRenderState.h */; };
+		C3B6FA150B7D0C4D00A6FDCF /* CFXShaderCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA070B7D0C4D00A6FDCF /* CFXShaderCmd.h */; };
+		C3B6FA160B7D0C4D00A6FDCF /* CFXShaderNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA080B7D0C4D00A6FDCF /* CFXShaderNode.h */; };
+		C3B6FA170B7D0C4D00A6FDCF /* DDSFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA090B7D0C4D00A6FDCF /* DDSFormat.h */; };
+		C3B6FA4D0B7D0E2E00A6FDCF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B6FA4C0B7D0E2E00A6FDCF /* GLUT.framework */; };
+		C3B6FA4E0B7D0E2E00A6FDCF /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B6FA4C0B7D0E2E00A6FDCF /* GLUT.framework */; };
+		D0C8DCF80D621C110003483F /* CAnimationHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FB08B203F500B3EA3B /* CAnimationHelper.cpp */; };
+		D0C8DCF90D621C120003483F /* CAnimationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D500BAF287300D9004F /* CAnimationHelper.h */; };
+		D0C8DCFA0D621C150003483F /* CDagHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FC08B203F500B3EA3B /* CDagHelper.cpp */; };
+		D0C8DCFB0D621C160003483F /* CDagHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D510BAF287300D9004F /* CDagHelper.h */; };
+		D0C8DCFC0D621C160003483F /* CExportOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E608B203F500B3EA3B /* CExportOptions.cpp */; };
+		D0C8DCFD0D621C160003483F /* CExportOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9940B7D0C3A00A6FDCF /* CExportOptions.h */; };
+		D0C8DCFE0D621C170003483F /* CFXBehavior.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BC0AF95D4E00A53FA2 /* CFXBehavior.cpp */; };
+		D0C8DCFF0D621C170003483F /* CFXParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BB0AF95D4E00A53FA2 /* CFXParameter.cpp */; };
+		D0C8DD000D621C180003483F /* CFXBehavior.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA030B7D0C4D00A6FDCF /* CFXBehavior.h */; };
+		D0C8DD010D621C180003483F /* CFXParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA040B7D0C4D00A6FDCF /* CFXParameter.h */; };
+		D0C8DD020D621C190003483F /* CFXPasses.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910BA0AF95D4E00A53FA2 /* CFXPasses.cpp */; };
+		D0C8DD030D621C190003483F /* CFXPasses.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA050B7D0C4D00A6FDCF /* CFXPasses.h */; };
+		D0C8DD040D621C190003483F /* CFXRenderState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B90AF95D4E00A53FA2 /* CFXRenderState.cpp */; };
+		D0C8DD050D621C1A0003483F /* CFXRenderState.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA060B7D0C4D00A6FDCF /* CFXRenderState.h */; };
+		D0C8DD060D621C1B0003483F /* CFXRenderStateStaticInit.hpp in Headers */ = {isa = PBXBuildFile; fileRef = C3428D770BAF28C400D9004F /* CFXRenderStateStaticInit.hpp */; };
+		D0C8DD070D621C1B0003483F /* CFXShaderCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B80AF95D4E00A53FA2 /* CFXShaderCmd.cpp */; };
+		D0C8DD080D621C1C0003483F /* CFXShaderCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA070B7D0C4D00A6FDCF /* CFXShaderCmd.h */; };
+		D0C8DD090D621C1C0003483F /* CFXShaderNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51B910B70AF95D4E00A53FA2 /* CFXShaderNode.cpp */; };
+		D0C8DD0A0D621C1D0003483F /* CFXShaderNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA080B7D0C4D00A6FDCF /* CFXShaderNode.h */; };
+		D0C8DD0B0D621C200003483F /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D98CC20BF4E0E800D6E83C /* Cg.framework */; };
+		D0C8DD0D0D621C220003483F /* CMeshExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E708B203F500B3EA3B /* CMeshExporter.cpp */; };
+		D0C8DD0E0D621C230003483F /* CMeshExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9950B7D0C3A00A6FDCF /* CMeshExporter.h */; };
+		D0C8DD0F0D621C230003483F /* CMeshHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FD08B203F500B3EA3B /* CMeshHelper.cpp */; };
+		D0C8DD100D621C250003483F /* CMeshHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D520BAF287300D9004F /* CMeshHelper.h */; };
+		D0C8DD110D621C250003483F /* CNURBSExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6B0BAF289E00D9004F /* CNURBSExporter.cpp */; };
+		D0C8DD120D621C250003483F /* CNURBSExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9960B7D0C3A00A6FDCF /* CNURBSExporter.h */; };
+		D0C8DD130D621C2D0003483F /* CReferenceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E808B203F500B3EA3B /* CReferenceManager.cpp */; };
+		D0C8DD140D621C2D0003483F /* CReferenceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9970B7D0C3A00A6FDCF /* CReferenceManager.h */; };
+		D0C8DD150D621C2E0003483F /* CRotateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E908B203F500B3EA3B /* CRotateHelper.cpp */; };
+		D0C8DD160D621C2E0003483F /* CRotateHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9980B7D0C3A00A6FDCF /* CRotateHelper.h */; };
+		D0C8DD170D621C2F0003483F /* CSetHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D550BAF287300D9004F /* CSetHelper.h */; };
+		D0C8DD180D621C2F0003483F /* CSetHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD7409918790009F66BE /* CSetHelper.cpp */; };
+		D0C8DD190D621C2F0003483F /* CShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FF08B203F500B3EA3B /* CShaderHelper.cpp */; };
+		D0C8DD1A0D621C300003483F /* CShaderHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D560BAF287300D9004F /* CShaderHelper.h */; };
+		D0C8DD1B0D621C310003483F /* CSkewHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EA08B203F500B3EA3B /* CSkewHelper.cpp */; };
+		D0C8DD1C0D621C310003483F /* CSkewHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9990B7D0C3A00A6FDCF /* CSkewHelper.h */; };
+		D0C8DD1D0D621C310003483F /* CSplineExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE8099179DB009F66BE /* CSplineExporter.cpp */; };
+		D0C8DD1E0D621C320003483F /* CSplineExporter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99A0B7D0C3A00A6FDCF /* CSplineExporter.h */; };
+		D0C8DD1F0D621C320003483F /* DaeAgeiaPhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCE9099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp */; };
+		D0C8DD200D621C320003483F /* DaeAgeiaPhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99B0B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h */; };
+		D0C8DD210D621C350003483F /* DaeAnimationCurve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEA099179DB009F66BE /* DaeAnimationCurve.cpp */; };
+		D0C8DD220D621C350003483F /* DaeAnimationCurve.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99C0B7D0C3A00A6FDCF /* DaeAnimationCurve.h */; };
+		D0C8DD230D621C360003483F /* DaeAnimationLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EB08B203F500B3EA3B /* DaeAnimationLibrary.cpp */; };
+		D0C8DD240D621C360003483F /* DaeAnimationLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99D0B7D0C3A00A6FDCF /* DaeAnimationLibrary.h */; };
+		D0C8DD250D621C370003483F /* DaeAnimationTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEB099179DB009F66BE /* DaeAnimationTypes.cpp */; };
+		D0C8DD260D621C370003483F /* DaeAnimClipLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99F0B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h */; };
+		D0C8DD270D621C380003483F /* DaeAnimClipLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEC099179DB009F66BE /* DaeAnimClipLibrary.cpp */; };
+		D0C8DD280D621C380003483F /* DaeAnimationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F99E0B7D0C3A00A6FDCF /* DaeAnimationTypes.h */; };
+		D0C8DD2A0D621C390003483F /* DaeBaseLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A00B7D0C3A00A6FDCF /* DaeBaseLibrary.h */; };
+		D0C8DD2B0D621C3A0003483F /* DaeBaseLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCED099179DB009F66BE /* DaeBaseLibrary.cpp */; };
+		D0C8DD2C0D621C3A0003483F /* DaeCameraLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EC08B203F500B3EA3B /* DaeCameraLibrary.cpp */; };
+		D0C8DD2D0D621C3B0003483F /* DaeCameraLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A10B7D0C3A00A6FDCF /* DaeCameraLibrary.h */; };
+		D0C8DD2E0D621C3B0003483F /* DaeControllerLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059ED08B203F500B3EA3B /* DaeControllerLibrary.cpp */; };
+		D0C8DD2F0D621C3C0003483F /* DaeControllerLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A20B7D0C3A00A6FDCF /* DaeControllerLibrary.h */; };
+		D0C8DD300D621C3D0003483F /* DaeDoc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EE08B203F500B3EA3B /* DaeDoc.cpp */; };
+		D0C8DD310D621C3D0003483F /* DaeDoc.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A30B7D0C3A00A6FDCF /* DaeDoc.h */; };
+		D0C8DD320D621C3E0003483F /* DaeDocNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAD0A93B8A300B15814 /* DaeDocNode.cpp */; };
+		D0C8DD330D621C3F0003483F /* DaeDocNode.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A40B7D0C3A00A6FDCF /* DaeDocNode.h */; };
+		D0C8DD340D621C3F0003483F /* DaeEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6E0BAF28B900D9004F /* DaeEmitter.cpp */; };
+		D0C8DD350D621C3F0003483F /* DaeEmitter.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A50B7D0C3A00A6FDCF /* DaeEmitter.h */; };
+		D0C8DD360D621C400003483F /* DaeEmitterLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D6F0BAF28B900D9004F /* DaeEmitterLibrary.cpp */; };
+		D0C8DD370D621C400003483F /* DaeEmitterLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A60B7D0C3A00A6FDCF /* DaeEmitterLibrary.h */; };
+		D0C8DD380D621C410003483F /* DaeEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAE0A93B8A300B15814 /* DaeEntity.cpp */; };
+		D0C8DD390D621C410003483F /* DaeEntity.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A70B7D0C3A00A6FDCF /* DaeEntity.h */; };
+		D0C8DD3A0D621C410003483F /* DaeEntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C35D1CAF0A93B8A300B15814 /* DaeEntityManager.cpp */; };
+		D0C8DD3B0D621C420003483F /* DaeEntityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A80B7D0C3A00A6FDCF /* DaeEntityManager.h */; };
+		D0C8DD3C0D621C420003483F /* DaeForceFieldLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C3428D700BAF28B900D9004F /* DaeForceFieldLibrary.cpp */; };
+		D0C8DD3D0D621C440003483F /* DaeForceFieldLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9A90B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h */; };
+		D0C8DD3E0D621C440003483F /* DaeGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EF08B203F500B3EA3B /* DaeGeometry.cpp */; };
+		D0C8DD3F0D621C450003483F /* DaeGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AA0B7D0C3A00A6FDCF /* DaeGeometry.h */; };
+		D0C8DD400D621C450003483F /* DaeGeometryLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F008B203F500B3EA3B /* DaeGeometryLibrary.cpp */; };
+		D0C8DD410D621C450003483F /* DaeGeometryLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AB0B7D0C3A00A6FDCF /* DaeGeometryLibrary.h */; };
+		D0C8DD420D621C460003483F /* DaeLightLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F108B203F500B3EA3B /* DaeLightLibrary.cpp */; };
+		D0C8DD430D621C460003483F /* DaeInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AC0B7D0C3A00A6FDCF /* DaeInput.h */; };
+		D0C8DD440D621C460003483F /* DaeLightLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AD0B7D0C3A00A6FDCF /* DaeLightLibrary.h */; };
+		D0C8DD450D621C470003483F /* DaeMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F208B203F500B3EA3B /* DaeMaterialLibrary.cpp */; };
+		D0C8DD460D621C470003483F /* DaeMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AE0B7D0C3A00A6FDCF /* DaeMaterialLibrary.h */; };
+		D0C8DD470D621C470003483F /* DaeNativePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEE099179DB009F66BE /* DaeNativePhysicsScene.cpp */; };
+		D0C8DD480D621C480003483F /* DaeNativePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9AF0B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h */; };
+		D0C8DD490D621C480003483F /* DaePhysicsMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCEF099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp */; };
+		D0C8DD4A0D621C490003483F /* DaePhysicsMaterialLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B00B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h */; };
+		D0C8DD4B0D621C490003483F /* DaePhysicsModelLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF0099179DB009F66BE /* DaePhysicsModelLibrary.cpp */; };
+		D0C8DD4C0D621C4A0003483F /* DaePhysicsModelLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B10B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h */; };
+		D0C8DD4D0D621C4D0003483F /* DaePhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF1099179DB009F66BE /* DaePhysicsScene.cpp */; };
+		D0C8DD4E0D621C4D0003483F /* DaePhysicsScene.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B20B7D0C3A00A6FDCF /* DaePhysicsScene.h */; };
+		D0C8DD4F0D621C4E0003483F /* DaePhysicsSceneLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BCF2099179DB009F66BE /* DaePhysicsSceneLibrary.cpp */; };
+		D0C8DD500D621C4E0003483F /* DaePhysicsSceneLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B30B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h */; };
+		D0C8DD510D621C4F0003483F /* DaeSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F508B203F500B3EA3B /* DaeSceneGraph.cpp */; };
+		D0C8DD520D621C4F0003483F /* DaeSceneGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B40B7D0C3A00A6FDCF /* DaeSceneGraph.h */; };
+		D0C8DD530D621C4F0003483F /* DaeTextureLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F608B203F500B3EA3B /* DaeTextureLibrary.cpp */; };
+		D0C8DD540D621C500003483F /* DaeTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F708B203F500B3EA3B /* DaeTransform.cpp */; };
+		D0C8DD550D621C500003483F /* DaeTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B60B7D0C3A00A6FDCF /* DaeTransform.h */; };
+		D0C8DD560D621C510003483F /* DaeTextureLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B50B7D0C3A00A6FDCF /* DaeTextureLibrary.h */; };
+		D0C8DD570D621C510003483F /* DaeTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F808B203F500B3EA3B /* DaeTranslator.cpp */; };
+		D0C8DD580D621C510003483F /* DaeTranslator.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6F9B70B7D0C3A00A6FDCF /* DaeTranslator.h */; };
+		D0C8DD590D621C520003483F /* DDSFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = C3B6FA090B7D0C4D00A6FDCF /* DDSFormat.h */; };
+		D0C8DD5A0D621C550003483F /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B6FA4C0B7D0E2E00A6FDCF /* GLUT.framework */; };
+		D0C8DD5B0D621C550003483F /* HIAnimCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B1BEBC08B8029000ED34BD /* HIAnimCache.cpp */; };
+		D0C8DD5C0D621C550003483F /* HIAnimCache.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D570BAF287300D9004F /* HIAnimCache.h */; };
+		D0C8DD5E0D621C570003483F /* MayaConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C354BD0C09917A32009F66BE /* MayaConvert.cpp */; };
+		D0C8DD5F0D621C570003483F /* MayaConvert.h in Headers */ = {isa = PBXBuildFile; fileRef = C3428D680BAF288700D9004F /* MayaConvert.h */; };
+		D0C8DD600D621C570003483F /* MFnPluginNoEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E3D3580C623284007FB141 /* MFnPluginNoEntry.h */; };
+		D0C8DD610D621C580003483F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35D1D170A93BE7700B15814 /* OpenGL.framework */; };
+		D0C8DD620D621C580003483F /* StdAfx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FA08B203F500B3EA3B /* StdAfx.cpp */; };
+		D0C8DD630D621C590003483F /* StdAfx.h in Headers */ = {isa = PBXBuildFile; fileRef = C314E5CA08D8921000B32E64 /* StdAfx.h */; };
+		D0C8DD650D621C850003483F /* libFColladaSU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D271E80C624C4D0029C04A /* libFColladaSU.a */; };
+		D0C8DD960D62379D0003483F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C8DD950D62379D0003483F /* CoreServices.framework */; };
+		D0C8DD970D62379D0003483F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C8DD950D62379D0003483F /* CoreServices.framework */; };
+		D0C8DD980D62379D0003483F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C8DD950D62379D0003483F /* CoreServices.framework */; };
+		D0C8DD990D62379D0003483F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C8DD950D62379D0003483F /* CoreServices.framework */; };
+		D0D272130C62519F0029C04A /* libFColladaSU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D271E80C624C4D0029C04A /* libFColladaSU.a */; };
+		D0D98CC30BF4E0E800D6E83C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D98CC20BF4E0E800D6E83C /* Cg.framework */; };
+		D0D98CC40BF4E0E800D6E83C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D98CC20BF4E0E800D6E83C /* Cg.framework */; };
+		D0D98CC50BF4E0E800D6E83C /* Cg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0D98CC20BF4E0E800D6E83C /* Cg.framework */; };
+		D0E3D3590C623284007FB141 /* MFnPluginNoEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E3D3580C623284007FB141 /* MFnPluginNoEntry.h */; };
+		D0E3D35A0C623284007FB141 /* MFnPluginNoEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E3D3580C623284007FB141 /* MFnPluginNoEntry.h */; };
+		D0E3D35B0C623284007FB141 /* MFnPluginNoEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E3D3580C623284007FB141 /* MFnPluginNoEntry.h */; };
+		E1205A0108B203F500B3EA3B /* CExportOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E608B203F500B3EA3B /* CExportOptions.cpp */; };
+		E1205A0208B203F500B3EA3B /* CMeshExporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E708B203F500B3EA3B /* CMeshExporter.cpp */; };
+		E1205A0308B203F500B3EA3B /* CReferenceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E808B203F500B3EA3B /* CReferenceManager.cpp */; };
+		E1205A0408B203F500B3EA3B /* CRotateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059E908B203F500B3EA3B /* CRotateHelper.cpp */; };
+		E1205A0508B203F500B3EA3B /* CSkewHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EA08B203F500B3EA3B /* CSkewHelper.cpp */; };
+		E1205A0608B203F500B3EA3B /* DaeAnimationLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EB08B203F500B3EA3B /* DaeAnimationLibrary.cpp */; };
+		E1205A0708B203F500B3EA3B /* DaeCameraLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EC08B203F500B3EA3B /* DaeCameraLibrary.cpp */; };
+		E1205A0808B203F500B3EA3B /* DaeControllerLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059ED08B203F500B3EA3B /* DaeControllerLibrary.cpp */; };
+		E1205A0908B203F500B3EA3B /* DaeDoc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EE08B203F500B3EA3B /* DaeDoc.cpp */; };
+		E1205A0A08B203F500B3EA3B /* DaeGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059EF08B203F500B3EA3B /* DaeGeometry.cpp */; };
+		E1205A0B08B203F500B3EA3B /* DaeGeometryLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F008B203F500B3EA3B /* DaeGeometryLibrary.cpp */; };
+		E1205A0C08B203F500B3EA3B /* DaeLightLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F108B203F500B3EA3B /* DaeLightLibrary.cpp */; };
+		E1205A0D08B203F500B3EA3B /* DaeMaterialLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F208B203F500B3EA3B /* DaeMaterialLibrary.cpp */; };
+		E1205A1008B203F500B3EA3B /* DaeSceneGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F508B203F500B3EA3B /* DaeSceneGraph.cpp */; };
+		E1205A1108B203F500B3EA3B /* DaeTextureLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F608B203F500B3EA3B /* DaeTextureLibrary.cpp */; };
+		E1205A1208B203F500B3EA3B /* DaeTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F708B203F500B3EA3B /* DaeTransform.cpp */; };
+		E1205A1308B203F500B3EA3B /* DaeTranslator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059F808B203F500B3EA3B /* DaeTranslator.cpp */; };
+		E1205A1608B203F500B3EA3B /* CAnimationHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FB08B203F500B3EA3B /* CAnimationHelper.cpp */; };
+		E1205A1708B203F500B3EA3B /* CDagHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FC08B203F500B3EA3B /* CDagHelper.cpp */; };
+		E1205A1808B203F500B3EA3B /* CMeshHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FD08B203F500B3EA3B /* CMeshHelper.cpp */; };
+		E1205A1A08B203F600B3EA3B /* CShaderHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E12059FF08B203F500B3EA3B /* CShaderHelper.cpp */; };
+		E1B1BEBD08B8029000ED34BD /* HIAnimCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B1BEBC08B8029000ED34BD /* HIAnimCache.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		C314E5B408D88F5500B32E64 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.gcc.3_3;
+			fileType = sourcecode.c;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+		C3428DEE0BAF297D00D9004F /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.gcc.4_0;
+			fileType = sourcecode.c;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+		E12BF5BF08ADAB910051D47A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.gcc.3_3;
+			fileType = sourcecode.c;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		D0C8DD820D6234D40003483F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C3D608B30ADFD5FC00019D9C;
+			remoteInfo = FColladaSU;
+		};
+		D0D271E50C624C4D0029C04A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C315DFDB097840EB005D77BE;
+			remoteInfo = FColladaS;
+		};
+		D0D271E70C624C4D0029C04A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C3D608B40ADFD5FC00019D9C;
+			remoteInfo = FColladaSU;
+		};
+		D0D271E90C624C4D0029C04A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D09B10BA0B866F5500122B1F;
+			remoteInfo = FColladaTest;
+		};
+		D0D271EB0C624C4D0029C04A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D09F2DB30BD9527300447337;
+			remoteInfo = FColladaU;
+		};
+		D0D272200C6251F50029C04A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C3D608B30ADFD5FC00019D9C;
+			remoteInfo = FColladaSU;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		51B910B70AF95D4E00A53FA2 /* CFXShaderNode.cpp */ = {isa = PBXFileReference; comments = "[ewhittom] This file was known to cause problems when optimized. Disable optimizations if you don't receive Maya callbacks."; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CFXShaderNode.cpp; path = ColladaFX/CFXShaderNode.cpp; sourceTree = "<group>"; };
+		51B910B80AF95D4E00A53FA2 /* CFXShaderCmd.cpp */ = {isa = PBXFileReference; comments = "Disable all optimizations for this file."; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CFXShaderCmd.cpp; path = ColladaFX/CFXShaderCmd.cpp; sourceTree = "<group>"; };
+		51B910B90AF95D4E00A53FA2 /* CFXRenderState.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CFXRenderState.cpp; path = ColladaFX/CFXRenderState.cpp; sourceTree = "<group>"; };
+		51B910BA0AF95D4E00A53FA2 /* CFXPasses.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CFXPasses.cpp; path = ColladaFX/CFXPasses.cpp; sourceTree = "<group>"; };
+		51B910BB0AF95D4E00A53FA2 /* CFXParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CFXParameter.cpp; path = ColladaFX/CFXParameter.cpp; sourceTree = "<group>"; };
+		51B910BC0AF95D4E00A53FA2 /* CFXBehavior.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CFXBehavior.cpp; path = ColladaFX/CFXBehavior.cpp; sourceTree = "<group>"; };
+		C314E5B808D88F5500B32E64 /* COLLADA_m70.lib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = COLLADA_m70.lib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C314E5CA08D8921000B32E64 /* StdAfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdAfx.h; sourceTree = "<group>"; };
+		C3428D500BAF287300D9004F /* CAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAnimationHelper.h; path = TranslatorHelpers/CAnimationHelper.h; sourceTree = "<group>"; };
+		C3428D510BAF287300D9004F /* CDagHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDagHelper.h; path = TranslatorHelpers/CDagHelper.h; sourceTree = "<group>"; };
+		C3428D520BAF287300D9004F /* CMeshHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMeshHelper.h; path = TranslatorHelpers/CMeshHelper.h; sourceTree = "<group>"; };
+		C3428D550BAF287300D9004F /* CSetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSetHelper.h; path = TranslatorHelpers/CSetHelper.h; sourceTree = "<group>"; };
+		C3428D560BAF287300D9004F /* CShaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CShaderHelper.h; path = TranslatorHelpers/CShaderHelper.h; sourceTree = "<group>"; };
+		C3428D570BAF287300D9004F /* HIAnimCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIAnimCache.h; path = TranslatorHelpers/HIAnimCache.h; sourceTree = "<group>"; };
+		C3428D680BAF288700D9004F /* MayaConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MayaConvert.h; path = TranslatorHelpers/MayaConvert.h; sourceTree = "<group>"; };
+		C3428D6B0BAF289E00D9004F /* CNURBSExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CNURBSExporter.cpp; sourceTree = "<group>"; };
+		C3428D6E0BAF28B900D9004F /* DaeEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeEmitter.cpp; sourceTree = "<group>"; };
+		C3428D6F0BAF28B900D9004F /* DaeEmitterLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeEmitterLibrary.cpp; sourceTree = "<group>"; };
+		C3428D700BAF28B900D9004F /* DaeForceFieldLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeForceFieldLibrary.cpp; sourceTree = "<group>"; };
+		C3428D770BAF28C400D9004F /* CFXRenderStateStaticInit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CFXRenderStateStaticInit.hpp; path = ColladaFX/CFXRenderStateStaticInit.hpp; sourceTree = "<group>"; };
+		C3428DF20BAF297D00D9004F /* COLLADA_m85.bundle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = COLLADA_m85.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		C354BCE8099179DB009F66BE /* CSplineExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CSplineExporter.cpp; sourceTree = "<group>"; };
+		C354BCE9099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeAgeiaPhysicsScene.cpp; sourceTree = "<group>"; };
+		C354BCEA099179DB009F66BE /* DaeAnimationCurve.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeAnimationCurve.cpp; sourceTree = "<group>"; };
+		C354BCEB099179DB009F66BE /* DaeAnimationTypes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeAnimationTypes.cpp; sourceTree = "<group>"; };
+		C354BCEC099179DB009F66BE /* DaeAnimClipLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeAnimClipLibrary.cpp; sourceTree = "<group>"; };
+		C354BCED099179DB009F66BE /* DaeBaseLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeBaseLibrary.cpp; sourceTree = "<group>"; };
+		C354BCEE099179DB009F66BE /* DaeNativePhysicsScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeNativePhysicsScene.cpp; sourceTree = "<group>"; };
+		C354BCEF099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaePhysicsMaterialLibrary.cpp; sourceTree = "<group>"; };
+		C354BCF0099179DB009F66BE /* DaePhysicsModelLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaePhysicsModelLibrary.cpp; sourceTree = "<group>"; };
+		C354BCF1099179DB009F66BE /* DaePhysicsScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaePhysicsScene.cpp; sourceTree = "<group>"; };
+		C354BCF2099179DB009F66BE /* DaePhysicsSceneLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaePhysicsSceneLibrary.cpp; sourceTree = "<group>"; };
+		C354BD0C09917A32009F66BE /* MayaConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MayaConvert.cpp; path = TranslatorHelpers/MayaConvert.cpp; sourceTree = "<group>"; };
+		C354BD7409918790009F66BE /* CSetHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CSetHelper.cpp; path = TranslatorHelpers/CSetHelper.cpp; sourceTree = "<group>"; };
+		C35D1CAD0A93B8A300B15814 /* DaeDocNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeDocNode.cpp; sourceTree = "<group>"; };
+		C35D1CAE0A93B8A300B15814 /* DaeEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeEntity.cpp; sourceTree = "<group>"; };
+		C35D1CAF0A93B8A300B15814 /* DaeEntityManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DaeEntityManager.cpp; sourceTree = "<group>"; };
+		C35D1D170A93BE7700B15814 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		C3B6F9940B7D0C3A00A6FDCF /* CExportOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CExportOptions.h; sourceTree = "<group>"; };
+		C3B6F9950B7D0C3A00A6FDCF /* CMeshExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMeshExporter.h; sourceTree = "<group>"; };
+		C3B6F9960B7D0C3A00A6FDCF /* CNURBSExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNURBSExporter.h; sourceTree = "<group>"; };
+		C3B6F9970B7D0C3A00A6FDCF /* CReferenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CReferenceManager.h; sourceTree = "<group>"; };
+		C3B6F9980B7D0C3A00A6FDCF /* CRotateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRotateHelper.h; sourceTree = "<group>"; };
+		C3B6F9990B7D0C3A00A6FDCF /* CSkewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSkewHelper.h; sourceTree = "<group>"; };
+		C3B6F99A0B7D0C3A00A6FDCF /* CSplineExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSplineExporter.h; sourceTree = "<group>"; };
+		C3B6F99B0B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeAgeiaPhysicsScene.h; sourceTree = "<group>"; };
+		C3B6F99C0B7D0C3A00A6FDCF /* DaeAnimationCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeAnimationCurve.h; sourceTree = "<group>"; };
+		C3B6F99D0B7D0C3A00A6FDCF /* DaeAnimationLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeAnimationLibrary.h; sourceTree = "<group>"; };
+		C3B6F99E0B7D0C3A00A6FDCF /* DaeAnimationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeAnimationTypes.h; sourceTree = "<group>"; };
+		C3B6F99F0B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeAnimClipLibrary.h; sourceTree = "<group>"; };
+		C3B6F9A00B7D0C3A00A6FDCF /* DaeBaseLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeBaseLibrary.h; sourceTree = "<group>"; };
+		C3B6F9A10B7D0C3A00A6FDCF /* DaeCameraLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeCameraLibrary.h; sourceTree = "<group>"; };
+		C3B6F9A20B7D0C3A00A6FDCF /* DaeControllerLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeControllerLibrary.h; sourceTree = "<group>"; };
+		C3B6F9A30B7D0C3A00A6FDCF /* DaeDoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeDoc.h; sourceTree = "<group>"; };
+		C3B6F9A40B7D0C3A00A6FDCF /* DaeDocNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeDocNode.h; sourceTree = "<group>"; };
+		C3B6F9A50B7D0C3A00A6FDCF /* DaeEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeEmitter.h; sourceTree = "<group>"; };
+		C3B6F9A60B7D0C3A00A6FDCF /* DaeEmitterLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeEmitterLibrary.h; sourceTree = "<group>"; };
+		C3B6F9A70B7D0C3A00A6FDCF /* DaeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeEntity.h; sourceTree = "<group>"; };
+		C3B6F9A80B7D0C3A00A6FDCF /* DaeEntityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeEntityManager.h; sourceTree = "<group>"; };
+		C3B6F9A90B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeForceFieldLibrary.h; sourceTree = "<group>"; };
+		C3B6F9AA0B7D0C3A00A6FDCF /* DaeGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeGeometry.h; sourceTree = "<group>"; };
+		C3B6F9AB0B7D0C3A00A6FDCF /* DaeGeometryLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeGeometryLibrary.h; sourceTree = "<group>"; };
+		C3B6F9AC0B7D0C3A00A6FDCF /* DaeInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeInput.h; sourceTree = "<group>"; };
+		C3B6F9AD0B7D0C3A00A6FDCF /* DaeLightLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeLightLibrary.h; sourceTree = "<group>"; };
+		C3B6F9AE0B7D0C3A00A6FDCF /* DaeMaterialLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeMaterialLibrary.h; sourceTree = "<group>"; };
+		C3B6F9AF0B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeNativePhysicsScene.h; sourceTree = "<group>"; };
+		C3B6F9B00B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaePhysicsMaterialLibrary.h; sourceTree = "<group>"; };
+		C3B6F9B10B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaePhysicsModelLibrary.h; sourceTree = "<group>"; };
+		C3B6F9B20B7D0C3A00A6FDCF /* DaePhysicsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaePhysicsScene.h; sourceTree = "<group>"; };
+		C3B6F9B30B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaePhysicsSceneLibrary.h; sourceTree = "<group>"; };
+		C3B6F9B40B7D0C3A00A6FDCF /* DaeSceneGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeSceneGraph.h; sourceTree = "<group>"; };
+		C3B6F9B50B7D0C3A00A6FDCF /* DaeTextureLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeTextureLibrary.h; sourceTree = "<group>"; };
+		C3B6F9B60B7D0C3A00A6FDCF /* DaeTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeTransform.h; sourceTree = "<group>"; };
+		C3B6F9B70B7D0C3A00A6FDCF /* DaeTranslator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DaeTranslator.h; sourceTree = "<group>"; };
+		C3B6FA030B7D0C4D00A6FDCF /* CFXBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFXBehavior.h; path = ColladaFX/CFXBehavior.h; sourceTree = "<group>"; };
+		C3B6FA040B7D0C4D00A6FDCF /* CFXParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFXParameter.h; path = ColladaFX/CFXParameter.h; sourceTree = "<group>"; };
+		C3B6FA050B7D0C4D00A6FDCF /* CFXPasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFXPasses.h; path = ColladaFX/CFXPasses.h; sourceTree = "<group>"; };
+		C3B6FA060B7D0C4D00A6FDCF /* CFXRenderState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFXRenderState.h; path = ColladaFX/CFXRenderState.h; sourceTree = "<group>"; };
+		C3B6FA070B7D0C4D00A6FDCF /* CFXShaderCmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFXShaderCmd.h; path = ColladaFX/CFXShaderCmd.h; sourceTree = "<group>"; };
+		C3B6FA080B7D0C4D00A6FDCF /* CFXShaderNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CFXShaderNode.h; path = ColladaFX/CFXShaderNode.h; sourceTree = "<group>"; };
+		C3B6FA090B7D0C4D00A6FDCF /* DDSFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDSFormat.h; path = ColladaFX/DDSFormat.h; sourceTree = "<group>"; };
+		C3B6FA4C0B7D0E2E00A6FDCF /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = /System/Library/Frameworks/GLUT.framework; sourceTree = "<absolute>"; };
+		D0C8DCF00D6203310003483F /* COLLADA_m2008.bundle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = COLLADA_m2008.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0C8DD950D62379D0003483F /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
+		D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FCollada.xcodeproj; path = ../FCollada/FCollada.xcodeproj; sourceTree = SOURCE_ROOT; };
+		D0D98CC20BF4E0E800D6E83C /* Cg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cg.framework; path = /Library/Frameworks/Cg.framework; sourceTree = "<absolute>"; };
+		D0E3D3580C623284007FB141 /* MFnPluginNoEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFnPluginNoEntry.h; sourceTree = "<group>"; };
+		E12059E608B203F500B3EA3B /* CExportOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CExportOptions.cpp; sourceTree = "<group>"; };
+		E12059E708B203F500B3EA3B /* CMeshExporter.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CMeshExporter.cpp; sourceTree = "<group>"; };
+		E12059E808B203F500B3EA3B /* CReferenceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CReferenceManager.cpp; sourceTree = "<group>"; };
+		E12059E908B203F500B3EA3B /* CRotateHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CRotateHelper.cpp; sourceTree = "<group>"; };
+		E12059EA08B203F500B3EA3B /* CSkewHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = CSkewHelper.cpp; sourceTree = "<group>"; };
+		E12059EB08B203F500B3EA3B /* DaeAnimationLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeAnimationLibrary.cpp; sourceTree = "<group>"; };
+		E12059EC08B203F500B3EA3B /* DaeCameraLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeCameraLibrary.cpp; sourceTree = "<group>"; };
+		E12059ED08B203F500B3EA3B /* DaeControllerLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeControllerLibrary.cpp; sourceTree = "<group>"; };
+		E12059EE08B203F500B3EA3B /* DaeDoc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeDoc.cpp; sourceTree = "<group>"; };
+		E12059EF08B203F500B3EA3B /* DaeGeometry.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeGeometry.cpp; sourceTree = "<group>"; };
+		E12059F008B203F500B3EA3B /* DaeGeometryLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeGeometryLibrary.cpp; sourceTree = "<group>"; };
+		E12059F108B203F500B3EA3B /* DaeLightLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeLightLibrary.cpp; sourceTree = "<group>"; };
+		E12059F208B203F500B3EA3B /* DaeMaterialLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeMaterialLibrary.cpp; sourceTree = "<group>"; };
+		E12059F508B203F500B3EA3B /* DaeSceneGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeSceneGraph.cpp; sourceTree = "<group>"; };
+		E12059F608B203F500B3EA3B /* DaeTextureLibrary.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeTextureLibrary.cpp; sourceTree = "<group>"; };
+		E12059F708B203F500B3EA3B /* DaeTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeTransform.cpp; sourceTree = "<group>"; };
+		E12059F808B203F500B3EA3B /* DaeTranslator.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = DaeTranslator.cpp; sourceTree = "<group>"; };
+		E12059FA08B203F500B3EA3B /* StdAfx.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = StdAfx.cpp; sourceTree = "<group>"; };
+		E12059FB08B203F500B3EA3B /* CAnimationHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CAnimationHelper.cpp; path = TranslatorHelpers/CAnimationHelper.cpp; sourceTree = "<group>"; };
+		E12059FC08B203F500B3EA3B /* CDagHelper.cpp */ = {isa = PBXFileReference; comments = "The #pragma optimize pre-processor instruction doesn't seem to work on this file."; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CDagHelper.cpp; path = TranslatorHelpers/CDagHelper.cpp; sourceTree = "<group>"; };
+		E12059FD08B203F500B3EA3B /* CMeshHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CMeshHelper.cpp; path = TranslatorHelpers/CMeshHelper.cpp; sourceTree = "<group>"; };
+		E12059FF08B203F500B3EA3B /* CShaderHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = CShaderHelper.cpp; path = TranslatorHelpers/CShaderHelper.cpp; sourceTree = "<group>"; };
+		E12BF58208AD81FA0051D47A /* COLLADA_m65.lib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = COLLADA_m65.lib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1B1BEBC08B8029000ED34BD /* HIAnimCache.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = HIAnimCache.cpp; path = TranslatorHelpers/HIAnimCache.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C314E5B308D88F5500B32E64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C35D1D190A93BE7700B15814 /* OpenGL.framework in Frameworks */,
+				C3B6FA4E0B7D0E2E00A6FDCF /* GLUT.framework in Frameworks */,
+				D0D98CC40BF4E0E800D6E83C /* Cg.framework in Frameworks */,
+				D0C8DD980D62379D0003483F /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3428DE90BAF297D00D9004F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3428DEB0BAF297D00D9004F /* OpenGL.framework in Frameworks */,
+				C3428DEC0BAF297D00D9004F /* GLUT.framework in Frameworks */,
+				D0D98CC50BF4E0E800D6E83C /* Cg.framework in Frameworks */,
+				D0D272130C62519F0029C04A /* libFColladaSU.a in Frameworks */,
+				D0C8DD970D62379D0003483F /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C8DCEE0D6203310003483F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0C8DD0B0D621C200003483F /* Cg.framework in Frameworks */,
+				D0C8DD5A0D621C550003483F /* GLUT.framework in Frameworks */,
+				D0C8DD610D621C580003483F /* OpenGL.framework in Frameworks */,
+				D0C8DD650D621C850003483F /* libFColladaSU.a in Frameworks */,
+				D0C8DD960D62379D0003483F /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E12BF58008AD81FA0051D47A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C35D1D180A93BE7700B15814 /* OpenGL.framework in Frameworks */,
+				C3B6FA4D0B7D0E2E00A6FDCF /* GLUT.framework in Frameworks */,
+				D0D98CC30BF4E0E800D6E83C /* Cg.framework in Frameworks */,
+				D0C8DD990D62379D0003483F /* CoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C3B6F9920B7D0BFA00A6FDCF /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C3428D6E0BAF28B900D9004F /* DaeEmitter.cpp */,
+				C3428D6F0BAF28B900D9004F /* DaeEmitterLibrary.cpp */,
+				C3428D700BAF28B900D9004F /* DaeForceFieldLibrary.cpp */,
+				C3428D6B0BAF289E00D9004F /* CNURBSExporter.cpp */,
+				C35D1CAD0A93B8A300B15814 /* DaeDocNode.cpp */,
+				C35D1CAE0A93B8A300B15814 /* DaeEntity.cpp */,
+				51B910B70AF95D4E00A53FA2 /* CFXShaderNode.cpp */,
+				51B910B80AF95D4E00A53FA2 /* CFXShaderCmd.cpp */,
+				51B910B90AF95D4E00A53FA2 /* CFXRenderState.cpp */,
+				51B910BA0AF95D4E00A53FA2 /* CFXPasses.cpp */,
+				51B910BB0AF95D4E00A53FA2 /* CFXParameter.cpp */,
+				51B910BC0AF95D4E00A53FA2 /* CFXBehavior.cpp */,
+				C35D1CAF0A93B8A300B15814 /* DaeEntityManager.cpp */,
+				C354BD7409918790009F66BE /* CSetHelper.cpp */,
+				C354BD0C09917A32009F66BE /* MayaConvert.cpp */,
+				C354BCE8099179DB009F66BE /* CSplineExporter.cpp */,
+				C354BCE9099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp */,
+				C354BCEA099179DB009F66BE /* DaeAnimationCurve.cpp */,
+				C354BCEB099179DB009F66BE /* DaeAnimationTypes.cpp */,
+				C354BCEC099179DB009F66BE /* DaeAnimClipLibrary.cpp */,
+				C354BCED099179DB009F66BE /* DaeBaseLibrary.cpp */,
+				C354BCEE099179DB009F66BE /* DaeNativePhysicsScene.cpp */,
+				C354BCEF099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp */,
+				C354BCF0099179DB009F66BE /* DaePhysicsModelLibrary.cpp */,
+				C354BCF1099179DB009F66BE /* DaePhysicsScene.cpp */,
+				C354BCF2099179DB009F66BE /* DaePhysicsSceneLibrary.cpp */,
+				E1B1BEBC08B8029000ED34BD /* HIAnimCache.cpp */,
+				E12059E608B203F500B3EA3B /* CExportOptions.cpp */,
+				E12059E708B203F500B3EA3B /* CMeshExporter.cpp */,
+				E12059E808B203F500B3EA3B /* CReferenceManager.cpp */,
+				E12059E908B203F500B3EA3B /* CRotateHelper.cpp */,
+				E12059EA08B203F500B3EA3B /* CSkewHelper.cpp */,
+				E12059EB08B203F500B3EA3B /* DaeAnimationLibrary.cpp */,
+				E12059EC08B203F500B3EA3B /* DaeCameraLibrary.cpp */,
+				E12059ED08B203F500B3EA3B /* DaeControllerLibrary.cpp */,
+				E12059EE08B203F500B3EA3B /* DaeDoc.cpp */,
+				E12059EF08B203F500B3EA3B /* DaeGeometry.cpp */,
+				E12059F008B203F500B3EA3B /* DaeGeometryLibrary.cpp */,
+				E12059F108B203F500B3EA3B /* DaeLightLibrary.cpp */,
+				E12059F208B203F500B3EA3B /* DaeMaterialLibrary.cpp */,
+				E12059F508B203F500B3EA3B /* DaeSceneGraph.cpp */,
+				E12059F608B203F500B3EA3B /* DaeTextureLibrary.cpp */,
+				E12059F708B203F500B3EA3B /* DaeTransform.cpp */,
+				E12059F808B203F500B3EA3B /* DaeTranslator.cpp */,
+				E12059FA08B203F500B3EA3B /* StdAfx.cpp */,
+				E12059FB08B203F500B3EA3B /* CAnimationHelper.cpp */,
+				E12059FC08B203F500B3EA3B /* CDagHelper.cpp */,
+				E12059FD08B203F500B3EA3B /* CMeshHelper.cpp */,
+				E12059FF08B203F500B3EA3B /* CShaderHelper.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		C3B6F9930B7D0C0D00A6FDCF /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				D0E3D3580C623284007FB141 /* MFnPluginNoEntry.h */,
+				C3428D770BAF28C400D9004F /* CFXRenderStateStaticInit.hpp */,
+				C3428D680BAF288700D9004F /* MayaConvert.h */,
+				C3428D500BAF287300D9004F /* CAnimationHelper.h */,
+				C3428D510BAF287300D9004F /* CDagHelper.h */,
+				C3428D520BAF287300D9004F /* CMeshHelper.h */,
+				C3428D550BAF287300D9004F /* CSetHelper.h */,
+				C3428D560BAF287300D9004F /* CShaderHelper.h */,
+				C3428D570BAF287300D9004F /* HIAnimCache.h */,
+				C3B6FA030B7D0C4D00A6FDCF /* CFXBehavior.h */,
+				C3B6FA040B7D0C4D00A6FDCF /* CFXParameter.h */,
+				C3B6FA050B7D0C4D00A6FDCF /* CFXPasses.h */,
+				C3B6FA060B7D0C4D00A6FDCF /* CFXRenderState.h */,
+				C3B6FA070B7D0C4D00A6FDCF /* CFXShaderCmd.h */,
+				C3B6FA080B7D0C4D00A6FDCF /* CFXShaderNode.h */,
+				C3B6FA090B7D0C4D00A6FDCF /* DDSFormat.h */,
+				C3B6F9940B7D0C3A00A6FDCF /* CExportOptions.h */,
+				C3B6F9950B7D0C3A00A6FDCF /* CMeshExporter.h */,
+				C3B6F9960B7D0C3A00A6FDCF /* CNURBSExporter.h */,
+				C3B6F9970B7D0C3A00A6FDCF /* CReferenceManager.h */,
+				C3B6F9980B7D0C3A00A6FDCF /* CRotateHelper.h */,
+				C3B6F9990B7D0C3A00A6FDCF /* CSkewHelper.h */,
+				C3B6F99A0B7D0C3A00A6FDCF /* CSplineExporter.h */,
+				C3B6F99B0B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h */,
+				C3B6F99C0B7D0C3A00A6FDCF /* DaeAnimationCurve.h */,
+				C3B6F99D0B7D0C3A00A6FDCF /* DaeAnimationLibrary.h */,
+				C3B6F99E0B7D0C3A00A6FDCF /* DaeAnimationTypes.h */,
+				C3B6F99F0B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h */,
+				C3B6F9A00B7D0C3A00A6FDCF /* DaeBaseLibrary.h */,
+				C3B6F9A10B7D0C3A00A6FDCF /* DaeCameraLibrary.h */,
+				C3B6F9A20B7D0C3A00A6FDCF /* DaeControllerLibrary.h */,
+				C3B6F9A30B7D0C3A00A6FDCF /* DaeDoc.h */,
+				C3B6F9A40B7D0C3A00A6FDCF /* DaeDocNode.h */,
+				C3B6F9A50B7D0C3A00A6FDCF /* DaeEmitter.h */,
+				C3B6F9A60B7D0C3A00A6FDCF /* DaeEmitterLibrary.h */,
+				C3B6F9A70B7D0C3A00A6FDCF /* DaeEntity.h */,
+				C3B6F9A80B7D0C3A00A6FDCF /* DaeEntityManager.h */,
+				C3B6F9A90B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h */,
+				C3B6F9AA0B7D0C3A00A6FDCF /* DaeGeometry.h */,
+				C3B6F9AB0B7D0C3A00A6FDCF /* DaeGeometryLibrary.h */,
+				C3B6F9AC0B7D0C3A00A6FDCF /* DaeInput.h */,
+				C3B6F9AD0B7D0C3A00A6FDCF /* DaeLightLibrary.h */,
+				C3B6F9AE0B7D0C3A00A6FDCF /* DaeMaterialLibrary.h */,
+				C3B6F9AF0B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h */,
+				C3B6F9B00B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h */,
+				C3B6F9B10B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h */,
+				C3B6F9B20B7D0C3A00A6FDCF /* DaePhysicsScene.h */,
+				C3B6F9B30B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h */,
+				C3B6F9B40B7D0C3A00A6FDCF /* DaeSceneGraph.h */,
+				C3B6F9B50B7D0C3A00A6FDCF /* DaeTextureLibrary.h */,
+				C3B6F9B60B7D0C3A00A6FDCF /* DaeTransform.h */,
+				C3B6F9B70B7D0C3A00A6FDCF /* DaeTranslator.h */,
+				C314E5CA08D8921000B32E64 /* StdAfx.h */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		D0D271D60C624C4D0029C04A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0D271E60C624C4D0029C04A /* libFColladaS.a */,
+				D0D271E80C624C4D0029C04A /* libFColladaSU.a */,
+				D0D271EA0C624C4D0029C04A /* FColladaTest */,
+				D0D271EC0C624C4D0029C04A /* libFColladaU.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E12BF57008AD81D10051D47A = {
+			isa = PBXGroup;
+			children = (
+				D0C8DD950D62379D0003483F /* CoreServices.framework */,
+				D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */,
+				D0D98CC20BF4E0E800D6E83C /* Cg.framework */,
+				C3B6F9920B7D0BFA00A6FDCF /* Source */,
+				C3B6F9930B7D0C0D00A6FDCF /* Header */,
+				C3B6FA4C0B7D0E2E00A6FDCF /* GLUT.framework */,
+				C35D1D170A93BE7700B15814 /* OpenGL.framework */,
+				E12BF58308AD81FA0051D47A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E12BF58308AD81FA0051D47A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E12BF58208AD81FA0051D47A /* COLLADA_m65.lib */,
+				C314E5B808D88F5500B32E64 /* COLLADA_m70.lib */,
+				C3428DF20BAF297D00D9004F /* COLLADA_m85.bundle */,
+				D0C8DCF00D6203310003483F /* COLLADA_m2008.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C314E59408D88F5500B32E64 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C314E5CC08D8921000B32E64 /* StdAfx.h in Headers */,
+				C3B6F9DE0B7D0C3A00A6FDCF /* CExportOptions.h in Headers */,
+				C3B6F9DF0B7D0C3A00A6FDCF /* CMeshExporter.h in Headers */,
+				C3B6F9E00B7D0C3A00A6FDCF /* CNURBSExporter.h in Headers */,
+				C3B6F9E10B7D0C3A00A6FDCF /* CReferenceManager.h in Headers */,
+				C3B6F9E20B7D0C3A00A6FDCF /* CRotateHelper.h in Headers */,
+				C3B6F9E30B7D0C3A00A6FDCF /* CSkewHelper.h in Headers */,
+				C3B6F9E40B7D0C3A00A6FDCF /* CSplineExporter.h in Headers */,
+				C3B6F9E50B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h in Headers */,
+				C3B6F9E60B7D0C3A00A6FDCF /* DaeAnimationCurve.h in Headers */,
+				C3B6F9E70B7D0C3A00A6FDCF /* DaeAnimationLibrary.h in Headers */,
+				C3B6F9E80B7D0C3A00A6FDCF /* DaeAnimationTypes.h in Headers */,
+				C3B6F9E90B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h in Headers */,
+				C3B6F9EA0B7D0C3A00A6FDCF /* DaeBaseLibrary.h in Headers */,
+				C3B6F9EB0B7D0C3A00A6FDCF /* DaeCameraLibrary.h in Headers */,
+				C3B6F9EC0B7D0C3A00A6FDCF /* DaeControllerLibrary.h in Headers */,
+				C3B6F9ED0B7D0C3A00A6FDCF /* DaeDoc.h in Headers */,
+				C3B6F9EE0B7D0C3A00A6FDCF /* DaeDocNode.h in Headers */,
+				C3B6F9EF0B7D0C3A00A6FDCF /* DaeEmitter.h in Headers */,
+				C3B6F9F00B7D0C3A00A6FDCF /* DaeEmitterLibrary.h in Headers */,
+				C3B6F9F10B7D0C3A00A6FDCF /* DaeEntity.h in Headers */,
+				C3B6F9F20B7D0C3A00A6FDCF /* DaeEntityManager.h in Headers */,
+				C3B6F9F30B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h in Headers */,
+				C3B6F9F40B7D0C3A00A6FDCF /* DaeGeometry.h in Headers */,
+				C3B6F9F50B7D0C3A00A6FDCF /* DaeGeometryLibrary.h in Headers */,
+				C3B6F9F60B7D0C3A00A6FDCF /* DaeInput.h in Headers */,
+				C3B6F9F70B7D0C3A00A6FDCF /* DaeLightLibrary.h in Headers */,
+				C3B6F9F80B7D0C3A00A6FDCF /* DaeMaterialLibrary.h in Headers */,
+				C3B6F9F90B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h in Headers */,
+				C3B6F9FA0B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h in Headers */,
+				C3B6F9FB0B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h in Headers */,
+				C3B6F9FC0B7D0C3A00A6FDCF /* DaePhysicsScene.h in Headers */,
+				C3B6F9FD0B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h in Headers */,
+				C3B6F9FE0B7D0C3A00A6FDCF /* DaeSceneGraph.h in Headers */,
+				C3B6F9FF0B7D0C3A00A6FDCF /* DaeTextureLibrary.h in Headers */,
+				C3B6FA000B7D0C3A00A6FDCF /* DaeTransform.h in Headers */,
+				C3B6FA010B7D0C3A00A6FDCF /* DaeTranslator.h in Headers */,
+				C3B6FA110B7D0C4D00A6FDCF /* CFXBehavior.h in Headers */,
+				C3B6FA120B7D0C4D00A6FDCF /* CFXParameter.h in Headers */,
+				C3B6FA130B7D0C4D00A6FDCF /* CFXPasses.h in Headers */,
+				C3B6FA140B7D0C4D00A6FDCF /* CFXRenderState.h in Headers */,
+				C3B6FA150B7D0C4D00A6FDCF /* CFXShaderCmd.h in Headers */,
+				C3B6FA160B7D0C4D00A6FDCF /* CFXShaderNode.h in Headers */,
+				C3B6FA170B7D0C4D00A6FDCF /* DDSFormat.h in Headers */,
+				C3428D600BAF287300D9004F /* CAnimationHelper.h in Headers */,
+				C3428D610BAF287300D9004F /* CDagHelper.h in Headers */,
+				C3428D620BAF287300D9004F /* CMeshHelper.h in Headers */,
+				C3428D650BAF287300D9004F /* CSetHelper.h in Headers */,
+				C3428D660BAF287300D9004F /* CShaderHelper.h in Headers */,
+				C3428D670BAF287300D9004F /* HIAnimCache.h in Headers */,
+				C3428D6A0BAF288700D9004F /* MayaConvert.h in Headers */,
+				C3428D790BAF28C400D9004F /* CFXRenderStateStaticInit.hpp in Headers */,
+				D0E3D35B0C623284007FB141 /* MFnPluginNoEntry.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3428D7E0BAF297D00D9004F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3428D7F0BAF297D00D9004F /* StdAfx.h in Headers */,
+				C3428D800BAF297D00D9004F /* CExportOptions.h in Headers */,
+				C3428D810BAF297D00D9004F /* CMeshExporter.h in Headers */,
+				C3428D820BAF297D00D9004F /* CNURBSExporter.h in Headers */,
+				C3428D830BAF297D00D9004F /* CReferenceManager.h in Headers */,
+				C3428D840BAF297D00D9004F /* CRotateHelper.h in Headers */,
+				C3428D850BAF297D00D9004F /* CSkewHelper.h in Headers */,
+				C3428D860BAF297D00D9004F /* CSplineExporter.h in Headers */,
+				C3428D870BAF297D00D9004F /* DaeAgeiaPhysicsScene.h in Headers */,
+				C3428D880BAF297D00D9004F /* DaeAnimationCurve.h in Headers */,
+				C3428D890BAF297D00D9004F /* DaeAnimationLibrary.h in Headers */,
+				C3428D8A0BAF297D00D9004F /* DaeAnimationTypes.h in Headers */,
+				C3428D8B0BAF297D00D9004F /* DaeAnimClipLibrary.h in Headers */,
+				C3428D8C0BAF297D00D9004F /* DaeBaseLibrary.h in Headers */,
+				C3428D8D0BAF297D00D9004F /* DaeCameraLibrary.h in Headers */,
+				C3428D8E0BAF297D00D9004F /* DaeControllerLibrary.h in Headers */,
+				C3428D8F0BAF297D00D9004F /* DaeDoc.h in Headers */,
+				C3428D900BAF297D00D9004F /* DaeDocNode.h in Headers */,
+				C3428D910BAF297D00D9004F /* DaeEmitter.h in Headers */,
+				C3428D920BAF297D00D9004F /* DaeEmitterLibrary.h in Headers */,
+				C3428D930BAF297D00D9004F /* DaeEntity.h in Headers */,
+				C3428D940BAF297D00D9004F /* DaeEntityManager.h in Headers */,
+				C3428D950BAF297D00D9004F /* DaeForceFieldLibrary.h in Headers */,
+				C3428D960BAF297D00D9004F /* DaeGeometry.h in Headers */,
+				C3428D970BAF297D00D9004F /* DaeGeometryLibrary.h in Headers */,
+				C3428D980BAF297D00D9004F /* DaeInput.h in Headers */,
+				C3428D990BAF297D00D9004F /* DaeLightLibrary.h in Headers */,
+				C3428D9A0BAF297D00D9004F /* DaeMaterialLibrary.h in Headers */,
+				C3428D9B0BAF297D00D9004F /* DaeNativePhysicsScene.h in Headers */,
+				C3428D9C0BAF297D00D9004F /* DaePhysicsMaterialLibrary.h in Headers */,
+				C3428D9D0BAF297D00D9004F /* DaePhysicsModelLibrary.h in Headers */,
+				C3428D9E0BAF297D00D9004F /* DaePhysicsScene.h in Headers */,
+				C3428D9F0BAF297D00D9004F /* DaePhysicsSceneLibrary.h in Headers */,
+				C3428DA00BAF297D00D9004F /* DaeSceneGraph.h in Headers */,
+				C3428DA10BAF297D00D9004F /* DaeTextureLibrary.h in Headers */,
+				C3428DA20BAF297D00D9004F /* DaeTransform.h in Headers */,
+				C3428DA30BAF297D00D9004F /* DaeTranslator.h in Headers */,
+				C3428DA50BAF297D00D9004F /* CFXBehavior.h in Headers */,
+				C3428DA60BAF297D00D9004F /* CFXParameter.h in Headers */,
+				C3428DA70BAF297D00D9004F /* CFXPasses.h in Headers */,
+				C3428DA80BAF297D00D9004F /* CFXRenderState.h in Headers */,
+				C3428DA90BAF297D00D9004F /* CFXShaderCmd.h in Headers */,
+				C3428DAA0BAF297D00D9004F /* CFXShaderNode.h in Headers */,
+				C3428DAB0BAF297D00D9004F /* DDSFormat.h in Headers */,
+				C3428DAC0BAF297D00D9004F /* CAnimationHelper.h in Headers */,
+				C3428DAD0BAF297D00D9004F /* CDagHelper.h in Headers */,
+				C3428DAE0BAF297D00D9004F /* CMeshHelper.h in Headers */,
+				C3428DB10BAF297D00D9004F /* CSetHelper.h in Headers */,
+				C3428DB20BAF297D00D9004F /* CShaderHelper.h in Headers */,
+				C3428DB30BAF297D00D9004F /* HIAnimCache.h in Headers */,
+				C3428DB40BAF297D00D9004F /* MayaConvert.h in Headers */,
+				C3428DB50BAF297D00D9004F /* CFXRenderStateStaticInit.hpp in Headers */,
+				D0E3D35A0C623284007FB141 /* MFnPluginNoEntry.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C8DCEC0D6203310003483F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0C8DCF90D621C120003483F /* CAnimationHelper.h in Headers */,
+				D0C8DCFB0D621C160003483F /* CDagHelper.h in Headers */,
+				D0C8DCFD0D621C160003483F /* CExportOptions.h in Headers */,
+				D0C8DD000D621C180003483F /* CFXBehavior.h in Headers */,
+				D0C8DD010D621C180003483F /* CFXParameter.h in Headers */,
+				D0C8DD030D621C190003483F /* CFXPasses.h in Headers */,
+				D0C8DD050D621C1A0003483F /* CFXRenderState.h in Headers */,
+				D0C8DD060D621C1B0003483F /* CFXRenderStateStaticInit.hpp in Headers */,
+				D0C8DD080D621C1C0003483F /* CFXShaderCmd.h in Headers */,
+				D0C8DD0A0D621C1D0003483F /* CFXShaderNode.h in Headers */,
+				D0C8DD0E0D621C230003483F /* CMeshExporter.h in Headers */,
+				D0C8DD100D621C250003483F /* CMeshHelper.h in Headers */,
+				D0C8DD120D621C250003483F /* CNURBSExporter.h in Headers */,
+				D0C8DD140D621C2D0003483F /* CReferenceManager.h in Headers */,
+				D0C8DD160D621C2E0003483F /* CRotateHelper.h in Headers */,
+				D0C8DD170D621C2F0003483F /* CSetHelper.h in Headers */,
+				D0C8DD1A0D621C300003483F /* CShaderHelper.h in Headers */,
+				D0C8DD1C0D621C310003483F /* CSkewHelper.h in Headers */,
+				D0C8DD1E0D621C320003483F /* CSplineExporter.h in Headers */,
+				D0C8DD200D621C320003483F /* DaeAgeiaPhysicsScene.h in Headers */,
+				D0C8DD220D621C350003483F /* DaeAnimationCurve.h in Headers */,
+				D0C8DD240D621C360003483F /* DaeAnimationLibrary.h in Headers */,
+				D0C8DD260D621C370003483F /* DaeAnimClipLibrary.h in Headers */,
+				D0C8DD280D621C380003483F /* DaeAnimationTypes.h in Headers */,
+				D0C8DD2A0D621C390003483F /* DaeBaseLibrary.h in Headers */,
+				D0C8DD2D0D621C3B0003483F /* DaeCameraLibrary.h in Headers */,
+				D0C8DD2F0D621C3C0003483F /* DaeControllerLibrary.h in Headers */,
+				D0C8DD310D621C3D0003483F /* DaeDoc.h in Headers */,
+				D0C8DD330D621C3F0003483F /* DaeDocNode.h in Headers */,
+				D0C8DD350D621C3F0003483F /* DaeEmitter.h in Headers */,
+				D0C8DD370D621C400003483F /* DaeEmitterLibrary.h in Headers */,
+				D0C8DD390D621C410003483F /* DaeEntity.h in Headers */,
+				D0C8DD3B0D621C420003483F /* DaeEntityManager.h in Headers */,
+				D0C8DD3D0D621C440003483F /* DaeForceFieldLibrary.h in Headers */,
+				D0C8DD3F0D621C450003483F /* DaeGeometry.h in Headers */,
+				D0C8DD410D621C450003483F /* DaeGeometryLibrary.h in Headers */,
+				D0C8DD430D621C460003483F /* DaeInput.h in Headers */,
+				D0C8DD440D621C460003483F /* DaeLightLibrary.h in Headers */,
+				D0C8DD460D621C470003483F /* DaeMaterialLibrary.h in Headers */,
+				D0C8DD480D621C480003483F /* DaeNativePhysicsScene.h in Headers */,
+				D0C8DD4A0D621C490003483F /* DaePhysicsMaterialLibrary.h in Headers */,
+				D0C8DD4C0D621C4A0003483F /* DaePhysicsModelLibrary.h in Headers */,
+				D0C8DD4E0D621C4D0003483F /* DaePhysicsScene.h in Headers */,
+				D0C8DD500D621C4E0003483F /* DaePhysicsSceneLibrary.h in Headers */,
+				D0C8DD520D621C4F0003483F /* DaeSceneGraph.h in Headers */,
+				D0C8DD550D621C500003483F /* DaeTransform.h in Headers */,
+				D0C8DD560D621C510003483F /* DaeTextureLibrary.h in Headers */,
+				D0C8DD580D621C510003483F /* DaeTranslator.h in Headers */,
+				D0C8DD590D621C520003483F /* DDSFormat.h in Headers */,
+				D0C8DD5C0D621C550003483F /* HIAnimCache.h in Headers */,
+				D0C8DD5F0D621C570003483F /* MayaConvert.h in Headers */,
+				D0C8DD600D621C570003483F /* MFnPluginNoEntry.h in Headers */,
+				D0C8DD630D621C590003483F /* StdAfx.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E12BF57E08AD81FA0051D47A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C314E5CB08D8921000B32E64 /* StdAfx.h in Headers */,
+				C3B6F9B90B7D0C3A00A6FDCF /* CExportOptions.h in Headers */,
+				C3B6F9BA0B7D0C3A00A6FDCF /* CMeshExporter.h in Headers */,
+				C3B6F9BB0B7D0C3A00A6FDCF /* CNURBSExporter.h in Headers */,
+				C3B6F9BC0B7D0C3A00A6FDCF /* CReferenceManager.h in Headers */,
+				C3B6F9BD0B7D0C3A00A6FDCF /* CRotateHelper.h in Headers */,
+				C3B6F9BE0B7D0C3A00A6FDCF /* CSkewHelper.h in Headers */,
+				C3B6F9BF0B7D0C3A00A6FDCF /* CSplineExporter.h in Headers */,
+				C3B6F9C00B7D0C3A00A6FDCF /* DaeAgeiaPhysicsScene.h in Headers */,
+				C3B6F9C10B7D0C3A00A6FDCF /* DaeAnimationCurve.h in Headers */,
+				C3B6F9C20B7D0C3A00A6FDCF /* DaeAnimationLibrary.h in Headers */,
+				C3B6F9C30B7D0C3A00A6FDCF /* DaeAnimationTypes.h in Headers */,
+				C3B6F9C40B7D0C3A00A6FDCF /* DaeAnimClipLibrary.h in Headers */,
+				C3B6F9C50B7D0C3A00A6FDCF /* DaeBaseLibrary.h in Headers */,
+				C3B6F9C60B7D0C3A00A6FDCF /* DaeCameraLibrary.h in Headers */,
+				C3B6F9C70B7D0C3A00A6FDCF /* DaeControllerLibrary.h in Headers */,
+				C3B6F9C80B7D0C3A00A6FDCF /* DaeDoc.h in Headers */,
+				C3B6F9C90B7D0C3A00A6FDCF /* DaeDocNode.h in Headers */,
+				C3B6F9CA0B7D0C3A00A6FDCF /* DaeEmitter.h in Headers */,
+				C3B6F9CB0B7D0C3A00A6FDCF /* DaeEmitterLibrary.h in Headers */,
+				C3B6F9CC0B7D0C3A00A6FDCF /* DaeEntity.h in Headers */,
+				C3B6F9CD0B7D0C3A00A6FDCF /* DaeEntityManager.h in Headers */,
+				C3B6F9CE0B7D0C3A00A6FDCF /* DaeForceFieldLibrary.h in Headers */,
+				C3B6F9CF0B7D0C3A00A6FDCF /* DaeGeometry.h in Headers */,
+				C3B6F9D00B7D0C3A00A6FDCF /* DaeGeometryLibrary.h in Headers */,
+				C3B6F9D10B7D0C3A00A6FDCF /* DaeInput.h in Headers */,
+				C3B6F9D20B7D0C3A00A6FDCF /* DaeLightLibrary.h in Headers */,
+				C3B6F9D30B7D0C3A00A6FDCF /* DaeMaterialLibrary.h in Headers */,
+				C3B6F9D40B7D0C3A00A6FDCF /* DaeNativePhysicsScene.h in Headers */,
+				C3B6F9D50B7D0C3A00A6FDCF /* DaePhysicsMaterialLibrary.h in Headers */,
+				C3B6F9D60B7D0C3A00A6FDCF /* DaePhysicsModelLibrary.h in Headers */,
+				C3B6F9D70B7D0C3A00A6FDCF /* DaePhysicsScene.h in Headers */,
+				C3B6F9D80B7D0C3A00A6FDCF /* DaePhysicsSceneLibrary.h in Headers */,
+				C3B6F9D90B7D0C3A00A6FDCF /* DaeSceneGraph.h in Headers */,
+				C3B6F9DA0B7D0C3A00A6FDCF /* DaeTextureLibrary.h in Headers */,
+				C3B6F9DB0B7D0C3A00A6FDCF /* DaeTransform.h in Headers */,
+				C3B6F9DC0B7D0C3A00A6FDCF /* DaeTranslator.h in Headers */,
+				C3B6FA0A0B7D0C4D00A6FDCF /* CFXBehavior.h in Headers */,
+				C3B6FA0B0B7D0C4D00A6FDCF /* CFXParameter.h in Headers */,
+				C3B6FA0C0B7D0C4D00A6FDCF /* CFXPasses.h in Headers */,
+				C3B6FA0D0B7D0C4D00A6FDCF /* CFXRenderState.h in Headers */,
+				C3B6FA0E0B7D0C4D00A6FDCF /* CFXShaderCmd.h in Headers */,
+				C3B6FA0F0B7D0C4D00A6FDCF /* CFXShaderNode.h in Headers */,
+				C3B6FA100B7D0C4D00A6FDCF /* DDSFormat.h in Headers */,
+				C3428D580BAF287300D9004F /* CAnimationHelper.h in Headers */,
+				C3428D590BAF287300D9004F /* CDagHelper.h in Headers */,
+				C3428D5A0BAF287300D9004F /* CMeshHelper.h in Headers */,
+				C3428D5D0BAF287300D9004F /* CSetHelper.h in Headers */,
+				C3428D5E0BAF287300D9004F /* CShaderHelper.h in Headers */,
+				C3428D5F0BAF287300D9004F /* HIAnimCache.h in Headers */,
+				C3428D690BAF288700D9004F /* MayaConvert.h in Headers */,
+				C3428D780BAF28C400D9004F /* CFXRenderStateStaticInit.hpp in Headers */,
+				D0E3D3590C623284007FB141 /* MFnPluginNoEntry.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C314E59308D88F5500B32E64 /* COLLADA_m70 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C314E5B508D88F5500B32E64 /* Build configuration list for PBXNativeTarget "COLLADA_m70" */;
+			buildPhases = (
+				C314E59408D88F5500B32E64 /* Headers */,
+				C314E59608D88F5500B32E64 /* Sources */,
+				C314E5B308D88F5500B32E64 /* Frameworks */,
+			);
+			buildRules = (
+				C314E5B408D88F5500B32E64 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = COLLADA_m70;
+			productName = COLLADA_m65;
+			productReference = C314E5B808D88F5500B32E64 /* COLLADA_m70.lib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		C3428D7D0BAF297D00D9004F /* COLLADA_m85 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3428DEF0BAF297D00D9004F /* Build configuration list for PBXNativeTarget "COLLADA_m85" */;
+			buildPhases = (
+				C3428D7E0BAF297D00D9004F /* Headers */,
+				C3428DB60BAF297D00D9004F /* Sources */,
+				C3428DE90BAF297D00D9004F /* Frameworks */,
+			);
+			buildRules = (
+				C3428DEE0BAF297D00D9004F /* PBXBuildRule */,
+			);
+			dependencies = (
+				D0D272210C6251F50029C04A /* PBXTargetDependency */,
+			);
+			name = COLLADA_m85;
+			productName = COLLADA_m65;
+			productReference = C3428DF20BAF297D00D9004F /* COLLADA_m85.bundle */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		D0C8DCEF0D6203310003483F /* COLLADA_m2008 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0C8DCF30D62034F0003483F /* Build configuration list for PBXNativeTarget "COLLADA_m2008" */;
+			buildPhases = (
+				D0C8DCEC0D6203310003483F /* Headers */,
+				D0C8DCED0D6203310003483F /* Sources */,
+				D0C8DCEE0D6203310003483F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0C8DD830D6234D40003483F /* PBXTargetDependency */,
+			);
+			name = COLLADA_m2008;
+			productName = COLLADA_m2008;
+			productReference = D0C8DCF00D6203310003483F /* COLLADA_m2008.bundle */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		E12BF58108AD81FA0051D47A /* COLLADA_m65 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E12BF58408AD81FB0051D47A /* Build configuration list for PBXNativeTarget "COLLADA_m65" */;
+			buildPhases = (
+				E12BF57E08AD81FA0051D47A /* Headers */,
+				E12BF57F08AD81FA0051D47A /* Sources */,
+				E12BF58008AD81FA0051D47A /* Frameworks */,
+			);
+			buildRules = (
+				E12BF5BF08ADAB910051D47A /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = COLLADA_m65;
+			productName = COLLADA_m65;
+			productReference = E12BF58208AD81FA0051D47A /* COLLADA_m65.lib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E12BF57208AD81D10051D47A /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = E12BF57308AD81D10051D47A /* Build configuration list for PBXProject "COLLADA" */;
+			hasScannedForEncodings = 0;
+			mainGroup = E12BF57008AD81D10051D47A;
+			productRefGroup = E12BF58308AD81FA0051D47A /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D0D271D60C624C4D0029C04A /* Products */;
+					ProjectRef = D0D271D50C624C4D0029C04A /* FCollada.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				E12BF58108AD81FA0051D47A /* COLLADA_m65 */,
+				C314E59308D88F5500B32E64 /* COLLADA_m70 */,
+				C3428D7D0BAF297D00D9004F /* COLLADA_m85 */,
+				D0C8DCEF0D6203310003483F /* COLLADA_m2008 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D0D271E60C624C4D0029C04A /* libFColladaS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFColladaS.a;
+			remoteRef = D0D271E50C624C4D0029C04A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0D271E80C624C4D0029C04A /* libFColladaSU.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFColladaSU.a;
+			remoteRef = D0D271E70C624C4D0029C04A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0D271EA0C624C4D0029C04A /* FColladaTest */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = FColladaTest;
+			remoteRef = D0D271E90C624C4D0029C04A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0D271EC0C624C4D0029C04A /* libFColladaU.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libFColladaU.dylib;
+			remoteRef = D0D271EB0C624C4D0029C04A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C314E59608D88F5500B32E64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C314E59708D88F5500B32E64 /* CExportOptions.cpp in Sources */,
+				C314E59808D88F5500B32E64 /* CMeshExporter.cpp in Sources */,
+				C314E59908D88F5500B32E64 /* CReferenceManager.cpp in Sources */,
+				C314E59A08D88F5500B32E64 /* CRotateHelper.cpp in Sources */,
+				C314E59B08D88F5500B32E64 /* CSkewHelper.cpp in Sources */,
+				C314E59C08D88F5500B32E64 /* DaeAnimationLibrary.cpp in Sources */,
+				C314E59D08D88F5500B32E64 /* DaeCameraLibrary.cpp in Sources */,
+				C314E59E08D88F5500B32E64 /* DaeControllerLibrary.cpp in Sources */,
+				C314E59F08D88F5500B32E64 /* DaeDoc.cpp in Sources */,
+				C314E5A008D88F5500B32E64 /* DaeGeometry.cpp in Sources */,
+				C314E5A108D88F5500B32E64 /* DaeGeometryLibrary.cpp in Sources */,
+				C314E5A208D88F5500B32E64 /* DaeLightLibrary.cpp in Sources */,
+				C314E5A308D88F5500B32E64 /* DaeMaterialLibrary.cpp in Sources */,
+				C314E5A608D88F5500B32E64 /* DaeSceneGraph.cpp in Sources */,
+				C314E5A708D88F5500B32E64 /* DaeTextureLibrary.cpp in Sources */,
+				C314E5A808D88F5500B32E64 /* DaeTransform.cpp in Sources */,
+				C314E5A908D88F5500B32E64 /* DaeTranslator.cpp in Sources */,
+				C314E5AC08D88F5500B32E64 /* CAnimationHelper.cpp in Sources */,
+				C314E5AD08D88F5500B32E64 /* CDagHelper.cpp in Sources */,
+				C314E5AE08D88F5500B32E64 /* CMeshHelper.cpp in Sources */,
+				C314E5B008D88F5500B32E64 /* CShaderHelper.cpp in Sources */,
+				C314E5B208D88F5500B32E64 /* HIAnimCache.cpp in Sources */,
+				C354BCFE099179DB009F66BE /* CSplineExporter.cpp in Sources */,
+				C354BCFF099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp in Sources */,
+				C354BD00099179DB009F66BE /* DaeAnimationCurve.cpp in Sources */,
+				C354BD01099179DB009F66BE /* DaeAnimationTypes.cpp in Sources */,
+				C354BD02099179DB009F66BE /* DaeAnimClipLibrary.cpp in Sources */,
+				C354BD03099179DB009F66BE /* DaeBaseLibrary.cpp in Sources */,
+				C354BD04099179DB009F66BE /* DaeNativePhysicsScene.cpp in Sources */,
+				C354BD05099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp in Sources */,
+				C354BD06099179DB009F66BE /* DaePhysicsModelLibrary.cpp in Sources */,
+				C354BD07099179DB009F66BE /* DaePhysicsScene.cpp in Sources */,
+				C354BD08099179DB009F66BE /* DaePhysicsSceneLibrary.cpp in Sources */,
+				C354BD0E09917A32009F66BE /* MayaConvert.cpp in Sources */,
+				C354BD7609918790009F66BE /* CSetHelper.cpp in Sources */,
+				C35D1CBD0A93B8A300B15814 /* DaeDocNode.cpp in Sources */,
+				C35D1CBE0A93B8A300B15814 /* DaeEntity.cpp in Sources */,
+				C35D1CBF0A93B8A300B15814 /* DaeEntityManager.cpp in Sources */,
+				51B910C30AF95D4E00A53FA2 /* CFXShaderNode.cpp in Sources */,
+				51B910C40AF95D4E00A53FA2 /* CFXShaderCmd.cpp in Sources */,
+				51B910C50AF95D4E00A53FA2 /* CFXRenderState.cpp in Sources */,
+				51B910C60AF95D4E00A53FA2 /* CFXPasses.cpp in Sources */,
+				51B910C70AF95D4E00A53FA2 /* CFXParameter.cpp in Sources */,
+				51B910C80AF95D4E00A53FA2 /* CFXBehavior.cpp in Sources */,
+				C3428D6D0BAF289E00D9004F /* CNURBSExporter.cpp in Sources */,
+				C3428D740BAF28B900D9004F /* DaeEmitter.cpp in Sources */,
+				C3428D750BAF28B900D9004F /* DaeEmitterLibrary.cpp in Sources */,
+				C3428D760BAF28B900D9004F /* DaeForceFieldLibrary.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3428DB60BAF297D00D9004F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3428DB70BAF297D00D9004F /* CExportOptions.cpp in Sources */,
+				C3428DB80BAF297D00D9004F /* CMeshExporter.cpp in Sources */,
+				C3428DB90BAF297D00D9004F /* CReferenceManager.cpp in Sources */,
+				C3428DBA0BAF297D00D9004F /* CRotateHelper.cpp in Sources */,
+				C3428DBB0BAF297D00D9004F /* CSkewHelper.cpp in Sources */,
+				C3428DBC0BAF297D00D9004F /* DaeAnimationLibrary.cpp in Sources */,
+				C3428DBD0BAF297D00D9004F /* DaeCameraLibrary.cpp in Sources */,
+				C3428DBE0BAF297D00D9004F /* DaeControllerLibrary.cpp in Sources */,
+				C3428DBF0BAF297D00D9004F /* DaeDoc.cpp in Sources */,
+				C3428DC00BAF297D00D9004F /* DaeGeometry.cpp in Sources */,
+				C3428DC10BAF297D00D9004F /* DaeGeometryLibrary.cpp in Sources */,
+				C3428DC20BAF297D00D9004F /* DaeLightLibrary.cpp in Sources */,
+				C3428DC30BAF297D00D9004F /* DaeMaterialLibrary.cpp in Sources */,
+				C3428DC40BAF297D00D9004F /* DaeSceneGraph.cpp in Sources */,
+				C3428DC50BAF297D00D9004F /* DaeTextureLibrary.cpp in Sources */,
+				C3428DC60BAF297D00D9004F /* DaeTransform.cpp in Sources */,
+				C3428DC70BAF297D00D9004F /* DaeTranslator.cpp in Sources */,
+				C3428DC90BAF297D00D9004F /* CAnimationHelper.cpp in Sources */,
+				C3428DCA0BAF297D00D9004F /* CDagHelper.cpp in Sources */,
+				C3428DCB0BAF297D00D9004F /* CMeshHelper.cpp in Sources */,
+				C3428DCD0BAF297D00D9004F /* CShaderHelper.cpp in Sources */,
+				C3428DCE0BAF297D00D9004F /* HIAnimCache.cpp in Sources */,
+				C3428DCF0BAF297D00D9004F /* CSplineExporter.cpp in Sources */,
+				C3428DD00BAF297D00D9004F /* DaeAgeiaPhysicsScene.cpp in Sources */,
+				C3428DD10BAF297D00D9004F /* DaeAnimationCurve.cpp in Sources */,
+				C3428DD20BAF297D00D9004F /* DaeAnimationTypes.cpp in Sources */,
+				C3428DD30BAF297D00D9004F /* DaeAnimClipLibrary.cpp in Sources */,
+				C3428DD40BAF297D00D9004F /* DaeBaseLibrary.cpp in Sources */,
+				C3428DD50BAF297D00D9004F /* DaeNativePhysicsScene.cpp in Sources */,
+				C3428DD60BAF297D00D9004F /* DaePhysicsMaterialLibrary.cpp in Sources */,
+				C3428DD70BAF297D00D9004F /* DaePhysicsModelLibrary.cpp in Sources */,
+				C3428DD80BAF297D00D9004F /* DaePhysicsScene.cpp in Sources */,
+				C3428DD90BAF297D00D9004F /* DaePhysicsSceneLibrary.cpp in Sources */,
+				C3428DDA0BAF297D00D9004F /* MayaConvert.cpp in Sources */,
+				C3428DDB0BAF297D00D9004F /* CSetHelper.cpp in Sources */,
+				C3428DDC0BAF297D00D9004F /* DaeDocNode.cpp in Sources */,
+				C3428DDD0BAF297D00D9004F /* DaeEntity.cpp in Sources */,
+				C3428DDE0BAF297D00D9004F /* DaeEntityManager.cpp in Sources */,
+				C3428DDF0BAF297D00D9004F /* CFXShaderNode.cpp in Sources */,
+				C3428DE00BAF297D00D9004F /* CFXShaderCmd.cpp in Sources */,
+				C3428DE10BAF297D00D9004F /* CFXRenderState.cpp in Sources */,
+				C3428DE20BAF297D00D9004F /* CFXPasses.cpp in Sources */,
+				C3428DE30BAF297D00D9004F /* CFXParameter.cpp in Sources */,
+				C3428DE40BAF297D00D9004F /* CFXBehavior.cpp in Sources */,
+				C3428DE50BAF297D00D9004F /* CNURBSExporter.cpp in Sources */,
+				C3428DE60BAF297D00D9004F /* DaeEmitter.cpp in Sources */,
+				C3428DE70BAF297D00D9004F /* DaeEmitterLibrary.cpp in Sources */,
+				C3428DE80BAF297D00D9004F /* DaeForceFieldLibrary.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0C8DCED0D6203310003483F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0C8DCF80D621C110003483F /* CAnimationHelper.cpp in Sources */,
+				D0C8DCFA0D621C150003483F /* CDagHelper.cpp in Sources */,
+				D0C8DCFC0D621C160003483F /* CExportOptions.cpp in Sources */,
+				D0C8DCFE0D621C170003483F /* CFXBehavior.cpp in Sources */,
+				D0C8DCFF0D621C170003483F /* CFXParameter.cpp in Sources */,
+				D0C8DD020D621C190003483F /* CFXPasses.cpp in Sources */,
+				D0C8DD040D621C190003483F /* CFXRenderState.cpp in Sources */,
+				D0C8DD070D621C1B0003483F /* CFXShaderCmd.cpp in Sources */,
+				D0C8DD090D621C1C0003483F /* CFXShaderNode.cpp in Sources */,
+				D0C8DD0D0D621C220003483F /* CMeshExporter.cpp in Sources */,
+				D0C8DD0F0D621C230003483F /* CMeshHelper.cpp in Sources */,
+				D0C8DD110D621C250003483F /* CNURBSExporter.cpp in Sources */,
+				D0C8DD130D621C2D0003483F /* CReferenceManager.cpp in Sources */,
+				D0C8DD150D621C2E0003483F /* CRotateHelper.cpp in Sources */,
+				D0C8DD180D621C2F0003483F /* CSetHelper.cpp in Sources */,
+				D0C8DD190D621C2F0003483F /* CShaderHelper.cpp in Sources */,
+				D0C8DD1B0D621C310003483F /* CSkewHelper.cpp in Sources */,
+				D0C8DD1D0D621C310003483F /* CSplineExporter.cpp in Sources */,
+				D0C8DD1F0D621C320003483F /* DaeAgeiaPhysicsScene.cpp in Sources */,
+				D0C8DD210D621C350003483F /* DaeAnimationCurve.cpp in Sources */,
+				D0C8DD230D621C360003483F /* DaeAnimationLibrary.cpp in Sources */,
+				D0C8DD250D621C370003483F /* DaeAnimationTypes.cpp in Sources */,
+				D0C8DD270D621C380003483F /* DaeAnimClipLibrary.cpp in Sources */,
+				D0C8DD2B0D621C3A0003483F /* DaeBaseLibrary.cpp in Sources */,
+				D0C8DD2C0D621C3A0003483F /* DaeCameraLibrary.cpp in Sources */,
+				D0C8DD2E0D621C3B0003483F /* DaeControllerLibrary.cpp in Sources */,
+				D0C8DD300D621C3D0003483F /* DaeDoc.cpp in Sources */,
+				D0C8DD320D621C3E0003483F /* DaeDocNode.cpp in Sources */,
+				D0C8DD340D621C3F0003483F /* DaeEmitter.cpp in Sources */,
+				D0C8DD360D621C400003483F /* DaeEmitterLibrary.cpp in Sources */,
+				D0C8DD380D621C410003483F /* DaeEntity.cpp in Sources */,
+				D0C8DD3A0D621C410003483F /* DaeEntityManager.cpp in Sources */,
+				D0C8DD3C0D621C420003483F /* DaeForceFieldLibrary.cpp in Sources */,
+				D0C8DD3E0D621C440003483F /* DaeGeometry.cpp in Sources */,
+				D0C8DD400D621C450003483F /* DaeGeometryLibrary.cpp in Sources */,
+				D0C8DD420D621C460003483F /* DaeLightLibrary.cpp in Sources */,
+				D0C8DD450D621C470003483F /* DaeMaterialLibrary.cpp in Sources */,
+				D0C8DD470D621C470003483F /* DaeNativePhysicsScene.cpp in Sources */,
+				D0C8DD490D621C480003483F /* DaePhysicsMaterialLibrary.cpp in Sources */,
+				D0C8DD4B0D621C490003483F /* DaePhysicsModelLibrary.cpp in Sources */,
+				D0C8DD4D0D621C4D0003483F /* DaePhysicsScene.cpp in Sources */,
+				D0C8DD4F0D621C4E0003483F /* DaePhysicsSceneLibrary.cpp in Sources */,
+				D0C8DD510D621C4F0003483F /* DaeSceneGraph.cpp in Sources */,
+				D0C8DD530D621C4F0003483F /* DaeTextureLibrary.cpp in Sources */,
+				D0C8DD540D621C500003483F /* DaeTransform.cpp in Sources */,
+				D0C8DD570D621C510003483F /* DaeTranslator.cpp in Sources */,
+				D0C8DD5B0D621C550003483F /* HIAnimCache.cpp in Sources */,
+				D0C8DD5E0D621C570003483F /* MayaConvert.cpp in Sources */,
+				D0C8DD620D621C580003483F /* StdAfx.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E12BF57F08AD81FA0051D47A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1205A0108B203F500B3EA3B /* CExportOptions.cpp in Sources */,
+				E1205A0208B203F500B3EA3B /* CMeshExporter.cpp in Sources */,
+				E1205A0308B203F500B3EA3B /* CReferenceManager.cpp in Sources */,
+				E1205A0408B203F500B3EA3B /* CRotateHelper.cpp in Sources */,
+				E1205A0508B203F500B3EA3B /* CSkewHelper.cpp in Sources */,
+				E1205A0608B203F500B3EA3B /* DaeAnimationLibrary.cpp in Sources */,
+				E1205A0708B203F500B3EA3B /* DaeCameraLibrary.cpp in Sources */,
+				E1205A0808B203F500B3EA3B /* DaeControllerLibrary.cpp in Sources */,
+				E1205A0908B203F500B3EA3B /* DaeDoc.cpp in Sources */,
+				E1205A0A08B203F500B3EA3B /* DaeGeometry.cpp in Sources */,
+				E1205A0B08B203F500B3EA3B /* DaeGeometryLibrary.cpp in Sources */,
+				E1205A0C08B203F500B3EA3B /* DaeLightLibrary.cpp in Sources */,
+				E1205A0D08B203F500B3EA3B /* DaeMaterialLibrary.cpp in Sources */,
+				E1205A1008B203F500B3EA3B /* DaeSceneGraph.cpp in Sources */,
+				E1205A1108B203F500B3EA3B /* DaeTextureLibrary.cpp in Sources */,
+				E1205A1208B203F500B3EA3B /* DaeTransform.cpp in Sources */,
+				E1205A1308B203F500B3EA3B /* DaeTranslator.cpp in Sources */,
+				E1205A1608B203F500B3EA3B /* CAnimationHelper.cpp in Sources */,
+				E1205A1708B203F500B3EA3B /* CDagHelper.cpp in Sources */,
+				E1205A1808B203F500B3EA3B /* CMeshHelper.cpp in Sources */,
+				E1205A1A08B203F600B3EA3B /* CShaderHelper.cpp in Sources */,
+				E1B1BEBD08B8029000ED34BD /* HIAnimCache.cpp in Sources */,
+				C354BCF3099179DB009F66BE /* CSplineExporter.cpp in Sources */,
+				C354BCF4099179DB009F66BE /* DaeAgeiaPhysicsScene.cpp in Sources */,
+				C354BCF5099179DB009F66BE /* DaeAnimationCurve.cpp in Sources */,
+				C354BCF6099179DB009F66BE /* DaeAnimationTypes.cpp in Sources */,
+				C354BCF7099179DB009F66BE /* DaeAnimClipLibrary.cpp in Sources */,
+				C354BCF8099179DB009F66BE /* DaeBaseLibrary.cpp in Sources */,
+				C354BCF9099179DB009F66BE /* DaeNativePhysicsScene.cpp in Sources */,
+				C354BCFA099179DB009F66BE /* DaePhysicsMaterialLibrary.cpp in Sources */,
+				C354BCFB099179DB009F66BE /* DaePhysicsModelLibrary.cpp in Sources */,
+				C354BCFC099179DB009F66BE /* DaePhysicsScene.cpp in Sources */,
+				C354BCFD099179DB009F66BE /* DaePhysicsSceneLibrary.cpp in Sources */,
+				C354BD0D09917A32009F66BE /* MayaConvert.cpp in Sources */,
+				C354BD7509918790009F66BE /* CSetHelper.cpp in Sources */,
+				C35D1CB50A93B8A300B15814 /* DaeDocNode.cpp in Sources */,
+				C35D1CB60A93B8A300B15814 /* DaeEntity.cpp in Sources */,
+				C35D1CB70A93B8A300B15814 /* DaeEntityManager.cpp in Sources */,
+				51B910BD0AF95D4E00A53FA2 /* CFXShaderNode.cpp in Sources */,
+				51B910BE0AF95D4E00A53FA2 /* CFXShaderCmd.cpp in Sources */,
+				51B910BF0AF95D4E00A53FA2 /* CFXRenderState.cpp in Sources */,
+				51B910C00AF95D4E00A53FA2 /* CFXPasses.cpp in Sources */,
+				51B910C10AF95D4E00A53FA2 /* CFXParameter.cpp in Sources */,
+				51B910C20AF95D4E00A53FA2 /* CFXBehavior.cpp in Sources */,
+				C3428D6C0BAF289E00D9004F /* CNURBSExporter.cpp in Sources */,
+				C3428D710BAF28B900D9004F /* DaeEmitter.cpp in Sources */,
+				C3428D720BAF28B900D9004F /* DaeEmitterLibrary.cpp in Sources */,
+				C3428D730BAF28B900D9004F /* DaeForceFieldLibrary.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0C8DD830D6234D40003483F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FColladaSU;
+			targetProxy = D0C8DD820D6234D40003483F /* PBXContainerItemProxy */;
+		};
+		D0D272210C6251F50029C04A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FColladaSU;
+			targetProxy = D0D272200C6251F50029C04A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C314E5B608D88F5500B32E64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = lib;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G4;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					../FCollada,
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				MAYA_DIRECTORY = /Applications/Alias/maya7.0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-liconv",
+					"-lz",
+					"-lxml2",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m70;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		C314E5B708D88F5500B32E64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = lib;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G4;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					../FCollada,
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				MAYA_DIRECTORY = /Applications/Alias/maya7.0;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-liconv",
+					"-lz",
+					"-lxml2",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m70;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		C3428DF00BAF297D00D9004F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_EXTENSION = bundle;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+					UNICODE,
+					_DEBUG,
+					_BOOL,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					../FCollada,
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				MACH_O_TYPE = mh_dylib;
+				MAYA_DIRECTORY = /Applications/Autodesk/maya8.5;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-liconv",
+					"-lz",
+					"-lxml2",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m85;
+				SECTORDER_FLAGS = "";
+				USER_HEADER_SEARCH_PATHS = ". ../FCollada";
+			};
+			name = Debug;
+		};
+		C3428DF10BAF297D00D9004F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					ppc,
+				);
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_EXTENSION = bundle;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+					UNICODE,
+					NDEBUG,
+					RETAIL,
+					_BOOL,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					../FCollada,
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				MACH_O_TYPE = mh_dylib;
+				MAYA_DIRECTORY = /Applications/Autodesk/maya8.5;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-liconv",
+					"-lz",
+					"-lxml2",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m85;
+				SECTORDER_FLAGS = "";
+				USER_HEADER_SEARCH_PATHS = ". ../FCollada";
+			};
+			name = Release;
+		};
+		D0C8DCF10D6203310003483F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = "";
+				DYLIB_CURRENT_VERSION = "";
+				EXECUTABLE_EXTENSION = bundle;
+				EXECUTABLE_PREFIX = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+					UNICODE,
+					_DEBUG,
+					_BOOL,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					../FCollada,
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Debug\"";
+				MAYA_DIRECTORY = /Applications/Autodesk/maya2008;
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-liconv",
+					"-lz",
+					"-lxml2",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m2008;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		D0C8DCF20D6203310003483F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = bundle;
+				EXECUTABLE_PREFIX = "";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+					UNICODE,
+					_DEBUG,
+					_BOOL,
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					../FCollada,
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				MAYA_DIRECTORY = /Applications/Autodesk/maya2008;
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-liconv",
+					"-lz",
+					"-lxml2",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m2008;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		E12BF57408AD81D10051D47A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				COPY_PHASE_STRIP = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = StdAfx.h;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = ../FCollada;
+				MACH_O_TYPE = mh_dylib;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				MAYA_DIRECTORY = "";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				USER_HEADER_SEARCH_PATHS = ". ../FCollada";
+			};
+			name = Debug;
+		};
+		E12BF57508AD81D10051D47A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					ppc,
+				);
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = StdAfx.h;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				HEADER_SEARCH_PATHS = "..,.,../FCollada";
+				MACOSX_DEPLOYMENT_TARGET = "";
+				MAYA_DIRECTORY = "";
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				USER_HEADER_SEARCH_PATHS = "..,.,../FCollada";
+			};
+			name = Release;
+		};
+		E12BF58508AD81FB0051D47A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = lib;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G4;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					"$(SRCROOT)/../FCollada",
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				MAYA_DIRECTORY = /Applications/Alias/maya6.5;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-lxml2",
+					"-liconv",
+					"-lz",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m65;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		E12BF58608AD81FB0051D47A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_EXTENSION = lib;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G4;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					MAC_PLUGIN,
+					REQUIRE_IOSTREAM,
+					MAC_TIGER,
+				);
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/devkit/include",
+					/usr/include/libxml2,
+					"$(SRCROOT)/../FCollada",
+					.,
+				);
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+					"$(SRCROOT)/../FCollada",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/../FCollada/Output/Release\"";
+				LIBRARY_STYLE = DYNAMIC;
+				MACH_O_TYPE = mh_dylib;
+				MAYA_DIRECTORY = /Applications/Alias/maya6.5;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lOpenMaya",
+					"-lFoundation",
+					"-lOpenMayaUI",
+					"-lOpenMayaAnim",
+					"-lOpenMayaFX",
+					"-lOpenMayaRender",
+					"-lxml2",
+					"-liconv",
+					"-lz",
+					"-lm",
+					"-Wl,-executable_path,$(MAYA_DIRECTORY)/Maya.app/Contents/MacOS",
+				);
+				OTHER_REZFLAGS = "";
+				PREBINDING = NO;
+				PRODUCT_NAME = COLLADA_m65;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C314E5B508D88F5500B32E64 /* Build configuration list for PBXNativeTarget "COLLADA_m70" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C314E5B608D88F5500B32E64 /* Debug */,
+				C314E5B708D88F5500B32E64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3428DEF0BAF297D00D9004F /* Build configuration list for PBXNativeTarget "COLLADA_m85" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3428DF00BAF297D00D9004F /* Debug */,
+				C3428DF10BAF297D00D9004F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0C8DCF30D62034F0003483F /* Build configuration list for PBXNativeTarget "COLLADA_m2008" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0C8DCF10D6203310003483F /* Debug */,
+				D0C8DCF20D6203310003483F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E12BF57308AD81D10051D47A /* Build configuration list for PBXProject "COLLADA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E12BF57408AD81D10051D47A /* Debug */,
+				E12BF57508AD81D10051D47A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E12BF58408AD81FB0051D47A /* Build configuration list for PBXNativeTarget "COLLADA_m65" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E12BF58508AD81FB0051D47A /* Debug */,
+				E12BF58608AD81FB0051D47A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E12BF57208AD81D10051D47A /* Project object */;
+}

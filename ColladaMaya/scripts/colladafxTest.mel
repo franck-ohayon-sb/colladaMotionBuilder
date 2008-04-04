@@ -1,0 +1,147 @@
+global proc cfxTest0()
+{
+	shadingNode -asShader colladafxShader;
+	sets -renderable true -noSurfaceShader true -empty -name colladafxShader1SG;
+	connectAttr -f colladafxShader1.outColor colladafxShader1SG.surfaceShader;
+	
+	select -r pSphere1 pTorus1 pCube1;
+	sets -e -forceElement colladafxShader1SG;
+}
+
+global proc cfxTest1()
+{
+	cfxTest0();
+	colladafxShaderCmd -vp "./shaders/reflection_vert.cg" -s "colladafxShader1";
+	colladafxShaderCmd -fp "./shaders/reflection_frag.cg" -s "colladafxShader1";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file1.fileTextureName "./textures/Default_bump_normal.dds" "image";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file2.fileTextureName "./textures/Default_reflection.dds" "image";
+	
+	evalDeferred("connectAttr -force file1.outColor colladafxShader1.normalMap");
+	evalDeferred("connectAttr -force file2.outColor colladafxShader1.envMap");
+	
+	setAttr "colladafxShader1.coloration" -type double3 1 1 1 ;
+	defaultNavigation -ce -d colladafxShader1.eyePoint -source persp;
+	setAttr "colladafxShader1.uvOffset1" 0;
+}
+
+global proc cfxTest2()
+{
+	cfxTest0();
+	colladafxShaderCmd -vp "./shaders/velvet_vert.cg" -s "colladafxShader1";
+	colladafxShaderCmd -fp "./shaders/velvet_frag.cg" -s "colladafxShader1";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file1.fileTextureName "./textures/Default_bump_normal.dds" "image";
+	evalDeferred("connectAttr -force file1.outColor colladafxShader1.normalMap");
+	
+	defaultNavigation -ce -d colladafxShader1.eyePoint -source persp;
+	defaultPointLight(1, 1,1,1, 0, 0, 0,0,0, 1);
+	move -r -0.379346 5.703123 5.094268 ;
+
+	defaultNavigation -ce -d colladafxShader1.lightPoint -source pointLight1;
+	
+	setAttr "colladafxShader1.Kd" 0.84298;
+	setAttr "colladafxShader1.roughness" 0.12398;
+	setAttr "colladafxShader1.edginess" 0.0909;
+	setAttr "colladafxShader1.ambient" -type double3 0.1157 0.1157 0.1157 ;
+	setAttr "colladafxShader1.sheen" -type double3 0.9752 0.898159 0.77821 ;
+	setAttr "colladafxShader1.backScatter" 0.18184;
+}
+
+global proc cfxTest3()
+{
+	cfxTest0();
+	colladafxShaderCmd -lfe "./shaders/BumpReflect.cgfx" -s "colladafxShader1";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file1.fileTextureName "./textures/Default_bump_normal.dds" "image";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file2.fileTextureName "./textures/Default_reflection.dds" "image";
+	
+	evalDeferred("connectAttr -force file1.outColor colladafxShader1.normalMapSampler");
+	evalDeferred("connectAttr -force file2.outColor colladafxShader1.envMapSampler");	
+}
+
+global proc cfxTest4()
+{
+	cfxTest0();
+	colladafxShaderCmd -lfe "./shaders/goochy.cgfx" -s "colladafxShader1";
+	
+	defaultPointLight(1, 1,1,1, 0, 0, 0,0,0, 1);
+	move -r -0.379346 15.703123 15.094268 ;
+
+	defaultNavigation -ce -d colladafxShader1.LightPos -source pointLight1;	
+}
+
+global proc cfxTest5()
+{
+	cfxTest0();
+	colladafxShaderCmd -lfe "./shaders/goochy.cgfx" -s "colladafxShader1";
+	
+	defaultPointLight(1, 1,1,1, 0, 0, 0,0,0, 1);
+	move -r -0.379346 15.703123 15.094268 ;
+
+	defaultNavigation -ce -d colladafxShader1.LightPos -source pointLight1;	
+	
+	shadingNode -asShader colladafxShader;
+	sets -renderable true -noSurfaceShader true -empty -name colladafxShader2SG;
+	connectAttr -f colladafxShader2.outColor colladafxShader2SG.surfaceShader;
+	
+	select -r pSphere1 ;
+	sets -e -forceElement colladafxShader2SG;
+	
+	colladafxShaderCmd -vp "./shaders/velvet_vert.cg" -s "colladafxShader2";
+	colladafxShaderCmd -fp "./shaders/velvet_frag.cg" -s "colladafxShader2";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file1.fileTextureName "./textures/Default_bump_normal.dds" "image";
+	evalDeferred("connectAttr -force file1.outColor colladafxShader2.normalMap");
+
+	defaultNavigation -ce -d colladafxShader2.lightPoint -source pointLight1;
+	defaultNavigation -ce -d colladafxShader2.eyePoint -source persp;
+	
+	setAttr "colladafxShader2.Kd" 0.84298;
+	setAttr "colladafxShader2.roughness" 0.12398;
+	setAttr "colladafxShader2.edginess" 0.0909;
+	setAttr "colladafxShader2.ambient" -type double3 0.1157 0.1157 0.1157 ;
+	setAttr "colladafxShader2.sheen" -type double3 0.9752 0.898159 0.77821 ;
+	setAttr "colladafxShader2.backScatter" 0.18184;
+	
+	shadingNode -asShader colladafxShader;
+	sets -renderable true -noSurfaceShader true -empty -name colladafxShader3SG;
+	connectAttr -f colladafxShader3.outColor colladafxShader3SG.surfaceShader;
+	
+	select -r pTorus1 ;
+	sets -e -forceElement colladafxShader3SG;
+	
+	colladafxShaderCmd -lfe "./shaders/BumpReflect.cgfx" -s "colladafxShader3";
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file2.fileTextureName "./textures/Default_reflection.dds" "image";
+	
+	evalDeferred("connectAttr -force file1.outColor colladafxShader3.normalMapSampler");
+	evalDeferred("connectAttr -force file2.outColor colladafxShader3.envMapSampler");
+}
+
+global proc cfxTest6()
+{
+	cfxTest0();
+	colladafxShaderCmd -lfe "./shaders/basic_phong.cgfx" -s "colladafxShader1";
+	
+	defaultPointLight(1, 1,1,1, 0, 0, 0,0,0, 1);
+	move -r -0.379346 15.703123 15.094268 ;
+
+	defaultNavigation -ce -d colladafxShader1.g_lightpos -source pointLight1;
+	
+	shadingNode -asTexture file;
+	setAttr -type "string"  file1.fileTextureName "./textures/Default_color.dds" "image";
+	evalDeferred("connectAttr -force file1.outColor colladafxShader1.g_colorsampler");	
+	
+	select -r pSphere1 pTorus1 ;
+	makeIdentity -apply true -t 1 -r 1 -s 1 -n 0;
+}

@@ -1,0 +1,1336 @@
+//============================================================================
+// A Maya MEL script for the ColladaFX Shader UI.
+// 
+// File: ColladaMaya/scripts/AEcolladafxShaderTemplate.mel
+// Company: Feeling Software Inc.
+// Modified: 2006-11-18, ewhittom.
+//============================================================================
+
+global proc string AEcolladafxShader_beginCallback( int $iLayout )
+{
+    string $sNodeName;
+
+    // Find the requested instance of our colladafxShader AE template.
+    string $sLayout = "colladafxShader_AEinstance" + $iLayout;
+    if ( `layout -exists $sLayout` )
+    {
+        // Get the name of the colladafxShader node associated with this layout.
+        setParent $sLayout;
+        $sNodeName = `nameField -q -object nfNode`;
+
+        $sLayout = AEcolladafxShader_closestAncestor( "scrollLayout" );
+        setParent $sLayout;
+    }
+    return $sNodeName;
+}
+
+global proc AEcolladafxShader_beginNew( string $sNodeAttr )
+{
+    global int $gAEcolladafxShader_bNew;    // OUT: true because not same node
+    global int $gAEcolladafxShader_iLayout; // OUT: new template instance id        
+    global int $gAEcolladafxShader_nLayout; // UPD: highest used instance id
+
+    // Assign a unique serial number to identify this AE template instance.
+    $gAEcolladafxShader_iLayout = ++$gAEcolladafxShader_nLayout;
+    $gAEcolladafxShader_bNew    = true; 
+
+    // Create a uniquely named hidden layout.  
+    //   Callbacks use this to help find their UI elements and node name.
+    string $sLayout = "colladafxShader_AEinstance" + $gAEcolladafxShader_iLayout;
+    columnLayout -manage 0 $sLayout;   
+ 
+    // Stash the colladafxShader node name in a hidden nameField.
+    // - In the event the user renames the node, the
+    //   nameField will update itself to the new name.  
+    // - Saving the name allows us to distinguish between 
+    //   refreshing an existing layout vs. switching the
+    //   layout to attach to a different colladafxShader node.
+    string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+    nameField -manage 0
+              -object $sNodeName
+              nfNode;
+}
+
+global proc AEcolladafxShader_beginReplace( string $sNodeAttr )
+{
+    global int $gAEcolladafxShader_bNew;    // OUT: true if different node     
+    global int $gAEcolladafxShader_iLayout; // OUT: template instance id        
+
+    // Get our unique layout name.  It is the current layout's first child.
+    string $sParent  = `setParent -q`;
+    string $saKids[] = `layout -q -ca $sParent`;
+    string $sKid     = $saKids[0];
+
+    // The layout name contains the id of this AE template instance.
+    //   Extract it and pass it via a global variable to our
+    //   subsequent UI building functions.
+    string $sIndex  = `match "[0-9]+" $sKid`;
+    string $sLayout = "colladafxShader_AEinstance" + $sIndex;
+    if ( $sKid != $sLayout )
+        error -sl 1 "AEcolladafxShaderTemplate.mel internal error";
+
+    $gAEcolladafxShader_iLayout = $sIndex;
+
+    // If this template instance is already associated with the
+    // given colladafxShader node, clear global flag to tell subsequent
+    // UI building functions that the existing controls can be kept.
+    string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+    if ( $sNodeName == `nameField -q -object nfNode` )
+        $gAEcolladafxShader_bNew = false;
+    else
+    {
+        $gAEcolladafxShader_bNew = true;
+        nameField -e
+                  -object $sNodeName
+                  nfNode;
+    }
+}
+
+global proc AEcolladafxShader_importChange( int $iLayout )
+{
+	string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+    	setParent colladafxShaderLayout;
+
+	setAttr ($sNodeName+".fmt") (`optionMenuGrp -q -sl shaderopt`-1);
+}
+
+global proc AEcolladafxShader_importNew( string $sNodeAttr )
+{
+	global int $gAEcolladafxShader_iLayout;
+	
+    setUITemplate -pst attributeEditorTemplate;
+         
+    optionMenuGrp -l "Shader Format" -cc ("AEcolladafxShader_importChange " +$gAEcolladafxShader_iLayout) shaderopt;
+ 	menuItem -label "Cg";
+ 	menuItem -label "CgFX";
+ 	
+    setUITemplate -ppt;
+    
+    AEcolladafxShader_importReplace( $sNodeAttr );
+}
+
+global proc AEcolladafxShader_importReplace( string $sNodeAttr )
+{
+	optionMenuGrp -e -sl (`getAttr $sNodeAttr`+1) shaderopt;
+}
+
+//============================================================================
+// CGFX PASS CHOOSER DIALOG	
+//============================================================================
+
+global proc AEcolladafxShader_chooseFXProgramPopup(
+	string $sNodeName,
+	string $sWindowTitle, 
+	string $sCgFXFilename )
+{
+	// delete the window if it already exists
+	AEcolladafxShader_onWindowDestuction("AEcolladafxShader_fxDialogWindow");
+	
+	// gather information first
+	// get the technique names from the FX file
+	string $sTechNames[] = `colladafxShaderCmd -fxt $sCgFXFilename`;
+	string $sPassNames[];
+	if( size($sTechNames) > 0 )
+	{
+		$sPassNames = `colladafxShaderCmd -fxp 0 $sCgFXFilename`;
+	}
+	else
+	{
+		print("ColladaFX: FX file named \"" + $sCgFXFilename + "\" has no technique associated.\n");
+		return;
+	}
+	
+	string $sWin = `window -title $sWindowTitle AEcolladafxShader_fxDialogWindow`;
+	int $i;
+	
+	columnLayout
+		-adjustableColumn true
+		-columnAttach "both" 0
+		-rowSpacing 10;
+		
+		// TECHNIQUES ==========================
+		rowLayout -numberOfColumns 2
+			-columnWidth2 80 120
+			-columnAlign 1 "right"
+			-columnAttach 1 "both" 2
+			-columnAttach 2 "both" 2;
+			
+			text -l "Technique";
+			textScrollList
+				-numberOfRows 4
+				-allowMultiSelection false
+				-selectCommand ("AEcolladafxShader_onTechSelectChanged \"" + $sCgFXFilename + "\" techniqueSelector passSelector")
+				techniqueSelector;
+				
+			for($i = 0; $i < size($sTechNames); $i++)
+			{
+				textScrollList -edit
+					-append $sTechNames[$i]
+					techniqueSelector;
+			}
+			textScrollList -edit -selectIndexedItem 1 techniqueSelector;
+				
+			setParent ..;
+		
+		// PASSES ==========================
+		rowLayout -numberOfColumns 2
+			-columnWidth2 80 120
+			-columnAlign 1 "right"
+			-columnAttach 1 "both" 2
+			-columnAttach 2 "both" 2;
+			
+			text -l "Pass";
+			textScrollList
+				-numberOfRows 4
+				-allowMultiSelection false
+				passSelector;
+				
+			for($i = 0; $i < size($sPassNames); $i++)
+			{
+				textScrollList -edit
+					-append $sPassNames[$i]
+					passSelector;
+			}
+			textScrollList -edit -selectIndexedItem 1 passSelector;
+			
+			setParent ..;
+			
+		// CONTROLS ==========================
+		rowLayout -numberOfColumns 3
+			-columnWidth3 60 80 80
+			-columnAlign 1 "right"
+			-columnAttach 1 "both" 2
+			-columnAttach 2 "both" 2
+			-columnAttach 3 "both" 2;
+			
+			text -l "";
+			button 
+				-l "Select"
+				-align "center"
+				-c ("AEcolladafxShader_onTechPassSelection " + $sNodeName + " \"" + $sCgFXFilename + "\" techniqueSelector passSelector");
+				
+			button
+				-l "Cancel"
+				-align "center"
+				-c "AEcolladafxShader_onWindowDestuction AEcolladafxShader_fxDialogWindow";
+				
+			setParent ..;
+	
+	setParent ..;
+	
+	showWindow $sWin;
+	
+	return;
+}
+
+global proc AEcolladafxShader_onTechSelectChanged(string $sFXFilename, string $techSelector, string $passSelector)
+{
+	// query the new tech 0-based index
+	int $newTechIndex[] = `textScrollList -query -selectIndexedItem $techSelector`;
+	
+	// ask the plugin for pass names associated with this tech
+	$sPassNames = `colladafxShaderCmd -fxp ($newTechIndex[0] - 1) $sFXFilename`;
+	
+	// remove everything in the pass selector
+	textScrollList -edit -removeAll $passSelector;
+	
+	// append the new values
+	int $i;
+	for($i = 0; $i < size($sPassNames); $i++)
+	{
+		textScrollList -edit -append $sPassNames[$i] $passSelector;
+	}
+}
+
+global proc AEcolladafxShader_onWindowDestuction(string $sWinName)
+{
+	if( `window -exists $sWinName` )
+	{
+		deleteUI -window $sWinName;
+	}
+}
+
+global proc AEcolladafxShader_onTechPassSelection(string $sNodeName, string $sFXFileName, string $sTechSelectorName, string $sPassSelectorName)
+{
+	// query the 0-based index of the technique
+	int $iTechIndex[] = `textScrollList -query -selectIndexedItem $sTechSelectorName`;
+	
+	// query the 0-based index of the pass
+	int $iPassIndex[] = `textScrollList -query -selectIndexedItem $sPassSelectorName`;
+	
+	// feed everything to the plugin
+	string $sResults[] = `colladafxShaderCmd -sfx $sFXFileName ($iTechIndex[0] - 1) ($iPassIndex[0] - 1) -s $sNodeName`;
+	
+	if( size($sResults) == 0 )
+	{
+		// no error, destroy window
+		AEcolladafxShader_onWindowDestuction("AEcolladafxShader_fxDialogWindow");
+	}
+	else
+	{
+		// errors, print message
+		print("Error: " + $sResults[0] + "\n");
+	}
+}
+
+
+//============================================================================
+// VERTEX PROGRAM
+//============================================================================
+
+global proc AEcolladafxShader_vertShaderNew( string $sProgramAttr, string $sEntryAttr )
+{
+    global int $gAEcolladafxShader_iLayout; // IN: AE instance id for callbacks
+
+    // Create a column layout.
+    setUITemplate -pst attributeEditorTemplate;
+    columnLayout -adj 1
+                 -visible 0
+                 -rs 8
+                 colladafxShaderLayout;
+    
+        // colladafx File
+        string $sCmdFileName = "AEcolladafxShader_vertShaderText " + $gAEcolladafxShader_iLayout;
+        
+        rowLayout 
+            -nc 3 
+            -cw 1 96 
+            -cat 1 "right" 5;
+
+            text 
+                -l "Vertex Program" 
+                -ann "";
+                
+            textField 
+                -cc $sCmdFileName
+                -ann ""
+                vertFileName;
+
+            // Button to invoke file browser dialog
+            string $sArgs = $gAEcolladafxShader_iLayout + " " + "vertexProgram" + " " + "cg" + " \"" + "/renderData/shaders" + "\" ";
+            symbolButton -image "navButtonBrowse.xpm" 
+                         -c ( "AEcolladafxShader_fileBrowser " + $sArgs )
+                         -ann "";
+                        
+            setParent ..;
+        
+        // vertex shader entry point
+        rowLayout 
+            -nc 3 
+            -cw 1 96 
+            -cat 1 "right" 5;
+            
+            text 
+                -l "Entry point"
+                -ann "";
+                
+            textField
+                -ann ""
+                vertEntryPoint;
+            
+            setParent ..;
+    
+        // control buttons
+        rowLayout 
+            -numberOfColumns 3
+            -columnWidth3 96 50 50;
+            
+            text -l ""; // spacer
+            
+            // manual reload
+            button 
+                -l "Reload" 
+                -c $sCmdFileName;
+               
+            // open and edit
+            string $sCmdEdit = "AEcolladafxShader_openVertText " + $gAEcolladafxShader_iLayout;         
+            button 
+                -l "Edit"
+                -c $sCmdEdit;
+            
+            setParent ..;
+
+        setParent ..;
+        
+    setUITemplate -ppt;
+    
+    AEcolladafxShader_vertShaderReplace( $sProgramAttr, $sEntryAttr );
+
+    // Make the layout visible.
+    layout -e
+           -visible 1
+           colladafxShaderLayout;
+}
+
+global proc AEcolladafxShader_vertShaderReplace( string $sProgramAttr, string $sEntryAttr )
+{
+    global int $gAEcolladafxShader_iLayout; // IN: AE instance id for callbacks
+
+    setParent colladafxShaderLayout;
+
+        // colladafx file name
+        textField -e -fileName `getAttr $sProgramAttr` vertFileName;
+        
+        // entry point
+        textField -e -text `getAttr $sEntryAttr` vertEntryPoint;
+
+        setParent ..;
+}
+
+// load vert shader when the vert field changed
+global proc AEcolladafxShader_vertShaderText( int $iLayout )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+    setParent colladafxShaderLayout;
+    string $sFileName = `textField -q -fileName vertFileName`;
+    
+	string $sCmd;
+	if( `match "cgfx$" $sFileName` == "cgfx" ) {
+		$sCmd = "colladafxShaderCmd -rle \"" + $sFileName + "\" -s \"" + $sNodeName + "\"";
+	}
+	else {
+        string $sEntryPoint = `textField -q -text vertEntryPoint`;
+		$sCmd = "colladafxShaderCmd -rlv \"" + $sFileName + "\" \"" + $sEntryPoint + "\" -s \"" + $sNodeName + "\";\n";
+	}
+	
+	print ( $sCmd + ";\n" );
+	eval( $sCmd );
+
+}
+
+// open the vert file
+//
+global proc AEcolladafxShader_openVertText( int $iLayout )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+    setParent colladafxShaderLayout;
+    string $sFileName = `textField -q -fileName vertFileName`;
+
+    
+    string $sCmd = "system \"\\\"" + $sFileName + "\\\"\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+//============================================================================
+// FRAGMENT PROGRAM
+//============================================================================
+
+global proc AEcolladafxShader_fragShaderNew( string $sProgramAttr, string $sEntryAttr )
+{           
+    global int $gAEcolladafxShader_iLayout; // IN: AE instance id for callbacks
+
+    // Create a column layout.
+    setUITemplate -pst attributeEditorTemplate;
+    columnLayout -adj 1
+                 -visible 0
+                 -rs 8
+                 colladafxShaderLayout; 
+    
+        // colladafx File
+        string $sCmdFileName = "AEcolladafxShader_fragShaderText " + $gAEcolladafxShader_iLayout;
+        
+        rowLayout 
+            -nc 3 
+            -cw 1 96 
+            -cat 1 "right" 5;
+
+            text 
+                -l "Fragment Program" 
+                -ann "";
+                
+            textField 
+                -cc $sCmdFileName
+                -ann ""
+                fragFileName;
+
+            // Button to invoke file browser dialog
+            string $sArgs = $gAEcolladafxShader_iLayout + " " + "fragmentProgram" + " " + "cg" + " \"" + "/renderData/shaders" + "\" ";
+            symbolButton -image "navButtonBrowse.xpm" 
+                         -c ( "AEcolladafxShader_fileBrowser " + $sArgs )
+                         -ann "";
+                        
+            setParent ..;
+        
+        rowLayout 
+            -nc 3 
+            -cw 1 96 
+            -cat 1 "right" 5;
+            
+            text 
+                -l "Entry point"
+                -ann "";
+                
+            textField
+                -ann ""
+                fragEntryPoint;
+            
+            setParent ..;
+    
+        // control buttons
+        rowLayout 
+            -numberOfColumns 3
+            -columnWidth3 96 50 50;
+            
+            text -l ""; // spacer
+            
+            // manual reload
+            button 
+                -l "Reload" 
+                -c $sCmdFileName;
+               
+            // open and edit
+            string $sCmdEdit = "AEcolladafxShader_openFragText " + $gAEcolladafxShader_iLayout;
+            button 
+                -l "Edit"
+                -c $sCmdEdit;
+            
+            setParent ..;
+
+        setParent ..;
+        
+    setUITemplate -ppt;
+    
+    AEcolladafxShader_fragShaderReplace( $sProgramAttr, $sEntryAttr );
+
+    // Make the layout visible.
+    layout -e
+           -visible 1
+           colladafxShaderLayout;
+}
+
+global proc AEcolladafxShader_fragShaderReplace( string $sProgramAttr, string $sEntryAttr )
+{
+    setParent colladafxShaderLayout;
+
+        // colladafx file name
+        textField -e -fileName `getAttr $sProgramAttr` fragFileName;
+
+        // entry point
+        textField -e -text `getAttr $sEntryAttr` fragEntryPoint;
+
+        setParent ..;
+}
+
+// load frag shader when the frag field changed
+global proc AEcolladafxShader_fragShaderText( int $iLayout )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+    setParent colladafxShaderLayout;
+    string $sFileName = `textField -q -fileName fragFileName`;
+    string $sEntryPoint = `textField -q -text fragEntryPoint`;
+
+    string $sCmd;
+    if( `match "cgfx$" $sFileName` == "cgfx" ) {
+		$sCmd = "colladafxShaderCmd -rle \"" + $sFileName + "\" -s \"" + $sNodeName + "\"";
+	}
+	else {
+		$sCmd = "colladafxShaderCmd -rlf \"" + $sFileName + "\" \"" + $sEntryPoint + "\" -s \"" + $sNodeName + "\";\n";
+	}
+	
+	print ( $sCmd + ";\n" );
+	eval( $sCmd );
+} 
+
+// open the frag file
+//
+global proc AEcolladafxShader_openFragText( int $iLayout )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+    setParent colladafxShaderLayout;
+    string $sFileName = `textField -q -fileName fragFileName`;
+    
+    string $sCmd = "system \"" + $sFileName + "\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+//============================================================================
+// MESH DATA
+//============================================================================
+
+global proc AEcolladafxShader_colorNew( string $sNodeAttr )
+{
+    global int $gAEcolladafxShader_iLayout; // IN: AE instance id for callbacks
+    string $sCmd = "AEcolladafxShader_colorText (" + $gAEcolladafxShader_iLayout + ", 0 )";
+
+    setUITemplate -pst attributeEditorTemplate;
+    
+    	textFieldGrp -label "COLOR0" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for COLOR0" color0Name;
+    	AEcolladafxShader_combobox( $sNodeAttr, "color0Name", "COLOR0", "popc0" );
+    	//$sCmd = "AEcolladafxShader_colorText (" + $gAEcolladafxShader_iLayout + ", 1 )";
+    	
+        //textFieldGrp -label "COLOR1" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for COLOR1" color1Name;
+        
+    setUITemplate -ppt;
+    AEcolladafxShader_colorReplace( $sNodeAttr );
+  
+}
+
+// set color set name here
+//
+global proc AEcolladafxShader_colorText( int $iLayout, int $id )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+
+    string $sSetName = `textFieldGrp -q -text ("color"+$id+"Name")`;
+    
+
+    string $sCmd = "setAttr -type \"string\" " + $sNodeName + ".COLOR" + $id + " \"" + $sSetName + "\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+global proc AEcolladafxShader_colorReplace( string $sNodeAttr )
+{
+	global int $gAEcolladafxShader_iLayout;
+	string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+
+    textFieldGrp -e -text `getAttr $sNodeAttr` color0Name;
+    //textFieldGrp -e -text `getAttr ($sNodeName+".COLOR1")` color1Name;
+
+}
+
+// uv set name input
+//
+global proc AEcolladafxShader_uvNew( string $sNodeAttr )
+{
+    global int $gAEcolladafxShader_iLayout; // IN: AE instance id for callbacks
+    string $sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 0 )";
+
+    setUITemplate -pst attributeEditorTemplate;
+    
+
+    textFieldGrp -label "TEXCOORD0" -cc $sCmd -ann "Choose a uv set name to define vertex input for TEXCOORD0" tex0Name;
+	AEcolladafxShader_combobox( $sNodeAttr, "tex0Name", "TEXCOORD0", "pop0" );
+ 				
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 1 )";
+	textFieldGrp -label "TEXCOORD1" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD1" tex1Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex1Name", "TEXCOORD1", "pop1" );
+	
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 2 )";
+	textFieldGrp -label "TEXCOORD2" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD2" tex2Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex2Name", "TEXCOORD2", "pop2" );
+	
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 3 )";
+	
+	textFieldGrp -label "TEXCOORD3" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD3" tex3Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex3Name", "TEXCOORD3", "pop3" );
+	
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 4 )";
+	textFieldGrp -label "TEXCOORD4" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD4" tex4Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex4Name", "TEXCOORD4", "pop4" );
+	
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 5 )";
+	textFieldGrp -label "TEXCOORD5" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD5" tex5Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex5Name", "TEXCOORD5", "pop5" );
+	
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 6 )";
+	textFieldGrp -label "TEXCOORD6" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD6" tex6Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex6Name", "TEXCOORD6", "pop6" );
+	
+	$sCmd = "AEcolladafxShader_vertUvText (" + $gAEcolladafxShader_iLayout + " , 7 )";
+	textFieldGrp -label "TEXCOORD7" -cc $sCmd -ann "Choose a uv or color set name to define vertex input for TEXCOORD7" tex7Name;
+	
+	AEcolladafxShader_combobox( $sNodeAttr, "tex7Name", "TEXCOORD7", "pop7" );
+    setUITemplate -ppt;
+    
+    AEcolladafxShader_uvReplace( $sNodeAttr );
+           
+}
+
+// set uv set name here
+//
+global proc AEcolladafxShader_vertUvText( int $iLayout, int $id )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+
+    string $sUvSetName = `textFieldGrp -q -text ("tex" + $id + "Name")`;
+
+    string $sCmd = "setAttr -type \"string\" " + $sNodeName + ".TEXCOORD" + $id + " \"" + $sUvSetName + "\";\n";
+    print ( $sCmd );
+    eval( $sCmd );
+}
+
+global proc AEcolladafxShader_uvReplace( string $sNodeAttr )
+{
+	global int $gAEcolladafxShader_iLayout;
+	string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+	
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD0")` tex0Name;
+   
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD1")` tex1Name;
+    
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD2")` tex2Name;
+    
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD3")` tex3Name;
+    
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD4")` tex4Name;
+    
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD5")` tex5Name;
+    
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD6")` tex6Name;
+   
+    textFieldGrp -e -text `getAttr ($sNodeName+".TEXCOORD7")` tex7Name;
+}
+
+// append uv and color sets to menu
+//
+global proc AEcolladafxShader_menuItems(string $popname, string $parent, string $attr, string $sNodeName )
+{
+	string $sSG[] = `listConnections ($sNodeName+".outColor")`;
+	string $sMesh[] = `sets -q $sSG[0]`;
+	string $sUVs[] = `polyUVSet -q -allUVSets $sMesh[0]`;
+	string $sColors[] = `polyColorSet -q -allColorSets $sMesh[0]`;
+	
+	popupMenu -e -deleteAllItems $popname;
+	string $sCmd = "textFieldGrp -e -text tangent "+$parent+";\nsetAttr -type \"string\" " + $sNodeName + "." + $attr + " " + "tangent";
+	menuItem -l "tangent" -p $popname -c $sCmd;
+	
+	$sCmd =  "textFieldGrp -e -text binormal "+$parent+";\nsetAttr -type \"string\" " + $sNodeName + "." + $attr + " " + "binormal";
+    	menuItem -l "binormal" -p $popname -c $sCmd;
+    	
+    	menuItem -p $popname -divider true;
+    	string $sSet;
+    	for ( $sSet in $sUVs ) {
+    		$sCmd =  "textFieldGrp -e -text "+$sSet+" "+$parent+";\nsetAttr -type \"string\" " + $sNodeName + "." + $attr + " " + $sSet;
+    		menuItem -l $sSet -p $popname -c $sCmd;
+    	}
+    	menuItem -p $popname -divider true;
+    	string $sCol;
+    	for ( $sCol in $sColors ) {
+    		$sCmd =  "textFieldGrp -e -text "+$sCol+" "+$parent+";\nsetAttr -type \"string\" " + $sNodeName + "." + $attr + " " + $sCol;
+    		menuItem -l $sCol -p $popname -c $sCmd;
+    	}
+}
+
+// create pop up menu for mesh data
+//
+global proc AEcolladafxShader_combobox( string $sNodeAttr, string $parent, string $attr, string $popname )
+{
+	global int $gAEcolladafxShader_iLayout;
+	string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+
+	string $sMenuCmd = "AEcolladafxShader_menuItems "+$popname+ " " + $parent + " " + $attr + " " + $sNodeName;
+	
+	popupMenu -button 3 -postMenuCommand $sMenuCmd $popname;
+
+}
+
+// find all lights and cameras in the scene to connect
+//
+global proc AEcolladafxShader_objectMenuItems(string $popname, string $parent, string $attr, string $sNodeName )
+{
+	string $sLights[] = `ls -lt`;
+	string $sCameras[] = `ls -ca`;
+	string $sTransform[];
+	
+	popupMenu -e -deleteAllItems $popname;
+    	
+    	menuItem -p $popname -divider true;
+    	string $slt;
+    	for ( $slt in $sLights ) {
+    		$sTransform = `listRelatives -p $slt`;
+    		$sCmd =  "defaultNavigation -ce -d " + $sNodeName + "." + $attr + " -source " + $sTransform[0];
+    		//$sCmd =  "textFieldGrp -e -text "+$sSet+" "+$parent+";\nsetAttr -type \"string\" " + $sNodeName + "." + $attr + " " + $sSet;
+    		menuItem -l $slt -p $popname -c $sCmd;
+    	}
+    	menuItem -p $popname -divider true;
+    	string $sca;
+    	for ( $sca in $sCameras ) {
+    		$sTransform = `listRelatives -p $sca`;
+    		$sCmd =  "defaultNavigation -ce -d " + $sNodeName + "." + $attr + " -source " + $sTransform[0];
+    		menuItem -l $sca -p $popname -c $sCmd;
+    	}
+}
+
+// create pop up menu for light connection
+//
+global proc AEcolladafxShader_objectCombobox( string $sNodeAttr, string $parent, string $attr, string $popname )
+{
+	global int $gAEcolladafxShader_iLayout;
+	string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+
+	string $sMenuCmd = "AEcolladafxShader_objectMenuItems "+$popname+ " " + $parent + " " + $attr + " " + $sNodeName;
+	
+	popupMenu -button 3 -postMenuCommand $sMenuCmd $popname;
+
+}
+
+//============================================================================
+// MATERIAL PARAMETERS
+//============================================================================
+
+global proc AEcolladafxShader_effectParamLayout( string $sNodeAttr )
+{
+	global int $gAEcolladafxShader_bNew;    // IN: true => build new controls 
+   	global int $gAEcolladafxShader_iLayout;
+   	global string $gAEcolladafxShader_refreshLayout;
+    
+	string $sFrame = AEcolladafxShader_closestAncestor( "frameLayout" );
+
+	// Delete old controls.
+	string $sLayoutRel = "colladafxParameterLayout";
+	string $parentLayout = `setParent -q`;
+	string $sLayoutAbs = $parentLayout + "|" + $sLayoutRel;
+	if ( `layout -exists $sLayoutAbs` )
+	{
+       	deleteUI $sLayoutAbs;
+   	}
+	
+	// Retrieve the node name.
+	string $sNodeName = `match "^[^.]*" $sNodeAttr`;
+	
+	// Create a row column layout to hold the new controls.
+	setUITemplate -pst attributeEditorTemplate;
+
+	rowColumnLayout -numberOfColumns 4
+		-columnWidth 1 96 
+		-columnWidth 2 246 
+		-columnWidth 3 24
+		-columnWidth 4 196 
+		-visible 0
+		$sLayoutRel;
+
+	int $count[] = `colladafxShaderCmd -s $sNodeName -pc`;
+	int $i;
+	for ($i = 0; $i < $count[0]; $i += 1)
+	{
+		string $paramDesc[] = `colladafxShaderCmd -s $sNodeName -pi $i`;
+		AEcolladafxShader_addParamControl( $sNodeName, $paramDesc[0], $paramDesc[1], $paramDesc[2], $paramDesc[3] );
+	}
+                
+	setParent ..;
+	setUITemplate -ppt;
+
+	// Cheezy solution to attempt a bit of performance increase by reducing the number of window movements.
+	// To speed-up the UI, we should re-create this panel only when necessary, rather than always.
+	$gAEcolladafxShader_refreshLayout = $sLayoutAbs;
+	evalDeferred ("layout -e -vis 1 $gAEcolladafxShader_refreshLayout");
+}
+
+// build up the parameter controls
+// float : float
+// float3 : color
+// float4 : color
+// float4x4 : matrix
+// half : float
+// half3 : color
+// half4 : color
+// half4x4 : matrix
+// sampler2D : navigation
+// samplerCUBE : navigation
+//
+global proc AEcolladafxShader_addParamControl( string $snodeName, string $sparamName, string $sparamType, string $semantic, string $uiName )
+{
+    string $sChosenUIName = $uiName;
+    if( $sChosenUIName == "" ) $sChosenUIName = $sparamName;
+    
+	if( $sparamType == "bool" ) {
+			string $newbox = $sparamName+$sparamType+"cbox";
+			text -al right -l $sChosenUIName;
+			checkBoxGrp -cw 1 1 -ann $semantic $newbox;
+			connectControl -index 2 $newbox ($snodeName+"."+$sparamName);
+			text -l "";
+			text -l ("  :  "+$semantic);
+		}
+		else if( $sparamType == "float" || $sparamType == "half" ) {
+			text -al right -l $sChosenUIName;
+			string $ctrl = `attrFieldSliderGrp -cw 1 1 -ann $semantic -attribute ( $snodeName + "." + $sparamName )`;
+			button -l "<>" -c ( "AEcolladafxShader_editMinMax " + $snodeName + " " + $sparamName + " " + $ctrl ) ;
+			text -l ("  :  "+$semantic);
+		}
+		else if( $sparamType == "float2" || $sparamType == "half2" ) {
+			text -al right -l $sChosenUIName;
+			attrFieldGrp -cw 1 1 -nf 2 -ann $semantic -attribute ( $snodeName + "." + $sparamName );
+			text -l "";
+			text -l ("  :  "+$semantic);
+		}
+		else if($sparamType == "float3" || $sparamType == "half3" || $sparamType == "float4" || $sparamType == "half4") {
+			text -al right -l $sChosenUIName;
+			string $cmd = "colladafxShaderCmd -gu null -p " + $sparamName + " -s " + $snodeName;
+			string $str[] = eval($cmd);
+			if($str[0]=="Color")
+			{
+				attrColorSliderGrp -cw 1 1 -ann $semantic -attribute ( $snodeName + "." + $sparamName );
+				button -l "+" -c ( "AEcolladafxShader_editUI " + $snodeName + " " + $sparamName ) ;
+				text -l ("  :  "+$semantic);
+			}
+			else if($str[0]=="Navigation")
+			{
+				string $nav = `attrNavigationControlGrp -cw 1 1 -ann $semantic -attribute ( $snodeName + "." + $sparamName )`;
+				AEcolladafxShader_objectCombobox($snodeName + "." + $sparamName, $nav, $sparamName, $snodeName + "pop" + $sparamName );
+				button -l "+" -c ( "AEcolladafxShader_editUI " + $snodeName + " " + $sparamName ) ;
+				text -l ("  :  "+$semantic);
+			}
+			else if($str[0]=="Vector")
+			{
+				attrFieldGrp -cw 1 1 -ann $semantic -attribute ( $snodeName + "." + $sparamName );
+				button -l "+" -c ( "AEcolladafxShader_editUI " + $snodeName + " " + $sparamName ) ;
+				text -l ("  :  "+$semantic);
+			}
+		}
+		else if( $sparamType == "float4x4" || $sparamType == "half4x4" ) {
+			text -al right -l $sChosenUIName;
+			attrNavigationControlGrp -cw 1 1 -ann $semantic -attribute ( $snodeName + "." + $sparamName );
+			text -l "";
+			text -l ("  :  "+$semantic);
+		}
+		else if( $sparamType == "sampler2D" || $sparamType == "samplerCUBE") {
+			text -al right -l $sChosenUIName;
+			attrNavigationControlGrp -cw 1 1 -ann $semantic -attribute ( $snodeName + "." + $sparamName );
+			text -l "";
+			text -l ("  :  "+$semantic);
+		}
+
+}
+
+// Note : the $ctrl input MUST be a name for a attrFieldSliderGrp
+//
+global proc AEcolladafxShader_doEditMinMax( string $snode, string $sattr, string $ctrl ) 
+{	
+	float $values[] = `floatFieldGrp -q -v cFloatMinmax`;
+	float $curval = `getAttr ($snode+"."+$sattr)`;
+	if( $curval > $values[1])
+		setAttr ($snode+"."+$sattr) ($values[1] - 0.001);
+	if( $curval < $values[0])
+		setAttr ($snode+"."+$sattr) ($values[0] + 0.001);
+		
+	// bug 273
+	// the editAttrLimits doesn't work, and there seems to be no other way
+	// to change the limits in MEL script, so I moved the code into the plugin
+	colladafxShaderCmd -s $snode -amm $sattr $values[0] $values[1];
+	
+	// edit the slider
+	attrFieldSliderGrp -e -fieldMinValue $values[0] $ctrl;
+	attrFieldSliderGrp -e -fieldMaxValue $values[1] $ctrl;
+	attrFieldSliderGrp -e -sliderMinValue $values[0] $ctrl;
+	attrFieldSliderGrp -e -sliderMaxValue $values[1] $ctrl;
+	
+	deleteUI AEcolladafxShader_editwin;
+}
+
+global proc AEcolladafxShader_editMinMaxWin( string $snode, string $sattr, string $ctrl ) 
+{ 
+//If such a window already exists, destory it.
+if ( (`window -exists AEcolladafxShader_editwin`) == true ) deleteUI AEcolladafxShader_editwin;
+
+//Create the window.
+	window -title $sattr -wh 320 240 AEcolladafxShader_editwin;
+	
+	columnLayout -adjustableColumn true; 
+	
+	float $minmax[] = `attributeQuery -r -n $snode $sattr`;
+
+	print("MinMax = " + $minmax[0] + ", " + $minmax[1] + "\n");
+	
+	floatFieldGrp -precision 3 -l "Min/Max" -nf 2 -v1 $minmax[0] -v2 $minmax[1] cFloatMinmax;
+	text -l "";
+	button -l "Edit the Range" -c ( "AEcolladafxShader_doEditMinMax " + $snode + " " + $sattr + " " + $ctrl );
+	
+	setParent..;
+//Show it.
+	showWindow AEcolladafxShader_editwin; 
+ }
+
+global proc AEcolladafxShader_editMinMax( string $snode, string $sattr, string $ctrl )
+{
+	AEcolladafxShader_editMinMaxWin( $snode, $sattr, $ctrl );
+}
+
+global proc AEcolladafxShader_editUI( string $snode, string $sattr ) 
+{
+	string $cmd = $cmd = "colladafxShaderCmd -gu NULL -p " + $sattr + " -s " + $snode;
+	string $res[] = eval($cmd);
+	if( $res[0] == "Navigation" )
+		$cmd = "colladafxShaderCmd -su Color -p " + $sattr + " -s " + $snode;
+	else if( $res[0] == "Color" )
+		$cmd = "colladafxShaderCmd -su Vector -p " + $sattr + " -s " + $snode;
+	else if( $res[0] == "Vector" )
+		$cmd = "colladafxShaderCmd -su Navigation -p " + $sattr + " -s " + $snode;
+	eval($cmd);
+	select -r $snode;
+}
+
+//============================================================================
+// RENDER STATES (CgFX)
+//============================================================================
+
+global proc AEcolladafxShader_renderStatesNew()
+{
+    global int $gAEcolladafxShader_iLayout;
+    
+    // Create a column layout.
+    setUITemplate -pst attributeEditorTemplate;
+    
+    columnLayout
+        -adj true
+        -visible 0
+        -rs 8
+        colladafxShaderLayout;
+        
+        rowLayout -nc 2 -cw2 96 280 -ct2 "both" "both" -co2 0 10;
+
+			text -l "";
+			textScrollList 
+				-allowMultiSelection false 
+				-numberOfRows 6
+				renderStateScrollList;
+				
+			setParent ..;
+                
+        rowLayout -numberOfColumns 3 -columnWidth3 96 150 150 -ct3 "both" "both" "both" -co3 0 5 5;
+            text -l ""; // spacer
+            button -l "Add state" -c ("AEcolladafxShader_renderStatesAddStateEvent " + $gAEcolladafxShader_iLayout);
+            button -l "Remove state" -c ("AEcolladafxShader_renderStatesRemoveStateEvent " + $gAEcolladafxShader_iLayout);
+            setParent ..;
+            
+       rowLayout -nc 2 -cw2 96 280 -ct2 "both" "both" -co2 0 10;
+
+			text -l "";
+			textScrollList
+				-allowMultiSelection false 
+				-numberOfRows 6
+				indexedRenderStateScrollList;
+				
+			setParent ..;
+            
+        intSliderGrp -l "Index" -min 0 -max 255 -f true indexedRenderStateIndex;
+        
+        rowLayout -numberOfColumns 3 -columnWidth3 96 150 150 -ct3 "both" "both" "both" -co3 0 5 5;
+            text -l ""; // spacer
+            button -l "Add indexed state" -c ("AEcolladafxShader_renderStatesIndexedAddStateEvent " + $gAEcolladafxShader_iLayout);
+            button -l "Remove indexed state" -c ("AEcolladafxShader_renderStatesIndexedRemoveStateEvent " + $gAEcolladafxShader_iLayout);
+            setParent ..;
+            
+        setParent ..;
+        
+    // empty layout that will contain the render states
+    columnLayout
+        -adj true
+        -visible 1
+        -rs 8
+        renderStatesLayout;
+        
+        setParent ..;
+        
+    setUITemplate -ppt;
+    
+    AEcolladafxShader_renderStatesReplace();
+
+    // Make the layout visible.
+    layout -e
+           -visible 1
+           colladafxShaderLayout;
+}
+
+global proc AEcolladafxShader_renderStatesReplace()
+{
+    global int $gAEcolladafxShader_iLayout;
+    string $sNodeName = AEcolladafxShader_beginCallback( $gAEcolladafxShader_iLayout );
+    setParent colladafxShaderLayout;
+    
+    columnLayout -e -vis false colladafxShaderLayout;
+    
+    // fetch the *available* render states from the plugin
+    string $availableStates[] = `colladafxShaderCmd -qrs -s $sNodeName`;
+    print( size($availableStates) + " available render states.\n" );
+    
+    textScrollList -e -removeAll renderStateScrollList;
+    for( $state in $availableStates )
+    {
+        textScrollList -e -append $state renderStateScrollList;
+    }
+    
+    // fetch the *available* *indexed* render states from the plugin
+    string $availableIndexedStates[] = `colladafxShaderCmd -qri -s $sNodeName`;
+    print( size($availableIndexedStates) + " available indexed render states.\n" );
+    
+    textScrollList -e -removeAll indexedRenderStateScrollList;
+    for( $state in $availableIndexedStates )
+    {
+        textScrollList -e -append $state indexedRenderStateScrollList;
+    }
+    
+    columnLayout -e -vis true colladafxShaderLayout;
+    
+    columnLayout -e -vis false renderStatesLayout;
+    
+    // clear the states
+    print("Clearing...\n");
+    string $children[] = `columnLayout -q -childArray renderStatesLayout`;
+    for( $child in $children )
+    {
+        deleteUI $child;
+    }
+    
+    // fetch the *enabled* states from the plugin
+    print("Fetching...\n");
+    string $enabledStates[] = `getAttr ($sNodeName + "." + "renderStates")`;
+    
+    setParent ..;
+    setParent renderStatesLayout;
+    
+    for( $state in $enabledStates )
+    {
+        print("Adding state: " + $state + "\n");
+        // why must we use string arrays here? MEL mysteries...
+        string $uiCmd[] = `colladafxShaderCmd -rsi $state $gAEcolladafxShader_iLayout -s $sNodeName`;
+        //print($uiCmd);
+        eval($uiCmd[0]); // create the UI
+    } 
+    
+    columnLayout -e -vis true renderStatesLayout;
+}
+
+global proc AEcolladafxShader_renderStatesAddStateEvent(int $iLayout)
+{
+    string $sNodeName = AEcolladafxShader_beginCallback($iLayout);
+    setParent colladafxShaderLayout;
+    
+    string $selectedState[] = `textScrollList -q -selectItem renderStateScrollList`;
+    print($selectedState[0]+"\n");
+    
+    if( $selectedState[0] != "" )
+    {
+        int $boolResult[] = `colladafxShaderCmd -ars $selectedState[0] -s $sNodeName`;
+        if( $boolResult[0] == 1 )
+        {
+            AEcolladafxShader_renderStatesReplace(); // clear and replace the UI on success.
+        }
+    }
+}
+
+global proc AEcolladafxShader_renderStatesIndexedAddStateEvent(int $iLayout)
+{
+    string $sNodeName = AEcolladafxShader_beginCallback($iLayout);
+    setParent colladafxShaderLayout;
+    
+    string $selectedState[] = `textScrollList -q -selectItem indexedRenderStateScrollList`;
+    print($selectedState[0]+"\n");
+    
+    int $index = `intSliderGrp -q -value indexedRenderStateIndex`;
+    
+    if( $selectedState[0] != "" )
+    {
+        int $boolResult[] = `colladafxShaderCmd -ari $selectedState[0] $index -s $sNodeName`;
+        if( $boolResult[0] == 1 )
+        {
+            AEcolladafxShader_renderStatesReplace(); // clear and replace the UI on success.
+        }
+    }
+}
+
+global proc AEcolladafxShader_renderStatesRemoveStateEvent(int $iLayout )
+{
+    string $sNodeName = AEcolladafxShader_beginCallback($iLayout);
+    setParent colladafxShaderLayout;
+    
+    string $selectedState[] = `textScrollList -q -selectItem renderStateScrollList`;
+    print($selectedState[0]+"\n");
+    
+    if( $selectedState[0] != "" )
+    {
+        int $boolResult[] = `colladafxShaderCmd -rrs $selectedState[0] -s $sNodeName`;
+        if( $boolResult[0] == 1 )
+        {
+            AEcolladafxShader_renderStatesReplace(); // clear and replace the UI on success.
+        }
+    }
+}
+
+global proc AEcolladafxShader_renderStatesIndexedRemoveStateEvent(int $iLayout)
+{
+    string $sNodeName = AEcolladafxShader_beginCallback($iLayout);
+    setParent colladafxShaderLayout;
+    
+    string $selectedState[] = `textScrollList -q -selectItem indexedRenderStateScrollList`;
+    print($selectedState[0]+"\n");
+    
+    int $index = `intSliderGrp -q -value indexedRenderStateIndex`;
+    
+    if( $selectedState[0] != "" )
+    {
+        int $boolResult[] = `colladafxShaderCmd -rri $selectedState[0] $index -s $sNodeName`;
+        if( $boolResult[0] == 1 )
+        {
+            AEcolladafxShader_renderStatesReplace(); // clear and replace the UI on success.
+        }
+    }
+}
+
+//============================================================================
+// UTILITIES
+//============================================================================
+
+// Callback on button click to invoke file browser dialog.
+global proc AEcolladafxShader_fileBrowser( int    $iLayout,
+                                      string $sAttrName,
+                                      string $sFileClassification,
+                                      string $projectDir )
+{
+    // Retrieve the node name.
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+
+    // Determine initial directory for file browser.
+    string $sWorkspace = `workspace -q -fn`;
+    setWorkingDirectory $sWorkspace $sFileClassification "colladafx";
+
+    // Start in current file's directory if possible. 
+    string $sOldDir = `getAttr ( $sNodeName + "." + $sAttrName )`;
+    $sOldDir = `match ".*/" $sOldDir`; 
+    
+    // If there isn't a current directory, use the project dir 
+    if( $sOldDir == "")
+		$sOldDir = $sWorkspace + $projectDir;
+		
+    if ( $sOldDir != "" &&
+         $sOldDir != `workspace -q -dir` &&
+         `file -q -ex $sOldDir` &&
+         !catch( `workspace -dir $sOldDir` ) )
+    {
+        retainWorkingDirectory( $sOldDir );
+        setWorkingDirectory $sWorkspace $sFileClassification "colladafx";
+    }
+
+    // Set up args for callback.
+    //   In addition to the args we provide, the fileBrowser will 
+    //   append two more: the chosen file name, and file type.
+    string $sArgs = $iLayout + " " + $sAttrName;
+
+    // Invoke the file browser dialog.
+    fileBrowser( "AEcolladafxShader_fileChoice " + $sArgs, "Open", "", 0 );
+}   
+
+// Callback when user clicks the "Open" button in the file browser
+//   dialog, or changes the text in the file name text field.
+global proc AEcolladafxShader_fileChoice( int    $iLayout,
+                                     string $sAttrName,
+                                     string $sFile,
+                                     string $sFileType )
+{
+    // Save the current working directory so the file browser will
+    // start here next time.
+    string $currentDir = `workspace -q -dir`;
+    retainWorkingDirectory( $currentDir );
+
+    // Retrieve the node name.
+    string $sNodeName = AEcolladafxShader_beginCallback( $iLayout );
+    setParent colladafxShaderLayout;
+    
+	if ( $sAttrName == "vertexProgram" ) {
+    	if( `match "cgfx$" $sFile` == "cgfx" ) {
+    	
+    		AEcolladafxShader_chooseFXProgramPopup(
+    			$sNodeName,
+    			"Select Pass",
+    			$sFile);
+    			
+	    }else{
+            string $sEntryPoint = `textField -q -text vertEntryPoint`;
+            
+            string $sCmd = "colladafxShaderCmd -rlv \"" + $sFile + "\" \"" + $sEntryPoint + "\" -s \"" + $sNodeName + "\"";
+            print ( $sCmd + ";\n" );
+            eval( $sCmd );  
+        }
+	}
+	else if ( $sAttrName == "fragmentProgram" ) {
+		if( `match "cgfx$" $sFile` == "cgfx" ) {
+    	
+    		AEcolladafxShader_chooseFXProgramPopup(
+    			$sNodeName,
+    			"Select Pass",
+    			$sFile);
+    			
+	    }else{
+			string $sEntryPoint = `textField -q -text fragEntryPoint`;
+	        
+			string $sCmd = "colladafxShaderCmd -rlf \"" + $sFile + "\" \"" + $sEntryPoint + "\" -s \"" + $sNodeName + "\"";
+			print ( $sCmd + ";\n" );
+			eval( $sCmd );
+		}
+	}
+	
+	// keep selection
+    evalDeferred ("select " + $sNodeName);
+}
+
+// Return full name of the closest ancestor layout of a given type, or "".
+global proc string AEcolladafxShader_closestAncestor( string $sObjectTypeUI )
+{
+    string $sPrev;
+    string $sLayout = `setParent -q`;
+    while ( !`objectTypeUI -isType $sObjectTypeUI $sLayout` )
+    {
+        $sPrev = $sLayout;
+        $sLayout = `substitute "|[^|]*$" $sLayout ""`;  // drop rightmost "|name"
+        if ( $sLayout == $sPrev )
+            return "";
+    }
+    return $sLayout;
+}
+
+//============================================================================
+// MAIN ENTRY POINT
+//============================================================================
+
+global proc AEcolladafxShaderTemplate( string $node )
+{
+    AEswatchDisplay $node;
+
+    editorTemplate -beginScrollLayout;
+		editorTemplate -callCustom AEcolladafxShader_beginNew AEcolladafxShader_beginReplace shader;
+
+	    editorTemplate -beginLayout "Shading" -collapse false;
+			editorTemplate -callCustom AEcolladafxShader_vertShaderNew AEcolladafxShader_vertShaderReplace vertexProgram vertexProgramEntry;
+            editorTemplate -callCustom AEcolladafxShader_fragShaderNew AEcolladafxShader_fragShaderReplace fragmentProgram fragmentProgramEntry;
+	    editorTemplate -endLayout;
+
+		editorTemplate -beginLayout "Material Parameters" -collapse true;
+            editorTemplate -beginLayout "Uniform" -collapse false;
+			    editorTemplate -callCustom AEcolladafxShader_effectParamLayout AEcolladafxShader_effectParamLayout TEXCOORD1;
+            editorTemplate -endLayout;
+            editorTemplate -beginLayout "Varying" -collapse true;
+			    editorTemplate -callCustom AEcolladafxShader_colorNew AEcolladafxShader_colorReplace COLOR0;
+			    editorTemplate -callCustom AEcolladafxShader_uvNew AEcolladafxShader_uvReplace TEXCOORD0;
+            editorTemplate -endLayout;
+		editorTemplate -endLayout;
+        
+        editorTemplate -beginLayout "Render States" -collapse true;
+			editorTemplate -callCustom AEcolladafxShader_renderStatesNew AEcolladafxShader_renderStatesReplace;
+	    editorTemplate -endLayout;
+
+		//editorTemplate -beginLayout "Mesh Data" -collapse true;
+		//	editorTemplate -callCustom AEcolladafxShader_colorNew AEcolladafxShader_colorReplace COLOR0;
+		//	editorTemplate -callCustom AEcolladafxShader_uvNew AEcolladafxShader_uvReplace TEXCOORD0;
+	    //editorTemplate -endLayout;
+
+		// Those attributes are meaningless for colladafx shaders
+		//
+		string $suppressed[] = {
+			"outColor", "outTransparency", "outMatteOpacity", "outGlowColor",
+			"shader", "technique", "texCoordSource",
+			"enableHwShading",
+			"miDeriveFromMaya", "miShinyness", "miAngle", 
+			"miSpreadX", "miSpreadY", "miWhiteness", "miSpecularColor", 
+			"miReflectivity", "miRefractiveIndex", "miRefractions", 
+			"miAbsorbs", "miDiffuse", "miColor", "miTransparency", 
+			"miTranslucence", "miTranslucenceFocus", "miNormalCamera",
+			"materialAlphaGain","vertexProgram","fragmentProgram","effectFile",
+			"COLOR0","COLOR1",
+			"TEXCOORD0","TEXCOORD1","TEXCOORD2","TEXCOORD3","TEXCOORD4","TEXCOORD5","TEXCOORD6","TEXCOORD7"
+		};
+
+		for ($attr in $suppressed)
+			editorTemplate -suppress $attr;
+
+		AEdependNodeTemplate $node;
+		editorTemplate -addExtraControls;
+    editorTemplate -endScrollLayout;
+}

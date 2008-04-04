@@ -1,0 +1,71 @@
+README for Linux compilation of Collada for Maya.
+
+To build the plugin for Maya 7.0, the compiler needs to be exactly gcc 3.3.4.
+To build the plugin for Maya 8.0 or 8.5, the compiler needs to be gcc 4.0.2.
+Type 'gcc -v' to find out the version of your compiler. If it happens to be
+gcc 3.3.4, scream 'hurray!' and close this file. However, if your version 
+of gcc is higher, follow the directions below to install gcc 3.3.4.
+
+Another option is to look in the sconscript file and manually move the
+(already compiled) libraries, .mel scripts and .xpm icons to your maya
+folders, and cross your fingers that it will work.
+
+Instructions on how to install this version of gcc is explained in the Maya
+API Introduction, and is summarized here.
+
+INSTALLING GCC 3.3.4 for Maya 7.0
+
+1. Download gnu-gcc at http://ftp.gnu.org/gnu/gcc. Travel to the gcc-3.3.4
+   directory and download the following two files:
+        gcc-3.3.4-tar.gz
+        gcc-3.3.4-tar.gz.sig
+2. Choose an appropriate directory to uncompress the files. 
+        mkdir gcc334
+        cd gcc334
+        mkdir gcc-build
+        tar zxvf gcc-3.3.4-tar.gz
+3. Configure the compiler, and compile it.
+        cd gcc-build
+        ../gcc-3.3.4/configure --prefix=/opt/gcc334 --program-suffix=334 --enable-shared --enable-threads=posix --disable-checking --with-system-zlib --disable-libunwind-exceptions --enable-__cxa_atexit
+        (the above command should all be on one line)
+        make -j 2 bootstrap
+        
+4. Login as root, to install the compiler.
+        su root
+        make install
+
+To verify that you now have two compilers, by typing 'gcc -v' and 
+'/opt/gcc334/gcc334 -v' and verifying that the two executables show
+different (and appropriate) versions.
+
+You now have two different gcc compilers on your system. The regular one
+is the one that was installed with your OS. The other one is accessed
+from its path directly, and is used in the Sconstruct and Sconscript files
+in this directory.
+
+
+INSTALLING GCC 4.0.2 for Maya 8.0 and 8.5
+
+Maya 8.0 and 8.5 used gcc version 4.0.2. Follow the above instructions
+to download and install that version of gcc. The scons scripts in this
+directory assume that you have followed these exact instructions to 
+compile version 4.0.2 of gcc.
+
+
+COMPILING COLLADA Maya PlugIn
+
+To compile the COLLADA PlugIn for Maya 7.0 or Maya 8.0, follow these
+instructions. Make sure you have a g++334 compiler in /opt/gcc334 before
+you attempt the following:
+
+For example, to build and install the plugin for Maya 7.0:
+        scons debug=0 version=70 target=1
+        sudo scons debug=0 version=70 target=99
+To build the plugin for Maya 8.0, change to 'version=80' in the two lines.
+Likewise, to build the plug-in for Maya 8.5, change to 'version=85'.
+To build a debug version of either plugins, change to 'debug=1' in the
+two lines.
+
+If your Maya path isn't '/usr/aw/maya7.0', '/usr/aw/maya8.0' or 
+'/usr/autodesk/maya8.5', make the necessary changes to the Sconscript 
+and Sconstruct files.

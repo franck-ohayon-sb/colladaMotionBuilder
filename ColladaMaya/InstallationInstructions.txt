@@ -1,0 +1,18 @@
+To use ColladaMaya for Linux, run one of the following scripts:
+./LinuxInstallColladaMaya80.sh 
+or
+./LinuxInstallColladaMaya85.sh
+
+The scripts will only work if you installed Maya in the default folder,
+which is /usr/aw/maya8.0 or /usr/autodesk/maya8.5
+
+To use ColladaMaya for MAC OSX, open a Terminal Window 
+(/Applications/Utilities/Terminal.app), use the 'cd' command to change
+the current directory to the folder that was just uncompressed, and run 
+the script by typing  "./MacInstallColladaMaya85Release.sh" at the line.
+
+The script assumes that the Maya folder is /Applications/Autodesk/Maya8.5
+
+If Maya 8.5 was *not* installed in the default folder, the shell script
+should be modified to reflect the real folder in which Maya resides.
+
