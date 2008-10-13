@@ -50,11 +50,11 @@
 #define WEIGHT_TOLERANCE 0.001f
 
 #if MAYA_API_VERSION >= 650
-#define MWeight double
-#define MWeightArray MDoubleArray
+#define Weight double
+#define WeightArray MDoubleArray
 #else
-#define MWeight float
-#define MWeightArray MFloatArray
+#define Weight float
+#define WeightArray MFloatArray
 #endif
 
 // Animation Conversion Functions
@@ -1111,7 +1111,7 @@ DaeEntity* DaeControllerLibrary::ExportSkinController(MObject controllerNode, MD
 		{
 			FCDSkinControllerVertex& vertex = colladaInfluences[componentIt.index()];
 
-			MWeightArray weights;
+			WeightArray weights;
 			if (skinClusterFn.getWeights(outputShape, componentIt.component(), weights, numInfluences) != MS::kSuccess)
 			{
 				weights.clear();
@@ -1120,7 +1120,7 @@ DaeEntity* DaeControllerLibrary::ExportSkinController(MObject controllerNode, MD
 			uint weightCount = weights.length();
 			for (uint i = 0; i < weightCount; ++i)
 			{
-				if (!IsEquivalent(weights[i], MWeight(0)))
+				if (!IsEquivalent(weights[i], Weight(0)))
 				{
 					vertex.AddPair(i, (float) weights[i]);
 				}
