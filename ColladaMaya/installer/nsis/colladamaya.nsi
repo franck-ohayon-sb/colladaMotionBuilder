@@ -36,13 +36,17 @@ InstallDirRegKey HKLM "Software\FeelingSoftware\ColladaMaya" "Install_Dir"
 ; hide the "show details" box
 ;ShowInstDetails nevershow
 
+
 ;--------------------------------
 ; Global variables
 ;--------------------------------
+Var MAYA_2009_DIR
 Var MAYA_2008_DIR
 Var MAYA_85_DIR
 Var MAYA_80_DIR
 Var MAYA_70_DIR
+
+Var WINDOWS_SYSTEM
 
 Var WANTS_CG_UPGRADE
 
@@ -90,6 +94,25 @@ Var WANTS_CG_UPGRADE
 ;--------------------------------
 Function .onInit
 
+
+	; Check for the current system (32 or 64 bit)
+    System::Call "kernel32::GetCurrentProcess() i .s"
+  	System::Call "kernel32::IsWow64Process(i s, *i .r0)"
+  	StrCpy $WINDOWS_SYSTEM "32bit"
+  	IntCmp $0 0 systemOutput
+  	StrCpy $WINDOWS_SYSTEM "64bit"
+	StrCpy $INSTDIR "$PROGRAMFILES64\Feeling Software\ColladaMaya"
+	SetRegView 64
+systemOutput:
+	MessageBox MB_OK "Windows system found: $WINDOWS_SYSTEM"
+  	
+
+    ; Check for version 2009
+    ReadRegStr $MAYA_2009_DIR HKLM "Software\Autodesk\Maya\2009\Setup\InstallPath" "MAYA_INSTALL_LOCATION"
+    StrCmp $MAYA_2009_DIR "" NotFound2009
+        MessageBox MB_OK "Maya 2009 was found at: $MAYA_2009_DIR"
+    NotFound2009:
+
     ; Check for version 2008
     ReadRegStr $MAYA_2008_DIR HKLM "Software\Autodesk\Maya\2008\Setup\InstallPath" "MAYA_INSTALL_LOCATION"
     StrCmp $MAYA_2008_DIR "" NotFound2008
@@ -119,33 +142,43 @@ Function .onInit
     ${AndIf} $MAYA_80_DIR == ""
     ${AndIf} $MAYA_85_DIR == ""
     ${AndIf} $MAYA_2008_DIR == ""
-      MessageBox MB_OK 'Warning: This plug-in is compiled for Maya 7.0, 8.0, 8.5 and 2008, but no such version was detected. You can still install the source code and documentation, and copy the plug-in files manually.'
+    ${AndIf} $MAYA_2009_DIR == ""
+      MessageBox MB_OK 'Warning: This plug-in is compiled for Maya 7.0, 8.0, 8.5, 2008 and 2009, but no such version was detected. You can still install the source code and documentation, and copy the plug-in files manually.'
     ${EndIf}
-
+    
+    
+   	SetRegView 32
+    
 FunctionEnd 
 
 ;--------------------------------
 ; SECTIONS
 ;--------------------------------
 Section "Documentation"
-  SetShellVarContext all ; Install the shortcuts in all users's start-menus.
+	SetShellVarContext all ; Install the shortcuts in all users's start-menus.
+	
+	SectionIn RO
+	
+	; Copy plug-in source code and docs
+	SetOutPath $INSTDIR
+	CreateDirectory "$INSTDIR"
+	
+	${If} $WINDOWS_SYSTEM == "64bit"
+		SetRegView 64
+	${Endif}
+	
+	; Write the installation path into the registry
+	WriteRegStr HKLM SOFTWARE\FeelingSoftware\ColladaMaya "Install_Dir" "$INSTDIR"
+	
+	; Write the uninstall keys for Windows
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "DisplayName" "Feeling Software ColladaMaya"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "UninstallString" '"$INSTDIR\uninstallColladaMaya.exe"'
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "NoModify" 1
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "NoRepair" 1
+	WriteUninstaller "$INSTDIR\uninstallColladaMaya.exe"
+  
+   	SetRegView 32
 
-  SectionIn RO
-
-  ; Copy plug-in source code and docs
-  SetOutPath $INSTDIR
-  CreateDirectory "$INSTDIR"
-  
-  ; Write the installation path into the registry
-  WriteRegStr HKLM SOFTWARE\FeelingSoftware\ColladaMaya "Install_Dir" "$INSTDIR"
-  
-  ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "DisplayName" "Feeling Software ColladaMaya"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "UninstallString" '"$INSTDIR\uninstallColladaMaya.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMaya" "NoRepair" 1
-  WriteUninstaller "$INSTDIR\uninstallColladaMaya.exe"
-  
 SectionEnd
 
 Section "Source"
@@ -164,6 +197,68 @@ Section "Overwrite Localized CG (necessary for ColladaFX)"
 SectionEnd
 
 ;--------------------------------
+; INSTALL STUFF
+;--------------------------------
+
+; The stuff to install
+Section "Plug-in for Maya 2009"
+
+    ; Skip this section if Maya 8.5 is not installed
+    StrCmp $MAYA_2009_DIR "" End2009
+    
+    ; Copy plug-in itself
+    SetOutPath $MAYA_2009_DIR\bin\plug-ins
+    ${If} $WINDOWS_SYSTEM == "32bit"
+    	File "..\..\Output\Maya 2009 Win32\COLLADA.mll"
+    ${Endif}
+    ${If} $WINDOWS_SYSTEM == "64bit"
+    	File "..\..\Output\Maya 2009 x64\COLLADA.mll"
+    ${Endif}
+    
+    ; Copy regular scripts (all mel files except AE templates)
+    SetOutPath $MAYA_2009_DIR\scripts\others
+	Delete $MAYA_2009_DIR\scripts\others\AEcolladafxPassesTemplate.mel
+	Delete $MAYA_2009_DIR\scripts\others\AEcolladafxShaderTemplate.mel
+    File /r /x AE*.mel ..\..\scripts\*.mel
+    
+    ; Copy AE templates scripts
+    SetOutPath $MAYA_2009_DIR\scripts\AETemplates
+    File ..\..\scripts\AE*.mel
+    
+    ; Copy XPM icons
+    SetOutPath $MAYA_2009_DIR\icons
+    File ..\..\scripts\*.xpm
+    
+	${If} $WANTS_CG_UPGRADE == "Yes"
+		; Copy Cg DLLs.
+		; Note that this will overwrite existing files. We back them up
+		; first, if the backup don't already exist.
+		IfFileExists "$MAYA_2009_DIR\bin\Cg.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_2009_DIR\bin\Cg.dll" "$MAYA_2009_DIR\bin\Cg.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_2009_DIR\bin\CgGL.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_2009_DIR\bin\CgGL.dll" "$MAYA_2009_DIR\bin\CgGL.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_2009_DIR\bin\glut32.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_2009_DIR\bin\glut32.dll" "$MAYA_2009_DIR\bin\glut32.backup_before_ColladaMaya.dll"
+
+		SetOutPath $MAYA_2009_DIR\bin
+	    ${If} $WINDOWS_SYSTEM == "32bit"
+			File ..\..\..\External\Cg\bin\cg.dll
+			File ..\..\..\External\Cg\bin\cgGL.dll
+			File ..\..\..\External\Cg\bin\glut32.dll
+	    ${Endif}
+	    ${If} $WINDOWS_SYSTEM == "64bit"
+			File ..\..\..\External\Cg\bin.x64\cg.dll
+			File ..\..\..\External\Cg\bin.x64\cgGL.dll
+			File ..\..\..\External\Cg\bin.x64\glut32.dll
+	    ${Endif}
+	${Endif}
+    
+    End2009:
+    
+SectionEnd
+
 
 ; The stuff to install
 Section "Plug-in for Maya 2008"
@@ -173,7 +268,12 @@ Section "Plug-in for Maya 2008"
     
     ; Copy plug-in itself
     SetOutPath $MAYA_2008_DIR\bin\plug-ins
-    File "..\..\Output\Maya 2008 Win32\COLLADA.mll"
+    ${If} $WINDOWS_SYSTEM == "32bit"
+    	File "..\..\Output\Maya 2008 Win32\COLLADA.mll"
+    ${Endif}
+    ${If} $WINDOWS_SYSTEM == "64bit"
+    	File "..\..\Output\Maya 2008 x64\COLLADA.mll"
+    ${Endif}
     
     ; Copy regular scripts (all mel files except AE templates)
     SetOutPath $MAYA_2008_DIR\scripts\others
@@ -203,9 +303,16 @@ Section "Plug-in for Maya 2008"
 			CopyFiles "$MAYA_2008_DIR\bin\glut32.dll" "$MAYA_2008_DIR\bin\glut32.backup_before_ColladaMaya.dll"
 
 		SetOutPath $MAYA_2008_DIR\bin
-		File ..\..\..\External\Cg\bin\cg.dll
-		File ..\..\..\External\Cg\bin\cgGL.dll
-		File ..\..\..\External\Cg\bin\glut32.dll
+	    ${If} $WINDOWS_SYSTEM == "32bit"
+			File ..\..\..\External\Cg\bin\cg.dll
+			File ..\..\..\External\Cg\bin\cgGL.dll
+			File ..\..\..\External\Cg\bin\glut32.dll
+	    ${Endif}
+	    ${If} $WINDOWS_SYSTEM == "64bit"
+			File ..\..\..\External\Cg\bin.x64\cg.dll
+			File ..\..\..\External\Cg\bin.x64\cgGL.dll
+			File ..\..\..\External\Cg\bin.x64\glut32.dll
+	    ${Endif}
 	${Endif}
     
     End2008:
@@ -220,7 +327,13 @@ Section "Plug-in for Maya 8.5"
 
     ; Copy plug-in itself
     SetOutPath $MAYA_85_DIR\bin\plug-ins
-    File "..\..\Output\Maya 8.5 Win32\COLLADA.mll"
+    ${If} $WINDOWS_SYSTEM == "32bit"
+	    File "..\..\Output\Maya 8.5 Win32\COLLADA.mll"
+    ${Endif}
+    ${If} $WINDOWS_SYSTEM == "64bit"
+	    File "..\..\Output\Maya 8.5 x64\COLLADA.mll"
+    ${Endif}
+
     
     ; Copy regular scripts (all mel files except AE templates)
     SetOutPath $MAYA_85_DIR\scripts\others
@@ -250,9 +363,17 @@ Section "Plug-in for Maya 8.5"
 			CopyFiles "$MAYA_85_DIR\bin\glut32.dll" "$MAYA_85_DIR\bin\glut32.backup_before_ColladaMaya.dll"
 
 		SetOutPath $MAYA_85_DIR\bin
-		File ..\..\..\External\Cg\bin\cg.dll
-		File ..\..\..\External\Cg\bin\cgGL.dll
-		File ..\..\..\External\Cg\bin\glut32.dll
+			    ${If} $WINDOWS_SYSTEM == "32bit"
+			File ..\..\..\External\Cg\bin\cg.dll
+			File ..\..\..\External\Cg\bin\cgGL.dll
+			File ..\..\..\External\Cg\bin\glut32.dll
+	    ${Endif}
+	    ${If} $WINDOWS_SYSTEM == "64bit"
+			File ..\..\..\External\Cg\bin.x64\cg.dll
+			File ..\..\..\External\Cg\bin.x64\cgGL.dll
+			File ..\..\..\External\Cg\bin.x64\glut32.dll
+	    ${Endif}
+
 	${Endif}
     
     End85:

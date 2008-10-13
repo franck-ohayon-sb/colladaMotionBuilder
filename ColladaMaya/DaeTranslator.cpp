@@ -27,6 +27,8 @@
 #endif
 #include <maya/MItDependencyNodes.h>
 
+#include <time.h>
+
 #define TRANSLATOR_VENDOR					"Feeling Software"
 #define TRANSLATOR_MAYA_API_VERSION			"6.0.1"
 
@@ -397,17 +399,34 @@ MStatus DaeTranslator::Export(const MString& filename)
 {
 	MStatus status = MS::kSuccess;
 
+    /** To get the time */
+    clock_t startClock, endClock;
+    startClock = clock();
+
 	// Actually export the document
 	DaeDoc* document = colladaNode->NewDocument(filename);
 	document->Export(exportSelection);
 	colladaNode->ReleaseDocument(document); // don't keep export documents
 
-	// Display some closing information.
-	FUStringBuilder tmpstr;
-	tmpstr.append(FC("ColladaMaya export finished:  \""));
-	tmpstr.append(MConvert::ToFChar(filename.asChar()));
-	tmpstr.append((fchar) '\"');
-	MGlobal::displayInfo(tmpstr.ToCharPtr());
+    // Display some closing information.
+    endClock = clock();
+    FUStringBuilder tmpstr;
+    tmpstr.append(FC("Time to export into file  \""));
+    tmpstr.append(MConvert::ToFChar(filename.asChar()));
+    tmpstr.append(FC("\": "));
+    tmpstr.append(endClock - startClock);
+    tmpstr.append(FC("\n"));
+    MGlobal::displayInfo(tmpstr.ToCharPtr());
+
+//    MString message(stream.str().c_str());
+//    MGlobal::displayInfo ( message );
+
+//     // Display some closing information.
+// 	FUStringBuilder tmpstr;
+// 	tmpstr.append(FC("ColladaMaya export finished:  \""));
+// 	tmpstr.append(MConvert::ToFChar(filename.asChar()));
+// 	tmpstr.append((fchar) '\"');
+// 	MGlobal::displayInfo(tmpstr.ToCharPtr());
 
 	return status;
 }
