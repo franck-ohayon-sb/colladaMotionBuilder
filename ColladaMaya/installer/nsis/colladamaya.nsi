@@ -46,7 +46,6 @@ Var MAYA_85_DIR
 Var MAYA_80_DIR
 Var MAYA_70_DIR
 
-
 Var WINDOWS_SYSTEM
 
 Var WANTS_CG_UPGRADE
@@ -123,29 +122,28 @@ systemOutput:
     ; Check for version 8.5
     ReadRegStr $MAYA_85_DIR HKLM "Software\Autodesk\Maya\8.5\Setup\InstallPath" "MAYA_INSTALL_LOCATION"
     StrCmp $MAYA_85_DIR "" NotFound85
-        MessageBox MB_OK "Maya 8.5 was found at: $MAYA_85_DIR!  $\nPlease download ColladaMaya_FREE_3.05B.exe to install COLLADA plugin"
-        Quit
+        MessageBox MB_OK "Maya 8.5 was found at: $MAYA_85_DIR"
     NotFound85:
 
 	; Check for version 8.0
     ReadRegStr $MAYA_80_DIR HKLM "Software\Alias\Maya\8.0\Setup\InstallPath" "MAYA_INSTALL_LOCATION"
     StrCmp $MAYA_80_DIR "" NotFound80
-        MessageBox MB_OK "Maya 8.0 was found at: $MAYA_80_DIR!  $\nPlease download ColladaMaya_FREE_3.05B.exe to install COLLADA plugin"
-        Quit
+        MessageBox MB_OK "Maya 8.0 was found at: $MAYA_80_DIR"
     NotFound80:
     
     ; Check for version 7.0
     ReadRegStr $MAYA_70_DIR HKLM "Software\Alias\Maya\7.0\Setup\InstallPath" "MAYA_INSTALL_LOCATION"
     StrCmp $MAYA_70_DIR "" NotFound70
-        MessageBox MB_OK "Maya 7.0 was found at: $MAYA_70_DIR!  $\nPlease download ColladaMaya_FREE_3.05B.exe to install COLLADA plugin"
-        Quit
+        MessageBox MB_OK "Maya 7.0 was found at: $MAYA_70_DIR"
     NotFound70:
     
     ; TODO: If no version of Maya has been detected, warn the user.
-    ${If} $MAYA_2008_DIR == ""
+    ${If} $MAYA_70_DIR == ""
+    ${AndIf} $MAYA_80_DIR == ""
+    ${AndIf} $MAYA_85_DIR == ""
+    ${AndIf} $MAYA_2008_DIR == ""
     ${AndIf} $MAYA_2009_DIR == ""
-      MessageBox MB_OK 'Warning: This plug-in is compiled for Maya 2008 and 2009, but no such version was detected.$\nYou can still install the source code and documentation, and copy the plug-in files manually.'
-      Quit
+      MessageBox MB_OK 'Warning: This plug-in is compiled for Maya 7.0, 8.0, 8.5, 2008 and 2009, but no such version was detected. You can still install the source code and documentation, and copy the plug-in files manually.'
     ${EndIf}
     
     
@@ -322,6 +320,150 @@ Section "Plug-in for Maya 2008"
 SectionEnd
 
 ; The stuff to install
+Section "Plug-in for Maya 8.5"
+
+    ; Skip this section if Maya 8.5 is not installed
+    StrCmp $MAYA_85_DIR "" End85
+
+    ; Copy plug-in itself
+    SetOutPath $MAYA_85_DIR\bin\plug-ins
+    ${If} $WINDOWS_SYSTEM == "32bit"
+	    File "..\..\Output\Maya 8.5 Win32\COLLADA.mll"
+    ${Endif}
+
+    
+    ; Copy regular scripts (all mel files except AE templates)
+    SetOutPath $MAYA_85_DIR\scripts\others
+	Delete $MAYA_85_DIR\scripts\others\AEcolladafxPassesTemplate.mel
+	Delete $MAYA_85_DIR\scripts\others\AEcolladafxShaderTemplate.mel
+    File /r /x AE*.mel ..\..\scripts\*.mel
+    
+    ; Copy AE templates scripts
+    SetOutPath $MAYA_85_DIR\scripts\AETemplates
+    File ..\..\scripts\AE*.mel
+    
+    ; Copy XPM icons
+    SetOutPath $MAYA_85_DIR\icons
+    File ..\..\scripts\*.xpm
+    
+	${If} $WANTS_CG_UPGRADE == "Yes"
+		; Copy Cg DLLs.
+		; Note that this will overwrite existing files. We back them up
+		; first, if the backup don't already exist.
+		IfFileExists "$MAYA_85_DIR\bin\Cg.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_85_DIR\bin\Cg.dll" "$MAYA_85_DIR\bin\Cg.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_85_DIR\bin\CgGL.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_85_DIR\bin\CgGL.dll" "$MAYA_85_DIR\bin\CgGL.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_85_DIR\bin\glut32.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_85_DIR\bin\glut32.dll" "$MAYA_85_DIR\bin\glut32.backup_before_ColladaMaya.dll"
+
+		SetOutPath $MAYA_85_DIR\bin
+			    ${If} $WINDOWS_SYSTEM == "32bit"
+			File ..\..\..\External\Cg\bin\cg.dll
+			File ..\..\..\External\Cg\bin\cgGL.dll
+			File ..\..\..\External\Cg\bin\glut32.dll
+	    ${Endif}
+
+	${Endif}
+    
+    End85:
+    
+SectionEnd
+
+; The stuff to install
+Section "Plug-in for Maya 8.0"
+
+    ; Skip this section if Maya 8.0 is not installed
+    StrCmp $MAYA_80_DIR "" End80
+    
+    ; Copy plug-in itself
+    SetOutPath $MAYA_80_DIR\bin\plug-ins
+    File "..\..\Output\Maya 8.0 Win32\COLLADA.mll"
+    
+    ; Copy regular scripts (all mel files except AE templates)
+    SetOutPath $MAYA_80_DIR\scripts\others
+	Delete $MAYA_80_DIR\scripts\others\AEcolladafxPassesTemplate.mel
+	Delete $MAYA_80_DIR\scripts\others\AEcolladafxShaderTemplate.mel
+    File /r /x AE*.mel ..\..\scripts\*.mel
+    
+    ; Copy AE templates scripts
+    SetOutPath $MAYA_80_DIR\scripts\AETemplates
+    File ..\..\scripts\AE*.mel
+    
+    ; Copy XPM icons
+    SetOutPath $MAYA_80_DIR\icons
+    File ..\..\scripts\*.xpm
+    
+	${If} $WANTS_CG_UPGRADE == "Yes"
+		; Copy Cg DLLs.
+		; Note that this will overwrite existing files. We back them up
+		; first, if the backup don't already exist.
+		IfFileExists "$MAYA_80_DIR\bin\Cg.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_80_DIR\bin\Cg.dll" "$MAYA_80_DIR\bin\Cg.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_80_DIR\bin\CgGL.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_80_DIR\bin\CgGL.dll" "$MAYA_80_DIR\bin\CgGL.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_80_DIR\bin\glut32.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_80_DIR\bin\glut32.dll" "$MAYA_80_DIR\bin\glut32.backup_before_ColladaMaya.dll"
+
+		SetOutPath $MAYA_80_DIR\bin
+		File ..\..\..\External\Cg\bin\cg.dll
+		File ..\..\..\External\Cg\bin\cgGL.dll
+		File ..\..\..\External\Cg\bin\glut32.dll
+	${EndIf}
+    
+    End80:
+
+SectionEnd
+
+Section "Plug-in for Maya 7.0"
+
+    ; Skip this section if Maya 7.0 is not installed
+    StrCmp $MAYA_70_DIR "" End70
+        
+    ; Copy plug-in itself
+    SetOutPath $MAYA_70_DIR\bin\plug-ins
+    File "..\..\Output\Maya 7.0 Win32\COLLADA.mll"
+    
+    ; Copy regular scripts (all mel files except AE templates)
+    SetOutPath $MAYA_70_DIR\scripts\others
+	Delete $MAYA_70_DIR\scripts\others\AEcolladafxPassesTemplate.mel
+	Delete $MAYA_70_DIR\scripts\others\AEcolladafxShaderTemplate.mel
+    File /r /x AE*.mel ..\..\scripts\*.mel
+    
+    ; Copy AE templates scripts
+    SetOutPath $MAYA_70_DIR\scripts\AETemplates
+    File ..\..\scripts\AE*.mel
+    
+    ; Copy XPM icons
+    SetOutPath $MAYA_70_DIR\icons
+    File ..\..\scripts\*.xpm
+    
+	${If} $WANTS_CG_UPGRADE == "Yes"
+		; Copy Cg DLLs.
+		; Note that this will overwrite existing files. We back them up
+		; first, if the backup don't already exist.
+		IfFileExists "$MAYA_70_DIR\bin\Cg.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_70_DIR\bin\Cg.dll" "$MAYA_70_DIR\bin\Cg.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_70_DIR\bin\CgGL.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_70_DIR\bin\CgGL.dll" "$MAYA_70_DIR\bin\CgGL.backup_before_ColladaMaya.dll"
+	
+		IfFileExists "$MAYA_70_DIR\bin\glut32.backup_before_ColladaMaya.dll" +2 0
+			CopyFiles "$MAYA_70_DIR\bin\glut32.dll" "$MAYA_70_DIR\bin\glut32.backup_before_ColladaMaya.dll"
+
+		SetOutPath $MAYA_70_DIR\bin
+		File ..\..\..\External\Cg\bin\cg.dll
+		File ..\..\..\External\Cg\bin\cgGL.dll
+		File ..\..\..\External\Cg\bin\glut32.dll
+	${EndIf}
+    
+    End70:
+
+SectionEnd
 
 ; Optional section (can be disabled by the user)
 Section "Start Menu Shortcuts"
