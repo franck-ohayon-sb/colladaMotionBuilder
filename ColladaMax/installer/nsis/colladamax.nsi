@@ -44,6 +44,10 @@ Var MAX_70_DIR
 Var MAX_80_DIR
 Var MAX_90_DIR
 Var MAX_2008_DIR
+Var MAX_2009_DIR
+
+Var WINDOWS_SYSTEM
+
 Var WANTS_CG_UPGRADE
 
 ;--------------------------------
@@ -88,6 +92,17 @@ Var WANTS_CG_UPGRADE
 ; CALLBACKS
 ;--------------------------------
 Function .onInit
+
+	; Check for the current system (32 or 64 bit)
+    System::Call "kernel32::GetCurrentProcess() i .s"
+  	System::Call "kernel32::IsWow64Process(i s, *i .r0)"
+  	StrCpy $WINDOWS_SYSTEM "32bit"
+  	IntCmp $0 0 systemOutput
+  	StrCpy $WINDOWS_SYSTEM "64bit"
+	StrCpy $INSTDIR "$PROGRAMFILES64\Feeling Software\ColladaMaya"
+	SetRegView 64
+systemOutput:
+	MessageBox MB_OK "Windows system found: $WINDOWS_SYSTEM"
 
     ; Check for version 7.0
     ReadRegStr $MAX_70_DIR HKLM "Software\Autodesk\3dsMax\7.0" "InstallDir"
@@ -138,13 +153,34 @@ Function .onInit
 	Found2008:
         MessageBox MB_OK "3ds Max 2008 was found at: $MAX_2008_DIR"
 	NotFound2008_4:
+
+    ; Check for version (11.0) 2009
+    ReadRegStr $MAX_2009_DIR HKLM "Software\Autodesk\3dsMax\11.0\MAX-1:409" "InstallDir"
+    StrCmp $MAX_2009_DIR "" NotFound2009_0 Found2009
+	NotFound2009_0:
+	    ReadRegStr $MAX_2009_DIR HKLM "Software\Autodesk\3dsMax\11.0\MAX-1:410" "InstallDir"
+		StrCmp $MAX_2009_DIR "" NotFound2009_1 Found2009
+		NotFound2009_1:
+			ReadRegStr $MAX_2009_DIR HKLM "Software\Autodesk\3dsMax\11.0\MAX-1:411" "InstallDir"
+			StrCmp $MAX_2009_DIR "" NotFound2009_2 Found2009
+    		NotFound2009_2:
+                ReadRegStr $MAX_2009_DIR HKLM "Software\Autodesk\3dsMax\11.0\MAX-1:408" "InstallDir"
+                StrCmp $MAX_2009_DIR "" NotFound2009_3 Found2009
+                NotFound2009_3:
+                    ReadRegStr $MAX_2009_DIR HKLM "Software\Autodesk\3dsMax\11.0\MAX-1:407" "InstallDir"
+                    StrCmp $MAX_2009_DIR "" NotFound2009_4 Found2009
+	Found2009:
+        MessageBox MB_OK "3ds Max 2009 was found at: $MAX_2009_DIR"
+	NotFound2009_4:
+
     
 	; TODO: If no version of 3ds Max has been detected, warn the user.
     ${If} $MAX_70_DIR == ""
     ${AndIf} $MAX_80_DIR == ""
     ${AndIf} $MAX_90_DIR == ""
     ${AndIf} $MAX_2008_DIR == ""
-      MessageBox MB_OK 'Warning: This plug-in is compiled for Autodesk 3ds Max 2008, 9.0, 8.0 and 7.0.\nNeither were detected. You can still install the source code\nand documentation, and copy the plug-in files manually.'
+    ${AndIf} $MAX_2009_DIR == ""
+      MessageBox MB_OK 'Warning: This plug-in is compiled for Autodesk 3ds Max 2009, 2008, 9.0, 8.0 and 7.0.\nNeither were detected. You can still install the source code\nand documentation, and copy the plug-in files manually.'
     ${EndIf}
 
 FunctionEnd 
@@ -159,6 +195,12 @@ Section "Documentation"
   SetShellVarContext all
 
   ; Copy plug-in source code and docs
+  SetOutPath $INSTDIR
+  CreateDirectory "$INSTDIR"
+	
+  ${If} $WINDOWS_SYSTEM == "64bit"
+		SetRegView 64
+  ${Endif}
   
   ; Write the installation path into the registry
   WriteRegStr HKLM SOFTWARE\FeelingSoftware\ColladaMax "Install_Dir" "$INSTDIR"
@@ -171,6 +213,8 @@ Section "Documentation"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Feeling Software\ColladaMax" "NoRepair" 1
   WriteUninstaller "$INSTDIR\uninstallColladaMax.exe"
   
+  SetRegView 32
+
 SectionEnd
 
 Section "Install Localized CG (recommended)"
@@ -295,13 +339,21 @@ Section "Plug-in for 3ds Max 2008"
   StrCmp $MAX_2008_DIR "" End2008
 
   ; Copy necessary D3DX DLLs.
+  ${If} $WINDOWS_SYSTEM == "32bit"
   SetOutPath $MAX_2008_DIR
   File ..\..\..\External\D3D\D3DX9_30.dll
   File ..\..\..\External\D3D\D3DX9_34.dll
+  ${Endif}
 
   ; Copy plug-in itself
   SetOutPath $MAX_2008_DIR\plugins
-  File "..\..\Output\Release 2008 Win32\ColladaMax\ColladaMax.dle"
+
+  ${If} $WINDOWS_SYSTEM == "32bit"
+    File "..\..\Output\Release 2008 Win32\ColladaMax\ColladaMax.dle"
+  ${Endif}
+  ${If} $WINDOWS_SYSTEM == "64bit"
+    File "..\..\Output\Release 2008 x64\ColladaMax\ColladaMax.dle"
+  ${Endif}
 
   ; Take out Autodesk' version of the plug-in,
   Delete $MAX_2008_DIR\plugins\ColladaExporter.dle
@@ -310,15 +362,62 @@ Section "Plug-in for 3ds Max 2008"
   ; Take out the old ColladaMax script plug-in.
   Delete $MAX_2008_DIR\plugins\ColladaMaxScrpt.dlx
 
+
   ${If} $WANTS_CG_UPGRADE == "Yes"
     ; Copy Cg DLLs.
+    ${If} $WINDOWS_SYSTEM == "32bit"
     SetOutPath $MAX_2008_DIR
     File ..\..\..\External\Cg\bin\cg.dll
     File ..\..\..\External\Cg\bin\cgD3D9.dll
+    ${Endif}
   ${Endif}
 
   End2008:
+
+SectionEnd
+
+
+; The stuff to install
+Section "Plug-in for 3ds Max 2009"
+
+  ; Skip this section if 3ds Max 2009 is not installed
+  StrCmp $MAX_2009_DIR "" End2009
+
+  ; Copy necessary D3DX DLLs.
+  ${If} $WINDOWS_SYSTEM == "32bit"
+  SetOutPath $MAX_2009_DIR
+  File ..\..\..\External\D3D\D3DX9_30.dll
+  File ..\..\..\External\D3D\D3DX9_34.dll
+  ${Endif}
+
+  ; Copy plug-in itself
+  SetOutPath $MAX_2009_DIR\plugins
+  ${If} $WINDOWS_SYSTEM == "32bit"
+  File "..\..\Output\Release 2009 Win32\ColladaMax\ColladaMax.dle"
+  ${Endif}
+  ${If} $WINDOWS_SYSTEM == "64bit"
+    File "..\..\Output\Release 2009 x64\ColladaMax\ColladaMax.dle"
+  ${Endif}
+
+
+  ; Take out Autodesk' version of the plug-in,
+  Delete $MAX_2009_DIR\plugins\ColladaExporter.dle
+  Delete $MAX_2009_DIR\plugins\ColladaImporter.dli
   
+  ; Take out the old ColladaMax script plug-in.
+  Delete $MAX_2009_DIR\plugins\ColladaMaxScrpt.dlx
+
+  ${If} $WANTS_CG_UPGRADE == "Yes"
+    ; Copy Cg DLLs.
+    ${If} $WINDOWS_SYSTEM == "32bit"
+    SetOutPath $MAX_2009_DIR
+    File ..\..\..\External\Cg\bin\cg.dll
+    File ..\..\..\External\Cg\bin\cgD3D9.dll
+    ${Endif}
+  ${Endif}
+
+  End2009:
+
 SectionEnd
 
 ; Optional section (can be disabled by the user)
@@ -366,6 +465,17 @@ Section "Uninstall"
   Delete "$MAX_90_DIR\plugins\ColladaMax.dle"
   UninstallMax90Finished:
   
+  ReadRegStr $MAX_2008_DIR HKLM "Software\Autodesk\3dsMax\10.0\MAX-1:409" "InstallDir"
+  StrCmp $MAX_2008_DIR "" UninstallMax2008Finished
+  Delete "$MAX_2008_DIR\plugins\ColladaMax.dle"
+  UninstallMax2008Finished:
+
+  ; Skip this section if 3ds Max 2009 is not installed
+  ReadRegStr $MAX_2009_DIR HKLM "Software\Autodesk\3dsMax\11.0\MAX-1:409" "InstallDir"
+  StrCmp $MAX_2009_DIR "" UninstallMax2009Finished
+  Delete "$MAX_2009_DIR\plugins\ColladaMax.dle"
+  UninstallMax2009Finished:
+
   ; Remove shortcuts, if any
   Delete "$SMPROGRAMS\Feeling Software\ColladaMax\*.*"
 
