@@ -64,8 +64,8 @@ void NodeExporter::PreprocessScene(FBScene* _scene)
 		FBGeometry* geometry = node->Geometry;
 		if (geometry != NULL && geometry->VertexCount() > 0)
 		{
-			FBCluster cluster(node);
-			if (cluster.LinkGetCount() > 0)
+			FBCluster* cluster = node->Cluster;
+			if (cluster->LinkGetCount() > 0)
 			{
 				node->SetMatrix(identity, kModelTransformation, true);
 				node->IsDeformable = false;
@@ -102,8 +102,8 @@ void NodeExporter::PostprocessScene(FBScene* scene)
 			bool isDeformable = node->IsDeformable;
 			node->IsDeformable = true;
 
-			FBCluster cluster(node);
-			if (cluster.LinkGetCount() > 0)
+			FBCluster* cluster = node->Cluster;
+			if (cluster->LinkGetCount() > 0)
 			{
 				isDeformable = true;
 				doEvaluate = true;
@@ -209,7 +209,7 @@ void NodeExporter::ExportInstance(FCDSceneNode* colladaNode, FBModel* node)
 			if (node->Children.GetCount() > 0)
 			{
 				colladaNode = colladaNode->AddChildNode();
-				colladaNode->SetDaeId(fm::string((char*) node->Name) + "-pivot");
+				colladaNode->SetDaeId(fm::string((char*) node->Name.AsString()) + "-pivot");
 			}
 			FCDTRotation* pivotRotation = (FCDTRotation*) colladaNode->AddTransform(FCDTransform::ROTATION);
 			pivotRotation->SetAxis(FMVector3::XAxis);
@@ -254,7 +254,12 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 	if (node->Is(FBCamera::TypeInfo))
 	{
 		FBCamera* camera = (FBCamera*) node;
-		FMMatrix44 transform = camera->GetMatrix(kFBModelView);
+		FMMatrix44 transform;
+
+		FBMatrix transform1;
+		camera->GetCameraMatrix(transform1, kFBModelView);
+		transform = ToFMMatrix44(transform1);
+
 		transform = transform.Transposed().Inverted(); // Transpose because MotionBuilder is row-major.
 		
 		if (node->Parent != NULL)
@@ -314,15 +319,16 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		// Consider the rotation order.
 		const int* orderedRotationIndices;
 		const FMVector3* rotationAxises[3] = { &FMVector3::XAxis, &FMVector3::YAxis, &FMVector3::ZAxis };
-		switch ((FBRotationOrder::Values) rotationOrder)
+		
+		switch ((Values) rotationOrder)
 		{
-		case FBRotationOrder::EulerXYZ:
-		case FBRotationOrder::SphericXYZ: { static const int x[3] = { 0, 1, 2 }; orderedRotationIndices = x; break; }
-		case FBRotationOrder::EulerXZY: { static const int x[3] = { 0, 2, 1 }; orderedRotationIndices = x; break; }
-		case FBRotationOrder::EulerYZX: { static const int x[3] = { 1, 2, 0 }; orderedRotationIndices = x; break; }
-		case FBRotationOrder::EulerYXZ: { static const int x[3] = { 1, 0, 2 }; orderedRotationIndices = x; break; }
-		case FBRotationOrder::EulerZXY: { static const int x[3] = { 2, 0, 1 }; orderedRotationIndices = x; break; }
-		case FBRotationOrder::EulerZYX: { static const int x[3] = { 2, 1, 0 }; orderedRotationIndices = x; break; }
+		case EulerXYZ:
+		case SphericXYZ: { static const int x[3] = { 0, 1, 2 }; orderedRotationIndices = x; break; }
+		case EulerXZY: { static const int x[3] = { 0, 2, 1 }; orderedRotationIndices = x; break; }
+		case EulerYZX: { static const int x[3] = { 1, 2, 0 }; orderedRotationIndices = x; break; }
+		case EulerYXZ: { static const int x[3] = { 1, 0, 2 }; orderedRotationIndices = x; break; }
+		case EulerZXY: { static const int x[3] = { 2, 0, 1 }; orderedRotationIndices = x; break; }
+		case EulerZYX: { static const int x[3] = { 2, 1, 0 }; orderedRotationIndices = x; break; }
 		default: { static const int x[3] = { 0, 1, 2 }; FUFail(orderedRotationIndices = x); break; }
 		}
 
@@ -587,7 +593,9 @@ FMMatrix44 NodeExporter::GetParentTransform(FBModel* node, bool isLocal)
 	{
 		FMMatrix44 mx;
 		FBCamera* camera = (FBCamera*) node;
-		mx = camera->GetMatrix(kFBModelView);
+		FBMatrix mx1;
+		camera->GetCameraMatrix(mx1, kFBModelView);
+		mx = ToFMMatrix44(mx1);
 		mx = mx.Transposed();
 		if (isLocal)
 		{
@@ -615,10 +623,10 @@ void NodeExporter::FindNodesToSample(FBScene* scene)
 		int markerPlacementCount = (int) kFBLastNodeId;
 		for (int j = 0; j < markerPlacementCount; ++j)
 		{
-			int markerCount = markers->GetMarkerCount((FBBodyNodeId) j);
+			int markerCount = markers->GetMarkerCount((FBSkeletonNodeId) j);
 			for (int k = 0; k < markerCount; ++k)
 			{
-				FBModel* marker = markers->GetMarkerModel((FBBodyNodeId) j, k);
+				FBModel* marker = markers->GetMarkerModel((FBSkeletonNodeId) j, k);
 				if (marker == NULL) continue;
 
 				// Don't insert the marker to be sampled, but insert all its parents.
@@ -648,11 +656,11 @@ void NodeExporter::FindNodesToSample(FBScene* scene)
 	}
 
 	// Check for Constraints
-	FBConstraintManager constraintManager;
-	int constraintCount = constraintManager.ConstraintGetCount();
+	FBConstraintManager& constraintManager = FBConstraintManager::TheOne();
+	int constraintCount = constraintManager.TypeGetCount();
 	for (int i = 0; i < constraintCount; ++i)
 	{
-		FBConstraint* constraint = constraintManager.ConstraintGet(i);
+		FBConstraint* constraint = constraintManager.TypeCreateConstraint(i);
 		int groupCount = constraint->ReferenceGroupGetCount();
 		if (groupCount >= 2)
 		{

@@ -1,0 +1,1056 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FMath">
+      <UniqueIdentifier>{5c92ad0d-9e9f-409c-8fd5-ac28220a539d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Collection">
+      <UniqueIdentifier>{e0e75760-d78f-4ba3-a8ea-1d3427b4074c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Color">
+      <UniqueIdentifier>{c4fff2a5-3b05-4b2c-ba00-35901e40cb60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Interpolation">
+      <UniqueIdentifier>{030a11ca-332e-4ebc-b86b-6bc92af89582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Scalar">
+      <UniqueIdentifier>{5cd4cf96-4e88-476f-af00-2555c80022f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Vector">
+      <UniqueIdentifier>{93178900-b023-4f61-a1c1-9173b5503b52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Volume">
+      <UniqueIdentifier>{c9c0e477-4e1c-4967-8501-b90ffe20e27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Transforms">
+      <UniqueIdentifier>{75a0a97e-68bd-4b2e-9a49-2d3f05b8b419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Transforms\Matrix">
+      <UniqueIdentifier>{db06de29-43f5-41c6-807e-eb3164dbc071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FMath\Transforms\Quaternion">
+      <UniqueIdentifier>{f0b1114e-1114-41db-8be5-a35b241652d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{676f57d6-7b29-4fc9-8df4-9f5324a398e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils">
+      <UniqueIdentifier>{d70c66b6-72eb-4d7c-850a-86739d0eba0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\CRC32">
+      <UniqueIdentifier>{568e6d1f-2520-406e-a22e-d62542de28e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Debug">
+      <UniqueIdentifier>{42089ffe-7e9f-4e3d-bcf2-d16259a876fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\File System">
+      <UniqueIdentifier>{80df1b33-ccad-4058-962b-3aade2ff65ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\File System\Plugins">
+      <UniqueIdentifier>{e19b5499-98fd-4d6f-8a01-72df32e435d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\File System\Files">
+      <UniqueIdentifier>{e7bef0c5-3a30-4241-b888-5961e2a34d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Patterns">
+      <UniqueIdentifier>{69b20543-8760-4da4-bd33-f17acc44c656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Patterns\Parameters">
+      <UniqueIdentifier>{462c4c75-a2eb-4460-b1eb-51cea700ff23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Patterns\Functors &amp; Events">
+      <UniqueIdentifier>{19ac7232-95c5-49c8-9e93-8157c838ca44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Patterns\Base Objects">
+      <UniqueIdentifier>{fda15a9f-624a-4b29-90eb-41b7dd7c8c7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Strings">
+      <UniqueIdentifier>{1d9b5879-8cc4-4c73-be9a-8d4b8e981623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Structures">
+      <UniqueIdentifier>{a55402de-cb44-4549-ad6b-bb87b5bc4ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\XML">
+      <UniqueIdentifier>{bf06c02e-8d73-4683-9af4-f2c66bc1cd0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Base64">
+      <UniqueIdentifier>{16ac76e5-64cc-4fac-b940-8b305d6e74c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FUtils\Synchronization">
+      <UniqueIdentifier>{3d7db043-3307-4569-8212-42e2cda6742e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument">
+      <UniqueIdentifier>{5d57438c-b39a-4caf-89e1-050e4643ab38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Instantiation">
+      <UniqueIdentifier>{300945fb-83e3-4b18-a204-162fcca614e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries">
+      <UniqueIdentifier>{1eff5572-9749-4431-8351-3479911d3a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Animations">
+      <UniqueIdentifier>{b087b372-12e7-45d5-9233-dda8f0e92ab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Animations\Animated &amp; ParameterAnimatable">
+      <UniqueIdentifier>{cb8f7de3-7187-413c-beea-82ba41c5f916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Geometries">
+      <UniqueIdentifier>{8eb0425a-9b33-47fe-9b5c-03e2eae450ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Materials">
+      <UniqueIdentifier>{fb801610-a236-45bd-a999-03ba31863ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Materials\Effects">
+      <UniqueIdentifier>{2a0acda6-1f5b-46f3-81b0-6d4a5e317f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Materials\Images and Textures">
+      <UniqueIdentifier>{dc81286f-f882-4b67-8d06-eb3d43482042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Controllers">
+      <UniqueIdentifier>{7fedc820-8b40-4eb3-9b7a-e54f78e22846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Cameras and Lights">
+      <UniqueIdentifier>{c6093aa1-5659-4c61-92aa-831e3e2d86dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\Emitters">
+      <UniqueIdentifier>{4d2d80a0-4e09-4372-b7fb-f77b2431f23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Libraries\ForceFields">
+      <UniqueIdentifier>{2057f848-ce3d-4a67-be1e-572d8b06ef1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Document">
+      <UniqueIdentifier>{1c0903ff-e5c8-4187-930c-0b147f050234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Document\Extra">
+      <UniqueIdentifier>{3f16014a-f453-41a0-b61d-2ba9d1f1c5fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Document\External References">
+      <UniqueIdentifier>{51ef4e11-1f17-4a03-b05f-157ed5444a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Physics">
+      <UniqueIdentifier>{f1cccd57-db7f-4dc7-a605-a57521186107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Physics\Parameters">
+      <UniqueIdentifier>{246c55e3-16e2-404a-99e6-cd0ed87c50ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Scene Graph">
+      <UniqueIdentifier>{3a9a9ffe-82bf-4d9c-b95f-07efad6fa071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCDocument\Object">
+      <UniqueIdentifier>{ff804346-7a87-4e41-840d-338dd14968dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FCollada">
+      <UniqueIdentifier>{808e0243-aa2c-4306-850f-3723ca943af5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FMath\FMath.h">
+      <Filter>FMath</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMAllocator.h">
+      <Filter>FMath\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMArray.h">
+      <Filter>FMath\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMArrayPointer.h">
+      <Filter>FMath\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMSort.h">
+      <Filter>FMath\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMTree.h">
+      <Filter>FMath\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMColor.h">
+      <Filter>FMath\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMInterpolation.h">
+      <Filter>FMath\Interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMFloat.h">
+      <Filter>FMath\Scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMInteger.h">
+      <Filter>FMath\Scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMRandom.h">
+      <Filter>FMath\Scalar</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMVector2.h">
+      <Filter>FMath\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMVector3.h">
+      <Filter>FMath\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMVector4.h">
+      <Filter>FMath\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMVolume.h">
+      <Filter>FMath\Volume</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMAngleAxis.h">
+      <Filter>FMath\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMLookAt.h">
+      <Filter>FMath\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMSkew.h">
+      <Filter>FMath\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMMatrix33.h">
+      <Filter>FMath\Transforms\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMMatrix44.h">
+      <Filter>FMath\Transforms\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="FMath\FMQuaternion.h">
+      <Filter>FMath\Transforms\Quaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUDaeEnum.h">
+      <Filter>FUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUDaeSyntax.h">
+      <Filter>FUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUtils.h">
+      <Filter>FUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUUri.h">
+      <Filter>FUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\Platforms.h">
+      <Filter>FUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUCrc32.h">
+      <Filter>FUtils\CRC32</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUAssert.h">
+      <Filter>FUtils\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUDebug.h">
+      <Filter>FUtils\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUTestBed.h">
+      <Filter>FUtils\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUPlugin.h">
+      <Filter>FUtils\File System\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUPluginManager.h">
+      <Filter>FUtils\File System\Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUFile.h">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUFileManager.h">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FULogFile.h">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUSingleton.h">
+      <Filter>FUtils\Patterns</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUParameter.h">
+      <Filter>FUtils\Patterns\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUParameter.hpp">
+      <Filter>FUtils\Patterns\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUEvent.h">
+      <Filter>FUtils\Patterns\Functors &amp; Events</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUFunctor.h">
+      <Filter>FUtils\Patterns\Functors &amp; Events</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUObject.h">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUObjectType.h">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUParameterizable.h">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUTracker.h">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUString.h">
+      <Filter>FUtils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUStringBuilder.h">
+      <Filter>FUtils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUStringBuilder.hpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUStringConversion.h">
+      <Filter>FUtils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUStringConversion.hpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUUniqueStringMap.h">
+      <Filter>FUtils\Strings</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUBoundingBox.h">
+      <Filter>FUtils\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUBoundingSphere.h">
+      <Filter>FUtils\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUDateTime.h">
+      <Filter>FUtils\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUError.h">
+      <Filter>FUtils\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUErrorLog.h">
+      <Filter>FUtils\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUXmlDocument.h">
+      <Filter>FUtils\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUXmlParser.h">
+      <Filter>FUtils\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUXmlWriter.h">
+      <Filter>FUtils\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUBase64.h">
+      <Filter>FUtils\Base64</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUCriticalSection.h">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUSemaphore.h">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUSynchronizableObject.h">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="FUtils\FUThread.h">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDControllerInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEmitterInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEntityInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometryInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDMaterialInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsForceFieldInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsModelInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsRigidBodyInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsRigidConstraintInstance.h">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDLibrary.h">
+      <Filter>FCDocument\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDLibrary.hpp">
+      <Filter>FCDocument\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimation.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationChannel.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationClip.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationClipTools.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationCurve.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationCurveTools.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationKey.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimationMultiCurve.h">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAnimated.h">
+      <Filter>FCDocument\Libraries\Animations\Animated &amp; ParameterAnimatable</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDParameterAnimatable.h">
+      <Filter>FCDocument\Libraries\Animations\Animated &amp; ParameterAnimatable</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDParameterAnimatable.hpp">
+      <Filter>FCDocument\Libraries\Animations\Animated &amp; ParameterAnimatable</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometry.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometryMesh.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometryNURBSSurface.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometryPolygons.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometryPolygonsInput.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometryPolygonsTools.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometrySource.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDGeometrySpline.h">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDMaterial.h">
+      <Filter>FCDocument\Libraries\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffect.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectCode.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectParameter.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectParameter.hpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectParameterFactory.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectParameterSampler.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectParameterSurface.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectPass.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectPassShader.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectPassState.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectProfile.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectProfileFX.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectStandard.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectTechnique.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEffectTools.h">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDImage.h">
+      <Filter>FCDocument\Libraries\Materials\Images and Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDTexture.h">
+      <Filter>FCDocument\Libraries\Materials\Images and Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDController.h">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDControllerTools.h">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDMorphController.h">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDSkinController.h">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDCamera.h">
+      <Filter>FCDocument\Libraries\Cameras and Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDLight.h">
+      <Filter>FCDocument\Libraries\Cameras and Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDLightTools.h">
+      <Filter>FCDocument\Libraries\Cameras and Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEmitter.h">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEmitterObject.h">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEmitterParticle.h">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForceDeflector.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForceDrag.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForceField.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForceGravity.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForcePBomb.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForceTyped.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDForceWind.h">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDAsset.h">
+      <Filter>FCDocument\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEntityReference.h">
+      <Filter>FCDocument\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDocument.h">
+      <Filter>FCDocument\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDocumentTools.h">
+      <Filter>FCDocument\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDVersion.h">
+      <Filter>FCDocument\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDExtra.h">
+      <Filter>FCDocument\Document\Extra</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDExternalReferenceManager.h">
+      <Filter>FCDocument\Document\External References</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPlaceHolder.h">
+      <Filter>FCDocument\Document\External References</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsAnalyticalGeometry.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsMaterial.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsModel.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsRigidBody.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsRigidConstraint.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsScene.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsShape.h">
+      <Filter>FCDocument\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDPhysicsRigidBodyParameters.h">
+      <Filter>FCDocument\Physics\Parameters</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDEntity.h">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDSceneNode.h">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDSceneNodeIterator.h">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDSceneNodeTools.h">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDTargetedEntity.h">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDTransform.h">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDObject.h">
+      <Filter>FCDocument\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="FCDocument\FCDObjectWithId.h">
+      <Filter>FCDocument\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="FCollada.h">
+      <Filter>FCollada</Filter>
+    </ClInclude>
+    <ClInclude Include="FColladaPlugin.h">
+      <Filter>FCollada</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FMath\FMAllocator.cpp">
+      <Filter>FMath\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMArrayTest.cpp">
+      <Filter>FMath\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMTreeTest.cpp">
+      <Filter>FMath\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMColor.cpp">
+      <Filter>FMath\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMInterpolation.cpp">
+      <Filter>FMath\Interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMRandom.cpp">
+      <Filter>FMath\Scalar</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMVector3.cpp">
+      <Filter>FMath\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMVolume.cpp">
+      <Filter>FMath\Volume</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMAngleAxis.cpp">
+      <Filter>FMath\Transforms</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMLookAt.cpp">
+      <Filter>FMath\Transforms</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMSkew.cpp">
+      <Filter>FMath\Transforms</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMMatrix33.cpp">
+      <Filter>FMath\Transforms\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMMatrix44.cpp">
+      <Filter>FMath\Transforms\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMQuaternion.cpp">
+      <Filter>FMath\Transforms\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="FMath\FMQuaternionTest.cpp">
+      <Filter>FMath\Transforms\Quaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUDaeEnum.cpp">
+      <Filter>FUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUUri.cpp">
+      <Filter>FUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUCrc32.cpp">
+      <Filter>FUtils\CRC32</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUCrc32Test.cpp">
+      <Filter>FUtils\CRC32</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUAssert.cpp">
+      <Filter>FUtils\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUDebug.cpp">
+      <Filter>FUtils\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUTestBed.cpp">
+      <Filter>FUtils\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUPluginManager.cpp">
+      <Filter>FUtils\File System\Plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUFile.cpp">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUFileManager.cpp">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUFileManagerTest.cpp">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FULogFile.cpp">
+      <Filter>FUtils\File System\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUParameter.cpp">
+      <Filter>FUtils\Patterns\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUEventTest.cpp">
+      <Filter>FUtils\Patterns\Functors &amp; Events</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUFunctorTest.cpp">
+      <Filter>FUtils\Patterns\Functors &amp; Events</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUObject.cpp">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUObjectTest.cpp">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUObjectType.cpp">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUParameterizable.cpp">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUTracker.cpp">
+      <Filter>FUtils\Patterns\Base Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUStringBuilder.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUStringBuilderTest.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUStringConversion.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUStringConversionTest.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUStringTest.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUUniqueStringMap.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUUniqueStringMapTest.cpp">
+      <Filter>FUtils\Strings</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUBoundingBox.cpp">
+      <Filter>FUtils\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUBoundingSphere.cpp">
+      <Filter>FUtils\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUBoundingTest.cpp">
+      <Filter>FUtils\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUDateTime.cpp">
+      <Filter>FUtils\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUError.cpp">
+      <Filter>FUtils\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUErrorLog.cpp">
+      <Filter>FUtils\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUXmlDocument.cpp">
+      <Filter>FUtils\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUXmlParser.cpp">
+      <Filter>FUtils\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUXmlWriter.cpp">
+      <Filter>FUtils\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUBase64.cpp">
+      <Filter>FUtils\Base64</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUCriticalSection.cpp">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUSemaphore.cpp">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUSynchronizableObject.cpp">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="FUtils\FUThread.cpp">
+      <Filter>FUtils\Synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDControllerInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEmitterInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEntityInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometryInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDMaterialInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsForceFieldInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsModelInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsRigidBodyInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsRigidConstraintInstance.cpp">
+      <Filter>FCDocument\Instantiation</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDLibrary.cpp">
+      <Filter>FCDocument\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimation.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationChannel.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationClip.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationClipTools.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationCurve.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationCurveTools.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationKey.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimationMultiCurve.cpp">
+      <Filter>FCDocument\Libraries\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAnimated.cpp">
+      <Filter>FCDocument\Libraries\Animations\Animated &amp; ParameterAnimatable</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDParameterAnimatable.cpp">
+      <Filter>FCDocument\Libraries\Animations\Animated &amp; ParameterAnimatable</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometry.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometryMesh.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometryNURBSSurface.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometryPolygons.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometryPolygonsInput.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometryPolygonsTools.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometrySource.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDGeometrySpline.cpp">
+      <Filter>FCDocument\Libraries\Geometries</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDMaterial.cpp">
+      <Filter>FCDocument\Libraries\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffect.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectCode.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectParameter.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectParameterFactory.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectParameterSampler.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectParameterSurface.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectPass.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectPassShader.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectPassState.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectProfile.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectProfileFX.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectStandard.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectTechnique.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEffectTools.cpp">
+      <Filter>FCDocument\Libraries\Materials\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDImage.cpp">
+      <Filter>FCDocument\Libraries\Materials\Images and Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDTexture.cpp">
+      <Filter>FCDocument\Libraries\Materials\Images and Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDController.cpp">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDControllerTools.cpp">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDMorphController.cpp">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDSkinController.cpp">
+      <Filter>FCDocument\Libraries\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDCamera.cpp">
+      <Filter>FCDocument\Libraries\Cameras and Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDLight.cpp">
+      <Filter>FCDocument\Libraries\Cameras and Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDLightTools.cpp">
+      <Filter>FCDocument\Libraries\Cameras and Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEmitter.cpp">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEmitterObject.cpp">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEmitterParticle.cpp">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDParticleModifier.cpp">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDForceDeflector.cpp">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDForceDrag.cpp">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDForceField.cpp">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDForceGravity.cpp">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDForcePBomb.cpp">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDForceWind.cpp">
+      <Filter>FCDocument\Libraries\ForceFields</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDAsset.cpp">
+      <Filter>FCDocument\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEntityReference.cpp">
+      <Filter>FCDocument\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDocument.cpp">
+      <Filter>FCDocument\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDocumentTools.cpp">
+      <Filter>FCDocument\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDVersion.cpp">
+      <Filter>FCDocument\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDExtra.cpp">
+      <Filter>FCDocument\Document\Extra</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDExternalReferenceManager.cpp">
+      <Filter>FCDocument\Document\External References</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPlaceHolder.cpp">
+      <Filter>FCDocument\Document\External References</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsAnalyticalGeometry.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsMaterial.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsModel.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsRigidBody.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsRigidConstraint.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsScene.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsShape.cpp">
+      <Filter>FCDocument\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDPhysicsRigidBodyParameters.cpp">
+      <Filter>FCDocument\Physics\Parameters</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDEntity.cpp">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDSceneNode.cpp">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDSceneNodeIterator.cpp">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDSceneNodeTools.cpp">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDTargetedEntity.cpp">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDTransform.cpp">
+      <Filter>FCDocument\Scene Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDObject.cpp">
+      <Filter>FCDocument\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="FCDocument\FCDObjectWithId.cpp">
+      <Filter>FCDocument\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="FCollada.cpp">
+      <Filter>FCollada</Filter>
+    </ClCompile>
+    <ClCompile Include="FColladaPlugin.cpp">
+      <Filter>FCollada</Filter>
+    </ClCompile>
+    <ClCompile Include="DLLEntry.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="FCDocument\FCDParticleModifier.h">
+      <Filter>FCDocument\Libraries\Emitters</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

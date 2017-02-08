@@ -48,8 +48,8 @@ FCDEntity* CameraExporter::ExportCamera(FBCamera* camera)
 		// For orthographic cameras, retrieve the Motion Builder
 		// orthogonal vertical size and the aspect ratio.
 		colladaCamera->SetProjectionType(FCDCamera::ORTHOGRAPHIC);
-		colladaCamera->SetMagY(camera->OrthogonalVerticalSize);
-		ANIMATABLE(&camera->OrthogonalVerticalSize, colladaCamera, colladaCamera->GetMagY(), -1, NULL, false);
+//		colladaCamera->SetMagY(camera->OrthogonalVerticalSize);
+//		ANIMATABLE(&camera->OrthogonalVerticalSize, colladaCamera, colladaCamera->GetMagY(), -1, NULL, false);
 		colladaCamera->SetAspectRatio(camera->FilmAspectRatio);
 		ANIMATABLE(&camera->FilmAspectRatio, colladaCamera, colladaCamera->GetAspectRatio(), -1, NULL, false);
 	}

@@ -33,7 +33,7 @@ public:
 
 private:
 	// Typed entity export.
-	FCDEntity* ExportSkinController(FBModel* node, FBCluster& cluster, FCDEntity* colladaTarget);
+	FCDEntity* ExportSkinController(FBModel* node, FCDEntity* colladaTarget);
 	FBPose* FindBindPose(FBModel* node);
 };
 

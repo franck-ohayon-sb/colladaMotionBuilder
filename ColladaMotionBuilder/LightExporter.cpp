@@ -24,14 +24,14 @@
 
 LightExporter::LightExporter(ColladaExporter* base)
 :	EntityExporter(base)
-,	ambientLight(NULL)
+//,	ambientLight(NULL)
 {
 }
 
 LightExporter::~LightExporter()
 {
 	// We keep this function set around, in order to support sampling the ambient light color animation.
-	SAFE_DELETE(ambientLight);
+//	SAFE_DELETE(ambientLight);
 }
 
 FCDEntity* LightExporter::ExportLight(FBLight* light)
@@ -67,12 +67,15 @@ FCDEntity* LightExporter::ExportLight(FBLight* light)
 	return colladaLight;
 }
 
+
 FCDEntity* LightExporter::ExportAmbientLight(FCDSceneNode* colladaScene)
 {
-	if (ambientLight == NULL) ambientLight = new FBGlobalLight(); // This class is a function set.
+	//if (ambientLight == NULL) ambientLight = new FBGlobalLight(); // This class is a function set.
+	 FBGlobalLight& ambientLight = FBGlobalLight::TheOne();
 
-	FMVector3 ambientColor = ToFMVector3(ambientLight->AmbientColor);
-	if (IsEquivalent(ambientColor, FMVector3::Zero) && !ANIM->IsAnimated(&ambientLight->AmbientColor))
+
+	FMVector3 ambientColor = ToFMVector3(ambientLight.AmbientColor);
+	if (IsEquivalent(ambientColor, FMVector3::Zero) && !ANIM->IsAnimated(&ambientLight.AmbientColor))
 	{
 		return NULL;
 	}
@@ -83,7 +86,7 @@ FCDEntity* LightExporter::ExportAmbientLight(FCDSceneNode* colladaScene)
 	colladaLight->SetName(FC("global-light"));
 	colladaLight->SetLightType(FCDLight::AMBIENT);
 	colladaLight->SetColor(ambientColor);
-	ANIMATABLE(&ambientLight->AmbientColor, colladaLight, colladaLight->GetColor(), -1, NULL, false);
+	ANIMATABLE(&ambientLight.AmbientColor, colladaLight, colladaLight->GetColor(), -1, NULL, false);
 
 	// Create the FCollada scene node to contain the light.
 	FCDSceneNode* globalNode = colladaScene->AddChildNode();

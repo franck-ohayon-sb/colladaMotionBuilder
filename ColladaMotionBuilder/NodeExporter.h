@@ -29,6 +29,18 @@ private:
 	NodeSet nodesToSample;
 
 public:
+
+	enum Values
+	{
+		EulerXYZ = 0,
+		EulerXZY,
+		EulerYZX,
+		EulerYXZ,
+		EulerZXY,
+		EulerZYX,
+		SphericXYZ
+	};
+	
 	NodeExporter(ColladaExporter* base);
 	virtual ~NodeExporter();
 
@@ -55,19 +67,5 @@ private:
 	void FindNodesToSample(FBScene* scene);
 	bool HasIK(FBModel* node);
 };
-
-namespace FBRotationOrder
-{
-	enum Values
-	{
-		EulerXYZ = 0,
-		EulerXZY,
-		EulerYZX,
-		EulerYXZ,
-		EulerZXY,
-		EulerZYX,
-		SphericXYZ
-	};
-}
 
 #endif // _NODE_EXPORTER_H_

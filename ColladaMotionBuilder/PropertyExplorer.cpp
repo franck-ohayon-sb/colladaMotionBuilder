@@ -31,8 +31,8 @@ PropertyExplorer::PropertyExplorer(const fchar* _filename, FBComponent* toExplor
 		componentQueue.pop_back();
 
 		// Process this component.
-		char* className = component->ClassName();
-		char* componentName = component->Name;
+		char* className = (char*)component->ClassName();
+		char* componentName = (char*)component->Name.AsString();
 		fwrite("[", 1, 1, out);
 		fwrite(className, strlen(className), 1, out);
 		fwrite("] ", 2, 1, out);
@@ -46,10 +46,10 @@ PropertyExplorer::PropertyExplorer(const fchar* _filename, FBComponent* toExplor
 		{
 			FBProperty* property = component->PropertyList[p];
 			FBPropertyType ptype = property->GetPropertyType();
-			char* pclassName = property->ClassName();
-			char* propertyName = property->GetName();
+			char* pclassName = (char*)property->ClassName();
+			char* propertyName = (char*)property->GetName();
 
-			if (ptype == kFBPT_int || ptype == kFBPT_bool || ptype == kFBPT_float || ptype == kFBPT_double || ptype == kFBPT_charptr || ptype == kFBPT_enum || ptype == kFBPT_Time || ptype == kFBPT_String
+			if (ptype == kFBPT_int || ptype == kFBPT_bool || ptype == kFBPT_float || ptype == kFBPT_double || ptype == kFBPT_charptr || ptype == kFBPT_enum || ptype == kFBPT_Time || ptype == kFBPT_stringlist
 				|| ptype == kFBPT_event || ptype == kFBPT_Vector4D || ptype == kFBPT_Vector3D || ptype == kFBPT_ColorRGB || ptype == kFBPT_ColorRGBA || ptype == kFBPT_TimeSpan || ptype == kFBPT_Vector2D) continue;
 
 			// Skip many un-interesting (and crashing) properties
@@ -85,8 +85,8 @@ PropertyExplorer::PropertyExplorer(const fchar* _filename, FBComponent* toExplor
 						allComponents.insert(subComponent, 0);
 					}
 					fwrite("      ", 6, 1, out);
-					char* subClassName = subComponent->ClassName();
-					char* subComponentName = subComponent->Name;
+					char* subClassName = (char*)subComponent->ClassName();
+					char* subComponentName = (char*)subComponent->Name.AsString();
 					fwrite("[", 1, 1, out);
 					fwrite(subClassName, strlen(subClassName), 1, out);
 					fwrite("] -link- ", 9, 1, out);
@@ -106,8 +106,8 @@ PropertyExplorer::PropertyExplorer(const fchar* _filename, FBComponent* toExplor
 					allComponents.insert(subComponent, 0);
 				}
 				fwrite("      ", 6, 1, out);
-				char* subClassName = subComponent->ClassName();
-				char* subComponentName = subComponent->Name;
+				char* subClassName = (char*)subComponent->ClassName();
+				char* subComponentName = (char*)subComponent->Name.AsString();
 				fwrite("[", 1, 1, out);
 				fwrite(subClassName, strlen(subClassName), 1, out);
 				fwrite("] -link- ", 9, 1, out);

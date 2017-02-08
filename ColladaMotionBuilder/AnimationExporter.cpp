@@ -278,11 +278,17 @@ void AnimationExporter::DoSampling()
 
 		// Take a sample.
 		FMMatrix44 t;
+		FBMatrix t1;
 		if (node->Is(FBCamera::TypeInfo))
 		{
 			// Cameras are special and nasty nodes.
 			FMMatrix44 parentTransform = NODE->GetParentTransform(node->Parent, false);
-			t = ((FBCamera*)node)->GetMatrix(kFBModelView);
+
+			
+//			t = ((FBCamera*)node)->GetMatrix(kFBModelView);
+			((FBCamera*)node)->GetCameraMatrix(t1, kFBModelView);
+			t = ToFMMatrix44(t1);
+
 			t = parentTransform.Inverted() * t.Transposed().Inverted();
 		}
 		else
@@ -328,9 +334,9 @@ void AnimationExporter::DoSampling()
 
 			// Not animatables:
 		case kFBPT_unknown: case kFBPT_charptr: case kFBPT_enum: case kFBPT_Time:
-		case kFBPT_String: case kFBPT_object: case kFBPT_event: case kFBPT_stringlist:
+		/*case kFBPT_String:*/ case kFBPT_object: case kFBPT_event: case kFBPT_stringlist:
 		case kFBPT_Action: case kFBPT_Reference: case kFBPT_TimeSpan: case kFBPT_kReference:
-		case kFBPT_last: default: break;
+		/*case kFBPT_last:*/ default: break;
 		}
 
 		++it;

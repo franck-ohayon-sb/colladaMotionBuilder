@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Exporter">
+      <UniqueIdentifier>{e69c8834-3ca3-4ea1-bba6-03b33e793145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{cb655797-fef4-48b3-8036-f08916a581e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PCH">
+      <UniqueIdentifier>{a01bb730-64c9-49fc-a361-d4c81b7e26f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{61cb1b26-a673-4eb2-b512-de9e9eaaac5c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AnimationExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="ColladaExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="LightExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeExporter.cpp">
+      <Filter>Exporter</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportOptionsTool.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Options.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>PCH</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyExplorer.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="DLLEntry.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimationExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="ColladaExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="LightExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeExporter.h">
+      <Filter>Exporter</Filter>
+    </ClInclude>
+    <ClInclude Include="Options.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>PCH</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyExplorer.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

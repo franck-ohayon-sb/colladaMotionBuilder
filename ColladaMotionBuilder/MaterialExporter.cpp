@@ -74,10 +74,10 @@ FCDMaterial* MaterialExporter::ExportMaterial(FBMaterial* material, FBTextureLis
 		ANIMATABLE(&material->Specular, colladaEffect, stdFx->GetSpecularColorParam()->GetValue(), -1, NULL, false);
 		stdFx->SetShininess((float) material->Shininess);
 		ANIMATABLE(&material->Shininess, colladaEffect, stdFx->GetShininessParam()->GetValue(), -1, NULL, false);
-		stdFx->SetReflectivityFactor((float) material->Reflect);
-		ANIMATABLE(&material->Reflect, colladaEffect, stdFx->GetReflectivityFactorParam()->GetValue(), -1, NULL, false);
-		stdFx->SetTranslucencyFactor((float) material->Opacity);
-		ANIMATABLE(&material->Opacity, colladaEffect, stdFx->GetTranslucencyFactorParam()->GetValue(), -1, NULL, false);
+//		stdFx->SetReflectivityFactor((float) material->Reflect);
+//		ANIMATABLE(&material->Reflect, colladaEffect, stdFx->GetReflectivityFactorParam()->GetValue(), -1, NULL, false);
+//		stdFx->SetTranslucencyFactor((float) material->Opacity);
+//		ANIMATABLE(&material->Opacity, colladaEffect, stdFx->GetTranslucencyFactorParam()->GetValue(), -1, NULL, false);
 		stdFx->SetTransparencyMode(FCDEffectStandard::A_ONE);
 	}
 
@@ -85,14 +85,14 @@ FCDMaterial* MaterialExporter::ExportMaterial(FBMaterial* material, FBTextureLis
 	for (FBTexture** itT = textures.begin(); itT != textures.end(); ++itT)
 	{
 		FUDaeTextureChannel::Channel channel;
-		switch ((*itT)->Usage)
+		switch ((*itT)->UseType)
 		{
-		case kFBTextureUsageLightMap:
-		case kFBTextureUsageShadowMap: channel = FUDaeTextureChannel::AMBIENT; break;
-		case kFBTextureUsageSphericalReflection: channel = FUDaeTextureChannel::REFLECTION; break;
-		case kFBTextureUsageSphereMap: channel = FUDaeTextureChannel::BUMP; break; // Not sure about this one..
-		case kFBTextureUsageAll:
-		case kFBTextureUsageColor:
+		case kFBTextureUseLightMap:
+		case kFBTextureUseShadowMap: channel = FUDaeTextureChannel::AMBIENT; break;
+		case kFBTextureUseSphericalReflexionMap: channel = FUDaeTextureChannel::REFLECTION; break;
+		case kFBTextureUseSphereReflexionMap: channel = FUDaeTextureChannel::BUMP; break; // Not sure about this one..
+		case kFBTextureUseAll:
+		case kFBTextureUseColor:
 		default: channel = FUDaeTextureChannel::DIFFUSE; break; 
 		}
 
@@ -107,13 +107,13 @@ FCDMaterial* MaterialExporter::ExportMaterial(FBMaterial* material, FBTextureLis
 FCDImage* MaterialExporter::ExportImage(FBTexture* texture)
 {
 	// Retrieve the filename and look into our already-exported image list for it.
-	fm::string filename = (char*) texture->Filename;
+	fm::string filename = (char*) texture->Name.AsString();
 	ExportedImageMap::iterator it = exportedImages.find(filename);
 	if (it != exportedImages.end()) return it->second;
 
 	// Create the FCollada image.
 	FCDImage* image = CDOC->GetImageLibrary()->AddEntity();
-	image->SetDaeId((char*) texture->Name);
+	image->SetDaeId((char*)texture->Name.AsString());
 	image->SetFilename(filename);
 	exportedImages.insert(filename, image);
 

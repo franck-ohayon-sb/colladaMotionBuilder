@@ -47,14 +47,14 @@ public:
 
 private:
 	// Typed entity export.
-	FCDEntity* ExportMesh(FBGeometry* mesh);
-	FCDEntity* ExportNurbs(FBNurbs* nurbs);
-	FCDEntity* ExportPatch(FBPatch* patch);
+	FCDEntity* ExportMesh(FBMesh* mesh);
+//	FCDEntity* ExportNurbs(FBNurbs* nurbs);
+	//FCDEntity* ExportPatch(FBPatch* patch);
 
 	// Mesh entity element export.
-	void ExportMeshVertices(FBGeometry* geometry, FCDGeometryMesh* collladaGeometry);
+	void ExportMeshVertices(FBMesh* geometry, FCDGeometryMesh* collladaGeometry);
 	void ExportMeshTessellation(FBGeometry* geometry, FCDGeometryMesh* collladaGeometry);
-	FBFastTessellator* GetTessellator(FBGeometry* geometry);
+//	FBFastTessellator* GetTessellator(FBGeometry* geometry);
 
 	// Instance export.
 	void ExportMaterialInstance(FCDMaterialInstance* colladaInstance, FCDGeometryPolygons* colladaPolygons, const FBTextureList& textures);

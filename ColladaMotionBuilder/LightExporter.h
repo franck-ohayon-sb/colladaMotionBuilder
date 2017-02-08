@@ -20,7 +20,7 @@ class FCDSceneNode;
 class LightExporter : public EntityExporter
 {
 private:
-	FBGlobalLight* ambientLight;
+	//FBGlobalLight* ambientLight;
 
 public:
 	LightExporter(ColladaExporter* base);

@@ -39,12 +39,12 @@ GeometryExporter::~GeometryExporter()
 FCDEntity* GeometryExporter::ExportGeometry(FBGeometry* geometry)
 {
 	if (geometry->Is(FBMesh::TypeInfo)) return ExportMesh((FBMesh*) geometry);
-	else if (geometry->Is(FBNurbs::TypeInfo)) return ExportNurbs((FBNurbs*) geometry); 
-	else if (geometry->Is(FBPatch::TypeInfo)) return ExportPatch((FBPatch*) geometry);
+	//else if (geometry->Is(FBNurbs::TypeInfo)) return ExportNurbs((FBNurbs*) geometry); 
+	//else if (geometry->Is(FBPatch::TypeInfo)) return ExportPatch((FBPatch*) geometry);
 	else FUFail(return NULL); // Unknown geometry type. Need to add processing function.
 }
 
-FCDEntity* GeometryExporter::ExportMesh(FBGeometry* mesh)
+FCDEntity* GeometryExporter::ExportMesh(FBMesh* mesh)
 {
 	// Create the FCollada entity.
 	FCDGeometry* colladaGeometry = CDOC->GetGeometryLibrary()->AddEntity();
@@ -57,7 +57,7 @@ FCDEntity* GeometryExporter::ExportMesh(FBGeometry* mesh)
 	texCoordSource = colladaMesh->AddSource(FUDaeGeometryInput::TEXCOORD);
 
 	// Export the tessellation first, then the data.
-	ExportMeshTessellation(mesh, colladaMesh);
+//	ExportMeshTessellation(mesh, colladaMesh);
 	ExportMeshVertices(mesh, colladaMesh);
 
 	// Reset the buffered structures.
@@ -66,19 +66,21 @@ FCDEntity* GeometryExporter::ExportMesh(FBGeometry* mesh)
 	return colladaGeometry;
 }
 
-FCDEntity* GeometryExporter::ExportNurbs(FBNurbs* nurbs)
+/*FCDEntity* GeometryExporter::ExportNurbs(FBNurbs* nurbs)
 {
 	// NURBS and patches are not yet supported.
 	// Tessellate into a mesh.
 	return ExportMesh(nurbs);
 }
+*/
 
-FCDEntity* GeometryExporter::ExportPatch(FBPatch* patch)
+/*FCDEntity* GeometryExporter::ExportPatch(FBPatch* patch)
 {
 	// NURBS and patches are not yet supported.
 	// Tessellate into a mesh.
 	return ExportMesh(patch);
 }
+*/
 
 void GeometryExporter::ExportGeometryInstance(FBModel* node, FCDGeometryInstance* colladaInstance, FCDEntity* colladaEntity)
 {
@@ -105,9 +107,9 @@ void GeometryExporter::ExportGeometryInstance(FBModel* node, FCDGeometryInstance
 	if (geometry == NULL) return;
 
 	// Process the Motion Builder material bindings.
-	if (geometry->MaterialMappingMode == kFBMappingModeSurface)
+	if (geometry->MaterialMappingMode == /*kFBMappingModeSurface*/kFBGeometryMapping_BY_POLYGON)
 	{
-		int materialCount = geometry->Materials.GetCount();
+		int materialCount = node->Materials.GetCount();
 		FUStringBuilder builder;
 		for (int i = 0; i < materialCount; ++i)
 		{
@@ -122,14 +124,14 @@ void GeometryExporter::ExportGeometryInstance(FBModel* node, FCDGeometryInstance
 
 				// Process the texture(s) attached to this polygons set.
 				FBTextureList textures;
-				if (textureId < geometry->Textures.GetCount())
+				if (textureId < node->Textures.GetCount())
 				{
-					FBTexture* texture = geometry->Textures[textureId];
-					if (strlen(texture->Filename.AsString()) > 0) textures.push_back(texture);
+					FBTexture* texture = node->Textures[textureId];
+					if (strlen(texture->Name.AsString()) > 0) textures.push_back(texture);
 				}
 
 				// Export this material instance.
-				FCDMaterial* colladaMaterial = MATL->ExportMaterial(geometry->Materials[i], textures);
+				FCDMaterial* colladaMaterial = MATL->ExportMaterial(node->Materials[i], textures);
 				FCDMaterialInstance* colladaMaterialInstance = colladaInstance->AddMaterialInstance(colladaMaterial, polygons.front());
 				ExportMaterialInstance(colladaMaterialInstance, colladaPolys, textures);
 			}
@@ -141,14 +143,14 @@ void GeometryExporter::ExportGeometryInstance(FBModel* node, FCDGeometryInstance
 
 		// Consider all the textures.
 		FBTextureList textures;
-		for (int i = 0; i < geometry->Textures.GetCount(); ++i)
+		for (int i = 0; i < node->Textures.GetCount(); ++i)
 		{
-			FBTexture* texture = geometry->Textures[i];
-			if (strlen(texture->Filename.AsString()) > 0) textures.push_back(texture);
+			FBTexture* texture = node->Textures[i];
+			if (strlen(texture->Name.AsString()) > 0) textures.push_back(texture);
 		}
 
 		// Export this material and link it with the geometry.
-		FBMaterial* material = (geometry->Materials.GetCount() > 0) ? geometry->Materials[geometry->Materials.GetCount() - 1] : NULL;
+		FBMaterial* material = (node->Materials.GetCount() > 0) ? node->Materials[node->Materials.GetCount() - 1] : NULL;
 		FCDMaterial* colladaMaterial = MATL->ExportMaterial(material, textures); // material == NULL and textures.empty() is a valid case!
 		FCDGeometryPolygons* colladaPolys = colladaMesh->GetPolygons(0);
 		FCDMaterialInstance* colladaMaterialInstance = colladaInstance->AddMaterialInstance(colladaMaterial, colladaPolys);
@@ -169,6 +171,7 @@ void GeometryExporter::ExportMaterialInstance(FCDMaterialInstance* colladaInstan
 	}	
 }
 
+/*
 void GeometryExporter::ExportMeshTessellation(FBGeometry* geometry, FCDGeometryMesh* colladaMesh)
 {
 	FBFastTessellator* tessellator = GetTessellator(geometry);
@@ -338,10 +341,12 @@ void GeometryExporter::ExportMeshTessellation(FBGeometry* geometry, FCDGeometryM
 		colladaMesh->AddVertexSource(normalSource);
 	}
 }
+*/
 
-void GeometryExporter::ExportMeshVertices(FBGeometry* geometry, FCDGeometryMesh* colladaMesh)
+
+void GeometryExporter::ExportMeshVertices(FBMesh* geometry, FCDGeometryMesh* colladaMesh)
 {
-	FBFastTessellator* tessellator = GetTessellator(geometry);
+//	FBFastTessellator* tessellator = GetTessellator(geometry);
 	const int vectorStride = GetOptions()->Export3dData() ? 3 : 4;
 	static const int texCoordStride = 2;
 
@@ -351,10 +356,20 @@ void GeometryExporter::ExportMeshVertices(FBGeometry* geometry, FCDGeometryMesh*
 	positionSource->SetStride(vectorStride);
 	positionSource->SetValueCount(positionCount);
 	float* positions = positionSource->GetData();
-	float* positionData = tessellator->GetPositionArray();
+
+//	float* positionData = tessellator->GetPositionArray();
+    int pOutArrayCount;
+	FBGeometry* geom = ((FBGeometry*) geometry);
+	FBVertex* positionData   = geom->GetPositionsArray(pOutArrayCount);
+
 	for (size_t i = 0; i < positionCount; ++i)
 	{
-		for (int j = 0; j < vectorStride; ++j) (*positions++) = positionData[j];
+		for (int j = 0; j < vectorStride; ++j) 
+		{
+			
+			(*positions++) = positionData->operator[](j);
+		}
+
 		positionData += 4;
 	}
 
@@ -363,10 +378,19 @@ void GeometryExporter::ExportMeshVertices(FBGeometry* geometry, FCDGeometryMesh*
 	normalSource->SetStride(vectorStride);
 	normalSource->SetValueCount(normalCount);
 	float* normals = normalSource->GetData();
-	float* normalData = tessellator->GetNormalArray();
+
+
+//	float* normalData = tessellator->GetNormalArray();
+	geom = ((FBGeometry*) geometry);
+	FBVertex* normalData   = geom->GetNormalsDirectArray(pOutArrayCount);
+
 	for (size_t i = 0; i < normalCount; ++i)
 	{
-		for (int j = 0; j < vectorStride; ++j) (*normals++) = normalData[j];
+		for (int j = 0; j < vectorStride; ++j)
+		{
+
+			(*normals++) = normalData->operator[](j);
+		}
 		normalData += 4;
 	}
 
@@ -375,14 +399,23 @@ void GeometryExporter::ExportMeshVertices(FBGeometry* geometry, FCDGeometryMesh*
 	texCoordSource->SetStride(texCoordStride);
 	texCoordSource->SetValueCount(texCoordCount);
 	float* texCoords = texCoordSource->GetData();
-	float* uvData = tessellator->GetUVArray();
+
+
+	//float* uvData = tessellator->GetUVArray();
+	geom = ((FBGeometry*) geometry);
+	FBUV* uvData   = geom->GetUVSetDirectArray(pOutArrayCount);
+	
 	for (size_t i = 0; i < texCoordCount; ++i)
 	{
-		(*texCoords++) = (*uvData++);
-		(*texCoords++) = (*uvData++);
+		(*texCoords++) = uvData++->operator[](i);
+		(*texCoords++) = uvData++->operator[](i);
+	//	(*texCoords++) = (*uvData++);
+	//	(*texCoords++) = (*uvData++);
 	}
 }
 
+
+/*
 FBFastTessellator* GeometryExporter::GetTessellator(FBGeometry* geometry)
 {
 	if (!GetOptions()->ExportTriangleStrips())
@@ -401,3 +434,4 @@ FBFastTessellator* GeometryExporter::GetTessellator(FBGeometry* geometry)
 		return stripTessellator;
 	}
 }
+*/

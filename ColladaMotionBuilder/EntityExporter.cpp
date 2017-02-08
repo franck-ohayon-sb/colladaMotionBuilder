@@ -185,7 +185,7 @@ void EntityExporter::ExportUserProperties(FCDEntity* colladaEntity, FBComponent*
 
 		case kFBPT_charptr: {
 			colladaExtra->AddAttribute(DAE_TYPE_ATTRIBUTE, DAEFC_STRING_ATTRIBUTE_TYPE);
-			char* cp = property->AsString();
+			const char* cp = property->AsString();
 			colladaExtra->SetContent(TO_FSTRING(cp));
 			break; }
 
@@ -196,13 +196,13 @@ void EntityExporter::ExportUserProperties(FCDEntity* colladaEntity, FBComponent*
 			colladaExtra->SetContent(TO_FSTRING(ve));
 			break; }
 
-		case kFBPT_String: {
+/*		case kFBPT_String: {
 			FBString vsz;
 			colladaExtra->AddAttribute(DAE_TYPE_ATTRIBUTE, DAEFC_STRING_ATTRIBUTE_TYPE);
 			property->GetData(&vsz, sizeof(FBString));
 			colladaExtra->SetContent(TO_FSTRING((const char*) vsz));
 			break; }
-
+*/
 		case kFBPT_Vector4D: {
 			FBVector4d v;
 			colladaExtra->AddAttribute(DAE_TYPE_ATTRIBUTE, DAEFC_FLOAT4_ATTRIBUTE_TYPE);

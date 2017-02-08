@@ -47,10 +47,11 @@ FCDEntity* ControllerExporter::ExportController(FBModel* node, FBGeometry* geome
 	// Temporarily set the deformation flag.
 	bool isDeformable = node->IsDeformable;
 	node->IsDeformable = true;
-	FBCluster cluster(node);
-	if (cluster.LinkGetCount() > 0)
+	FBCluster* cluster = node->Cluster;
+	
+	if (cluster && cluster->LinkGetCount())
 	{
-		colladaTarget = (FCDController*) ExportSkinController(node, cluster, colladaTarget);
+		colladaTarget = (FCDController*) ExportSkinController(node, colladaTarget);
 	}
 	node->IsDeformable = isDeformable;
 	return colladaTarget;
@@ -61,13 +62,13 @@ void ControllerExporter::ExportControllerInstance(FBModel* node, FCDControllerIn
 {
 	// Retrieve the FCollada controller.
 	if (!colladaEntity->HasType(FCDController::GetClassType())) return;
-	FBCluster cluster(node);
 
 	// Fill in the joint sub-id list.
-	int jointCount = cluster.LinkGetCount();
+	FBCluster* cluster = node->Cluster;
+	int jointCount = cluster->LinkGetCount();
 	for (int i = 0; i < jointCount; ++i)
 	{
-		FBModel* joint = cluster.LinkGetModel(i);
+		FBModel* joint = cluster->LinkGetModel(i);
 		if (joint != NULL)
 		{
 			FCDSceneNode* colladaNode = NODE->ExportNode(NULL, joint); // NULL parent means don't instantiate.
@@ -77,7 +78,7 @@ void ControllerExporter::ExportControllerInstance(FBModel* node, FCDControllerIn
 	colladaInstance->CalculateRootIds();
 }
 
-FCDEntity* ControllerExporter::ExportSkinController(FBModel* node, FBCluster& cluster, FCDEntity* colladaTarget)
+FCDEntity* ControllerExporter::ExportSkinController(FBModel* node, FCDEntity* colladaTarget)
 {
 	// Retrieve the mesh object's bind pose.
 	FBPose* bindPose = FindBindPose(node); // NULL bindPose is valid.
@@ -86,7 +87,8 @@ FCDEntity* ControllerExporter::ExportSkinController(FBModel* node, FBCluster& cl
 
 	// Create the FCollada controller entity and its skin.
 	FCDController* colladaController = CDOC->GetControllerLibrary()->AddEntity();
-	ExportEntity(colladaController, &cluster);
+	ExportEntity(colladaController, node->Cluster);
+	
 	FCDSkinController* colladaSkin = colladaController->CreateSkinController();
 	colladaSkin->SetTarget(colladaTarget);
 	
@@ -122,17 +124,19 @@ FCDEntity* ControllerExporter::ExportSkinController(FBModel* node, FBCluster& cl
 	colladaSkin->SetInfluenceCount(vertexCount);
 
 	// Fill in the joint and influence information.
-	int jointCount = cluster.LinkGetCount();
+	FBCluster* cluster = node->Cluster;
+	int jointCount = cluster->LinkGetCount();
 	for (int i = 0; i < jointCount; ++i)
 	{
-		cluster.ClusterBegin(i);
+		cluster->ClusterBegin(i);
 
-		FBModel* joint = cluster.LinkGetModel(i);
+		FBModel* joint = cluster->LinkGetModel(i);
 		if (joint == NULL) continue;
 
 		// Add this joint to the skin controller.
 		FCDSceneNode* colladaNode = NODE->ExportNode(NULL, joint); // NULL parent means don't instantiate.
-		fm::string subId = FCDObjectWithId::CleanSubId((char*) joint->Name);
+
+		fm::string subId = FCDObjectWithId::CleanSubId((char*)joint->Name.AsString());
 		colladaNode->SetSubId(subId);
 		FMMatrix44 jointBindInverted(FMMatrix44::Identity);
 		bool attemptRecompose = true;
@@ -153,18 +157,18 @@ FCDEntity* ControllerExporter::ExportSkinController(FBModel* node, FBCluster& cl
 		{
 			// Support cluster bind-poses.
 			FBVector3d t, r, s;
-			cluster.VertexGetTransform(t, r, s);
+			cluster->VertexGetTransform(t, r, s);
 			jointBindInverted.Recompose(ToFMVector3(s), ToFMVector3(r) * FMath::DegToRad(1.0f), ToFMVector3(t));
 			jointBindInverted *= bindShapeTM.Inverted();
 		}
 		colladaSkin->AddJoint(subId, jointBindInverted);
 
-		int influenceCount = cluster.VertexGetCount();	
+		int influenceCount = cluster->VertexGetCount();	
 		for (int j = 0; j < influenceCount; ++j) 
 		{
 			// Retrieve the controller per-vertex influence structure and add this influence.
-			int vertex = cluster.VertexGetNumber(j);
-			float weight = (float) cluster.VertexGetWeight(j);
+			int vertex = cluster->VertexGetNumber(j);
+			float weight = (float) cluster->VertexGetWeight(j);
 	
 			// Look for duplicates: strangely MB allows for those (?!?)
 			FCDSkinControllerVertex* colladaInfluence = colladaSkin->GetVertexInfluence(vertex);
@@ -179,7 +183,7 @@ FCDEntity* ControllerExporter::ExportSkinController(FBModel* node, FBCluster& cl
 			}
 			if (k == pairCount) colladaInfluence->AddPair(i, weight);
 		}
-		cluster.ClusterEnd(true);
+		cluster->ClusterEnd();
 	}
 
 	// Add the non-skinned influences.
