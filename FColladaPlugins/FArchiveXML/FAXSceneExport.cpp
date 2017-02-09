@@ -54,7 +54,8 @@ xmlNode* FArchiveXML::WriteSceneNode(FCDObject* object, xmlNode* parentNode)
 	else
 	{
 		node = FArchiveXML::WriteToEntityXMLFCDEntity(sceneNode, parentNode, DAE_NODE_ELEMENT);
-		if (sceneNode->GetSubId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetSubId());
+		//if (sceneNode->GetSubId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetSubId());
+		if (sceneNode->GetDaeId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetDaeId());
 
 		// Set the scene node's type.
 		const char* nodeType = sceneNode->GetJointFlag() ? DAE_JOINT_NODE_TYPE : DAE_NODE_NODE_TYPE;
