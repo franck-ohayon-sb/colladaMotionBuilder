@@ -857,7 +857,7 @@ bool FArchiveXML::ExportDocument(FCDocument* theDocument, xmlNode* colladaNode)
 		EXPORT_LIBRARY(theDocument->GetMaterialLibrary(), DAE_LIBRARY_MATERIAL_ELEMENT);
 		EXPORT_LIBRARY(theDocument->GetEffectLibrary(), DAE_LIBRARY_EFFECT_ELEMENT);
 		EXPORT_LIBRARY(theDocument->GetGeometryLibrary(), DAE_LIBRARY_GEOMETRY_ELEMENT);
-		EXPORT_LIBRARY(theDocument->GetControllerLibrary(), DAE_LIBRARY_CONTROLLER_ELEMENT);
+//		EXPORT_LIBRARY(theDocument->GetControllerLibrary(), DAE_LIBRARY_CONTROLLER_ELEMENT);
 		EXPORT_LIBRARY(theDocument->GetVisualSceneLibrary(), DAE_LIBRARY_VSCENE_ELEMENT);
 
 #undef EXPORT_LIBRARY
