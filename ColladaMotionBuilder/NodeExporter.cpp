@@ -249,7 +249,8 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 	// Detect constraints.
 	FBModel* lookAtNode = node->LookAt;
 	FBModel* upOrientationNode = node->UpVector;
-	bool isConstrained = lookAtNode != NULL || upOrientationNode != NULL;
+	
+	bool isConstrained = true;//lookAtNode != NULL || upOrientationNode != NULL;
 
 	if (node->Is(FBCamera::TypeInfo))
 	{
