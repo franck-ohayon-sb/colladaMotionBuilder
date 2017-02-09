@@ -230,7 +230,7 @@ void NodeExporter::ExportInstance(FCDSceneNode* colladaNode, FBModel* node)
 		FBGeometry* geometry = node->Geometry;
 		if (geometry->VertexCount() > 0)
 		{
-			entity = CTRL->ExportController(node, geometry);
+//			entity = CTRL->ExportController(node, geometry);
 		}
 	}
 
@@ -240,7 +240,7 @@ void NodeExporter::ExportInstance(FCDSceneNode* colladaNode, FBModel* node)
 		FCDSceneNode* colladaPivot = ExportPivot(colladaNode, node); // may return the colladaNode if not pivoted.
 		FCDEntityInstance* instance = colladaPivot->AddInstance(entity);
 		if (instance->HasType(FCDGeometryInstance::GetClassType())) GEOM->ExportGeometryInstance(node, (FCDGeometryInstance*) instance, entity);
-		if (instance->HasType(FCDControllerInstance::GetClassType())) CTRL->ExportControllerInstance(node, (FCDControllerInstance*) instance, entity);
+//		if (instance->HasType(FCDControllerInstance::GetClassType())) CTRL->ExportControllerInstance(node, (FCDControllerInstance*) instance, entity);
 	}
 }
 
