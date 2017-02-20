@@ -13,6 +13,9 @@
     <Filter Include="Helpers">
       <UniqueIdentifier>{61cb1b26-a673-4eb2-b512-de9e9eaaac5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Python">
+      <UniqueIdentifier>{67726694-8a69-4bd4-8a59-ad7155aca461}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationExporter.cpp">
@@ -55,6 +58,12 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="DLLEntry.cpp" />
+    <ClCompile Include="py_function.cpp">
+      <Filter>Python</Filter>
+    </ClCompile>
+    <ClCompile Include="py_template.cpp">
+      <Filter>Python</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationExporter.h">
@@ -92,6 +101,12 @@
     </ClInclude>
     <ClInclude Include="PropertyExplorer.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="py_common.h">
+      <Filter>Python</Filter>
+    </ClInclude>
+    <ClInclude Include="py_function.h">
+      <Filter>Python</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -28,6 +28,10 @@ private:
 	ExportedNodeMap exportedNodes;
 	NodeSet nodesToSample;
 
+
+	typedef fm::vector<const char *> BoneListName;
+	BoneListName* boneNameExported;
+
 public:
 
 	enum Values
@@ -60,6 +64,8 @@ public:
 
 	// Cameras have annoying transforms. Need to encapsulate the transform retrieval.
 	FMMatrix44 GetParentTransform(FBModel* node, bool isLocal=true);
+
+	void SetBoneListToExport(BoneListName* list){ boneNameExported = list; }
 
 private:
 	void ExportTransforms(FCDSceneNode* colladaNode, FBModel* node);

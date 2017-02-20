@@ -146,7 +146,8 @@ xmlNode* FArchiveXML::WriteSceneNode(FCDObject* object, xmlNode* parentNode)
 		FCDSceneNode* child = sceneNode->GetChild(c);
 		if (child->GetParent() == sceneNode)
 		{
-			FArchiveXML::LetWriteObject(child, node);
+			if (child->IsExported())
+				FArchiveXML::LetWriteObject(child, node);
 		}
 	}
 

@@ -23,6 +23,10 @@ private:
 	int samplingStart;
 	int samplingEnd;
 
+	bool useBoneList;
+	bool exportOnlyAnimAndScene;
+	bool exportBakedMatrix;
+
 public:
 	ColladaOptions(); // Reads in from the INI file.
 	~ColladaOptions(); // Writes out the INI file.
@@ -46,6 +50,19 @@ public:
 	inline bool HasSamplingInterval() { return hasSamplingInterval; }
 	inline int SamplingStart() { return samplingStart; }
 	inline int SamplingEnd() { return samplingEnd; }
+
+	inline void setForceSampling(bool val){ forceSampling = val; }
+	inline void setSamplingStart(bool val){ samplingStart = val; }
+	inline void setSamplingEnd(bool val){ samplingEnd = val; }
+
+	inline bool isUsingBoneList(){ return useBoneList; }
+	inline bool isExportingOnlyAnimAndScene(){ return exportOnlyAnimAndScene; }
+	inline bool isExportingBakedMatrix(){ return exportBakedMatrix; }
+
+	inline void setBoneList(bool val){ useBoneList = val; }
+	inline void setExportingOnlyAnimAndScene(bool val){ exportOnlyAnimAndScene = val; }
+	inline void setExportingBakedMatrix(bool val){ exportBakedMatrix = val; }
+
 
 private:
 	// Only the tool should modify this singleton.

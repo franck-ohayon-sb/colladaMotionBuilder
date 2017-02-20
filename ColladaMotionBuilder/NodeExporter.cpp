@@ -163,8 +163,33 @@ FCDSceneNode* NodeExporter::ExportNode(FCDSceneNode* colladaParent, FBModel* nod
 		// Create the FCollada node.
 		FCDSceneNode* createUnder = (instantiate) ? colladaParent : colladaScene;
 		colladaNode = createUnder->AddChildNode();
+		
+		if (GetOptions()->isUsingBoneList())
+			colladaNode->SetExported(false);
+		else
+			colladaNode->SetExported(true);
+
+
+		// check if we want to export this node
+		FBComponent* entity = (FBComponent*)node;
+		fm::string name = (const char*)entity->Name;
+
+		if (GetOptions()->isUsingBoneList())
+		{
+			for (fm::vector<const char*>::iterator it = boneNameExported->begin(); it != boneNameExported->end(); ++it)
+			{
+				fm::string VecName(*it);
+				if (VecName == name)
+				{
+					colladaNode->SetExported(true);
+					break;
+				}
+			}
+		}
+
 		ExportEntity(colladaNode, node);
 		exportedNodes.insert(node, CountedNode(colladaNode, instantiate ? 1 : 0));
+
 	}
 	else 
 	{
@@ -191,8 +216,12 @@ FCDSceneNode* NodeExporter::ExportNode(FCDSceneNode* colladaParent, FBModel* nod
 	}
 
 	// Export the local instance and the transforms.
-	ExportTransforms(colladaNode, node);
-	ExportInstance(colladaNode, node);
+	if (colladaNode->IsExported())
+	{
+		ExportTransforms(colladaNode, node);
+		ExportInstance(colladaNode, node);
+	}
+
 	return colladaNode;
 }
 
@@ -230,7 +259,8 @@ void NodeExporter::ExportInstance(FCDSceneNode* colladaNode, FBModel* node)
 		FBGeometry* geometry = node->Geometry;
 		if (geometry->VertexCount() > 0)
 		{
-//			entity = CTRL->ExportController(node, geometry);
+			if (!GetOptions()->isExportingOnlyAnimAndScene())
+				entity = CTRL->ExportController(node, geometry);
 		}
 	}
 
@@ -240,7 +270,7 @@ void NodeExporter::ExportInstance(FCDSceneNode* colladaNode, FBModel* node)
 		FCDSceneNode* colladaPivot = ExportPivot(colladaNode, node); // may return the colladaNode if not pivoted.
 		FCDEntityInstance* instance = colladaPivot->AddInstance(entity);
 		if (instance->HasType(FCDGeometryInstance::GetClassType())) GEOM->ExportGeometryInstance(node, (FCDGeometryInstance*) instance, entity);
-//		if (instance->HasType(FCDControllerInstance::GetClassType())) CTRL->ExportControllerInstance(node, (FCDControllerInstance*) instance, entity);
+		if (instance->HasType(FCDControllerInstance::GetClassType()) && (!GetOptions()->isExportingOnlyAnimAndScene())) CTRL->ExportControllerInstance(node, (FCDControllerInstance*)instance, entity);
 	}
 }
 
@@ -250,7 +280,7 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 	FBModel* lookAtNode = node->LookAt;
 	FBModel* upOrientationNode = node->UpVector;
 	
-	bool isConstrained = true;//lookAtNode != NULL || upOrientationNode != NULL;
+	bool isConstrained = lookAtNode != NULL || upOrientationNode != NULL;
 
 	if (node->Is(FBCamera::TypeInfo))
 	{
@@ -286,7 +316,7 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		}
 	}
 	
-	if (isConstrained)
+	if (isConstrained || GetOptions()->isExportingBakedMatrix())
 	{
 		FBMatrix localTransform;
 		node->GetMatrix(localTransform, kModelTransformation, false);

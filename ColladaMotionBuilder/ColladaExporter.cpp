@@ -62,6 +62,8 @@ void ColladaExporter::Export(const fchar* filename)
 	materialExporter = new MaterialExporter(this);
 	nodeExporter = new NodeExporter(this);
 
+	nodeExporter->SetBoneListToExport(&boneNameExported);
+
 	// Export the library entities.
 	FBSystem global; // think of FBSystem as a function set, rather than an object.
 	FBScene* globalScene = global.Scene;

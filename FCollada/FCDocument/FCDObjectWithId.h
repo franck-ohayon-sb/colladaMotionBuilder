@@ -76,6 +76,11 @@ public:
 			this formal variable will be modified to contain the new COLLADA id. */
 	void SetDaeId(fm::string& id);
 
+
+	bool IsExported() const { return m_exported; } /**< See above. */
+	void SetExported(bool exported) { m_exported = exported; }
+
+
 	/** [INTERNAL] Release the unique COLLADA id of an object.
 		Use this function wisely, as it leaves the object id-less and without a way to automatically
 		generate a COLLADA id. */
@@ -103,6 +108,8 @@ public:
 			If you want to keep this information, copy it to a local value. */
 	static fm::string CleanSubId(const char* sid);
 	inline static const fm::string CleanSubId(const fm::string& sid) { return CleanSubId(sid.c_str()); } /**< See above. */
+
+	bool m_exported;
 };
 
 #endif // __FCD_OBJECT_WITH_ID_H_

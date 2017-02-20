@@ -52,6 +52,9 @@ public:
 
 	// Document-level asset export.
 	void ExportAsset();
+
+	//bone list to export
+	fm::vector<const char *> boneNameExported;
 };
 
 #define CDOC GetBaseExporter()->GetCOLLADADocument()
