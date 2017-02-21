@@ -548,7 +548,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\fbxsdk;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\pyfbsdk;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\python-2.7.3\include;$(ProjectDir)..\FCollada;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\boost_1_63_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\fbxsdk;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\pyfbsdk;$(MOTIONBUILDER_PATH_2014)\OpenRealitySDK\include\python-2.7.3\include;$(ProjectDir)..\FCollada;$(ProjectDir)..\External\boost_1_63_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;MOBU_PYTHON_PLUGIN;BOOST_ALL_NO_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -572,9 +572,9 @@
     </Link>
     <PostBuildEvent>
       <Message>Installing plug-in...</Message>
-      <Command>copy "$(TargetPath)" "$(MOTIONBUILDER_PATH_2014)\bin\x64\plugins
-cd "$(MOTIONBUILDER_PATH_2014)\bin\x64\plugins\"
-move /y "$(TargetName).dll" "$(TargetName).pyd"</Command>
+      <Command>copy "$(TargetPath)" "$(MOTIONBUILDER_PATH_2014)\bin\x64\plugins"
+move /y "$(MOTIONBUILDER_PATH_2014)\bin\x64\plugins\$(TargetName).dll" "$(MOTIONBUILDER_PATH_2014)\bin\x64\plugins\$(TargetName).pyd"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
