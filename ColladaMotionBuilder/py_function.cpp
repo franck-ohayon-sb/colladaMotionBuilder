@@ -33,13 +33,17 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 			break;
 	}
 
+
+	// Retrieve the frame time.
+	FBPlayerControl controller;
+
 	// Set Current Take to the index given by user
 	// FBPlayerControl stuff will be used on currrentTake
 	global.CurrentTake = globalScene->Takes[indexTake];
 
 
-	// Retrieve the frame time.
-	FBPlayerControl controller;
+	float originalStart = ToSeconds(controller.LoopStart);
+
 #if K_FILMBOX_POINT_RELEASE_VERSION >= 7050
 	samplePeriod = 1.0f / controller.GetTransportFpsValue();
 #else
@@ -104,6 +108,9 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 
 	//set original Take
 	global.CurrentTake = globalScene->Takes[previousIndexTake];
+
+	FBTime t; t.SetSecondDouble(originalStart);
+	controller.Goto(t);
 
 	SAFE_DELETE(exporter);
 }

@@ -52,8 +52,8 @@ public:
 	inline int SamplingEnd() { return samplingEnd; }
 
 	inline void setForceSampling(bool val){ forceSampling = val; }
-	inline void setSamplingStart(bool val){ samplingStart = val; }
-	inline void setSamplingEnd(bool val){ samplingEnd = val; }
+	inline void setSamplingStart(float val){ samplingStart = val; }
+	inline void setSamplingEnd(float val){ samplingEnd = val; }
 
 	inline bool isUsingBoneList(){ return useBoneList; }
 	inline bool isExportingOnlyAnimAndScene(){ return exportOnlyAnimAndScene; }
