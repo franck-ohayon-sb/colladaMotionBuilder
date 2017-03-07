@@ -32,6 +32,9 @@ private:
 	typedef fm::vector<const char *> BoneListName;
 	BoneListName* boneNameExported;
 
+	typedef fm::vector<fm::string> nameSpaceList;
+	nameSpaceList characterNamesSpace;
+
 public:
 
 	enum Values
@@ -66,6 +69,10 @@ public:
 	FMMatrix44 GetParentTransform(FBModel* node, bool isLocal=true);
 
 	void SetBoneListToExport(BoneListName* list){ boneNameExported = list; }
+
+
+
+	nameSpaceList* GetCharactersNamespace() { return &characterNamesSpace; }
 
 private:
 	void ExportTransforms(FCDSceneNode* colladaNode, FBModel* node);

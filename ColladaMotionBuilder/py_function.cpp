@@ -21,7 +21,7 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 	float currentSampleTime;
 	float sampleIntervalEnd;
 	float samplePeriod;
-
+	
 	FBSystem global; // think of FBSystem as a function set, rather than an object.
 	FBScene* globalScene = global.Scene;
 
@@ -36,7 +36,7 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 
 	// Retrieve the frame time.
 	FBPlayerControl controller;
-
+	
 	// Set Current Take to the index given by user
 	// FBPlayerControl stuff will be used on currrentTake
 	global.CurrentTake = globalScene->Takes[indexTake];
@@ -49,11 +49,13 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 #else
 	samplePeriod = 1.0f / 30.0f; // Always use 30 FPS, since I have no way to determine the user's value.
 #endif
-
+	
 	GetOptions()->setBoneList(true);
 	GetOptions()->setExportingOnlyAnimAndScene(true);
-	GetOptions()->setExportingBakedMatrix(true);
-	GetOptions()->setForceSampling(true);
+	GetOptions()->setExportingBakedMatrix(false);
+	GetOptions()->setForceSampling(false);
+	GetOptions()->setCharacterControlerToRetrieveIK(true);
+
 	GetOptions()->setSamplingStart(ToSeconds(controller.LoopStart) / samplePeriod);
 	GetOptions()->setSamplingEnd(ToSeconds(controller.LoopStop) / samplePeriod);
 		
@@ -107,7 +109,7 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 	exporter->Complete();
 
 	//set original Take
-	global.CurrentTake = globalScene->Takes[previousIndexTake];
+		global.CurrentTake = globalScene->Takes[previousIndexTake];
 
 	FBTime t; t.SetSecondDouble(originalStart);
 	controller.Goto(t);

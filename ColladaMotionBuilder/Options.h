@@ -22,6 +22,7 @@ private:
 	bool hasSamplingInterval;
 	int samplingStart;
 	int samplingEnd;
+	bool useCharacterControlerToRetrieveIK;
 
 	bool useBoneList;
 	bool exportOnlyAnimAndScene;
@@ -54,10 +55,12 @@ public:
 	inline void setForceSampling(bool val){ forceSampling = val; }
 	inline void setSamplingStart(float val){ samplingStart = val; }
 	inline void setSamplingEnd(float val){ samplingEnd = val; }
+	inline void setCharacterControlerToRetrieveIK(bool val) { useCharacterControlerToRetrieveIK = val; }
 
 	inline bool isUsingBoneList(){ return useBoneList; }
 	inline bool isExportingOnlyAnimAndScene(){ return exportOnlyAnimAndScene; }
 	inline bool isExportingBakedMatrix(){ return exportBakedMatrix; }
+	inline bool isCharacterControlerUsedToRetrieveIK(){ return useCharacterControlerToRetrieveIK; }
 
 	inline void setBoneList(bool val){ useBoneList = val; }
 	inline void setExportingOnlyAnimAndScene(bool val){ exportOnlyAnimAndScene = val; }

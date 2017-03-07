@@ -53,22 +53,27 @@ xmlNode* FArchiveXML::WriteSceneNode(FCDObject* object, xmlNode* parentNode)
 	}
 	else
 	{
-		node = FArchiveXML::WriteToEntityXMLFCDEntity(sceneNode, parentNode, DAE_NODE_ELEMENT);
-		//if (sceneNode->GetSubId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetSubId());
-		if (sceneNode->GetDaeId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetDaeId());
-
-		// Set the scene node's type.
-		const char* nodeType = sceneNode->GetJointFlag() ? DAE_JOINT_NODE_TYPE : DAE_NODE_NODE_TYPE;
-		AddAttribute(node, DAE_TYPE_ATTRIBUTE, nodeType);
-
-		// Write out the visibility of this node, if it is not visible or if it is animated.
-		if (sceneNode->GetVisibility().IsAnimated() || !sceneNode->IsVisible())
+		if (sceneNode->IsExported())
 		{
-			extraTechnique = const_cast<FCDExtra*>(sceneNode->GetExtra())->GetDefaultType()->AddTechnique(DAE_FCOLLADA_PROFILE);
-			FCDENode* visibilityNode = extraTechnique->AddParameter(DAEFC_VISIBILITY_PARAMETER, sceneNode->GetVisibility() >= 0.5f);
-			visibilityNode->GetAnimated()->Copy(sceneNode->GetVisibility().GetAnimated());
-			extraParameters.push_back(visibilityNode);
+			node = FArchiveXML::WriteToEntityXMLFCDEntity(sceneNode, parentNode, DAE_NODE_ELEMENT);
+			//if (sceneNode->GetSubId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetSubId());
+			if (sceneNode->GetDaeId().length() > 0) AddAttribute(node, DAE_SID_ATTRIBUTE, sceneNode->GetDaeId());
+
+			// Set the scene node's type.
+			const char* nodeType = sceneNode->GetJointFlag() ? DAE_JOINT_NODE_TYPE : DAE_NODE_NODE_TYPE;
+			AddAttribute(node, DAE_TYPE_ATTRIBUTE, nodeType);
+
+			// Write out the visibility of this node, if it is not visible or if it is animated.
+			if (sceneNode->GetVisibility().IsAnimated() || !sceneNode->IsVisible())
+			{
+				extraTechnique = const_cast<FCDExtra*>(sceneNode->GetExtra())->GetDefaultType()->AddTechnique(DAE_FCOLLADA_PROFILE);
+				FCDENode* visibilityNode = extraTechnique->AddParameter(DAEFC_VISIBILITY_PARAMETER, sceneNode->GetVisibility() >= 0.5f);
+				visibilityNode->GetAnimated()->Copy(sceneNode->GetVisibility().GetAnimated());
+				extraParameters.push_back(visibilityNode);
+			}
 		}
+		else
+			node = parentNode;
 	}
 
 	// Write out the transforms
@@ -146,8 +151,7 @@ xmlNode* FArchiveXML::WriteSceneNode(FCDObject* object, xmlNode* parentNode)
 		FCDSceneNode* child = sceneNode->GetChild(c);
 		if (child->GetParent() == sceneNode)
 		{
-			if (child->IsExported())
-				FArchiveXML::LetWriteObject(child, node);
+			FArchiveXML::LetWriteObject(child, node);
 		}
 	}
 
@@ -155,7 +159,8 @@ xmlNode* FArchiveXML::WriteSceneNode(FCDObject* object, xmlNode* parentNode)
 	if (isVisualScene) FArchiveXML::WriteVisualScene(sceneNode, node);
 
 	// Write out the extra information and release the temporarily added extra parameters
-	FArchiveXML::WriteEntityExtra(sceneNode, node);
+	if (sceneNode->IsExported())
+		FArchiveXML::WriteEntityExtra(sceneNode, node);
 
 	if (extraTechnique != NULL)
 	{

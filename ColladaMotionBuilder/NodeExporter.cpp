@@ -164,28 +164,45 @@ FCDSceneNode* NodeExporter::ExportNode(FCDSceneNode* colladaParent, FBModel* nod
 		FCDSceneNode* createUnder = (instantiate) ? colladaParent : colladaScene;
 		colladaNode = createUnder->AddChildNode();
 		
-		if (GetOptions()->isUsingBoneList())
-			colladaNode->SetExported(false);
-		else
-			colladaNode->SetExported(true);
-
-
 		// check if we want to export this node
 		FBComponent* entity = (FBComponent*)node;
+		fm::string fullName = (const char*)entity->GetFullName();
 		fm::string name = (const char*)entity->Name;
+		
+
+		colladaNode->SetExported(true);
 
 		if (GetOptions()->isUsingBoneList())
 		{
+			colladaNode->SetExported(false);
+
 			for (fm::vector<const char*>::iterator it = boneNameExported->begin(); it != boneNameExported->end(); ++it)
 			{
 				fm::string VecName(*it);
+
+//#define DEBUG_MOBU
+
+#ifdef DEBUG_MOBU
+				if (entity->Selected)
+#else
 				if (VecName == name)
+#endif
 				{
-					colladaNode->SetExported(true);
-					break;
+					std::size_t found = std::string::npos;
+					for (fm::vector<fm::string>::iterator it = GetCharactersNamespace()->begin(); it != GetCharactersNamespace()->end(); ++it)
+					{
+						found = fullName.find(*it);
+					}
+
+					if (found == std::string::npos)
+					{
+						colladaNode->SetExported(true);
+						break;
+					}
 				}
 			}
 		}
+
 
 		ExportEntity(colladaNode, node);
 		exportedNodes.insert(node, CountedNode(colladaNode, instantiate ? 1 : 0));
@@ -327,7 +344,7 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 	else
 	{
 		// For decomposed transforms, we need to force sampling if this node has IK.
-		bool forceSampling = HasIK(node);
+		bool forceSampling = GetOptions()->isCharacterControlerUsedToRetrieveIK()? false: HasIK(node);
 
 		// Motion Builder has four animatable transforms: Visibility, Translation,
 		// Rotation and Scaling. It also has a series of non-animatable pivots.
@@ -380,6 +397,10 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		{
 			FCDTTranslation* translation = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
 			translation->SetTranslation(ToFMVector3(node->Translation));
+
+			fstring translate("translate");
+			translation->SetSubId(translate);
+
 			ANIMATABLE(&node->Translation, colladaNode, translation->GetTranslation(), -1, NULL, forceSampling);
 		}
 
@@ -398,6 +419,11 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 				FCDTRotation* rotation = (FCDTRotation*) colladaNode->AddTransform(FCDTransform::ROTATION);
 				rotation->SetAxis(*rotationAxises[orderedRotationIndices[i]]);
 				rotation->SetAngle(preRotation[orderedRotationIndices[i]]);
+	
+				fstring jointOrient("jointOrient");
+				fstring XYZ(orderedRotationIndices[i] == 0 ? "X": orderedRotationIndices[i] == 1 ? "Y": "Z");
+				fstring final(jointOrient + XYZ);
+				rotation->SetSubId(final);
 			}
 		}
 	
@@ -424,6 +450,12 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 				FCDTRotation* rotation = (FCDTRotation*) colladaNode->AddTransform(FCDTransform::ROTATION);
 				rotation->SetAxis(*rotationAxises[orderedRotationIndices[i]]);
 				rotation->SetAngle(angles[orderedRotationIndices[i]]);
+
+				fstring rotate("rotate");
+				fstring XYZ(orderedRotationIndices[i] == 0 ? "X" : orderedRotationIndices[i] == 1 ? "Y" : "Z");
+				fstring final(rotate + XYZ);
+				rotation->SetSubId(final);
+
 				ANIMATABLE_INDEXED_ANGLE(&node->Rotation, orderedRotationIndices[i], colladaNode, rotation->GetAngleAxis(), -1, NULL, forceSampling);
 			}
 		}
@@ -675,6 +707,15 @@ void NodeExporter::FindNodesToSample(FBScene* scene)
 	for (int i = 0; i < characterCount; ++i)
 	{
 		FBCharacter* character = scene->Characters[i];
+
+		FBModel* hipsEffectorModel = character->GetEffectorModel(FBEffectorId::kFBHipsEffectorId);
+		FBComponent* hipsEntity = (FBComponent*)hipsEffectorModel;
+		fm::string fullName = (const char*)hipsEntity->GetFullName();
+		std::size_t found = fullName.find_last_of(":");
+		
+		GetCharactersNamespace()->push_back(fullName.substr(0, found));
+		
+
 		int markerPlacementCount = (int) kFBLastNodeId;
 		for (int j = 0; j < markerPlacementCount; ++j)
 		{

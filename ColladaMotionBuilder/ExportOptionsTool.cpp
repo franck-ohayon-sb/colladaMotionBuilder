@@ -116,6 +116,7 @@ public:
 		{
 			// Recover the export options.
 			GetOptions()->useBoneList = false;
+			GetOptions()->useCharacterControlerToRetrieveIK = false;
 			GetOptions()->exportOnlyAnimAndScene = false;
 			GetOptions()->exportBakedMatrix = false;
 			GetOptions()->exportTriangleStrips = (stripsCheckBox.State == 1);
