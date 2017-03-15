@@ -180,7 +180,7 @@ FCDSceneNode* NodeExporter::ExportNode(FCDSceneNode* colladaParent, FBModel* nod
 			{
 				fm::string VecName(*it);
 
-//#define DEBUG_MOBU
+#define DEBUG_MOBU
 
 #ifdef DEBUG_MOBU
 				if (entity->Selected)
@@ -335,11 +335,95 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 	
 	if (isConstrained || GetOptions()->isExportingBakedMatrix())
 	{
+
+		/*
 		FBMatrix localTransform;
 		node->GetMatrix(localTransform, kModelTransformation, false);
 		FCDTMatrix* colladaTranform = (FCDTMatrix*) colladaNode->AddTransform(FCDTransform::MATRIX);
 		colladaTranform->SetTransform(ToFMMatrix44(localTransform));
 		ANIM->AddModelToSample(node, colladaNode, colladaTranform->GetTransform());
+		*/
+
+		// Get Pre Rotation
+		int rotationOrder;
+		FMVector3 preRotation, postRotation, scalePivotUpdateOffset, rotationPivot, scalePivot, rotationOffset, scaleOffset;
+		bool isRotationDOFActive, isMotionBuilder55Limits;
+
+		const int* orderedRotationIndices;
+		const FMVector3* rotationAxises[3] = { &FMVector3::XAxis, &FMVector3::YAxis, &FMVector3::ZAxis };
+
+
+		GetPropertyValue(node, "PreRotation", preRotation);
+		GetPropertyValue(node, "RotationOrder", rotationOrder);
+		GetPropertyValue(node, "RotationOffset", rotationOffset);
+		GetPropertyValue(node, "RotationActive", isRotationDOFActive);
+		GetPropertyValue(node, "RotationSpaceForLimitOnly", isMotionBuilder55Limits);
+
+
+		switch ((Values)rotationOrder)
+		{
+			case EulerXYZ:
+			case SphericXYZ: { static const int x[3] = { 0, 1, 2 }; orderedRotationIndices = x; break; }
+			case EulerXZY: { static const int x[3] = { 0, 2, 1 }; orderedRotationIndices = x; break; }
+			case EulerYZX: { static const int x[3] = { 1, 2, 0 }; orderedRotationIndices = x; break; }
+			case EulerYXZ: { static const int x[3] = { 1, 0, 2 }; orderedRotationIndices = x; break; }
+			case EulerZXY: { static const int x[3] = { 2, 0, 1 }; orderedRotationIndices = x; break; }
+			case EulerZYX: { static const int x[3] = { 2, 1, 0 }; orderedRotationIndices = x; break; }
+			default: { static const int x[3] = { 0, 1, 2 }; FUFail(orderedRotationIndices = x); break; }
+		}
+
+		FMMatrix44 PreRot = FMMatrix44::Identity;
+		if (!isMotionBuilder55Limits && isRotationDOFActive && !IsEquivalent(preRotation, FMVector3::Zero))
+		{
+			
+			for (int i = 2; i >= 0; --i)
+			{
+				FCDTRotation* rotation = new FCDTRotation(nullptr, NULL);
+				rotation->SetAxis(*rotationAxises[orderedRotationIndices[i]]);
+				rotation->SetAngle(preRotation[orderedRotationIndices[i]]);
+
+				PreRot *= rotation->ToMatrix();
+				delete rotation;
+				rotation = NULL;
+			}
+		}
+
+		FMMatrix44 Rot = FMMatrix44::Identity;
+		// Animatable node rotation
+		if (ANIM->IsAnimated(&node->Rotation) || !IsEquivalent(ToFMVector3(node->Rotation), FMVector3::Zero))
+		{
+			FMVector3 angles = ToFMVector3(node->Rotation);
+			for (int i = 2; i >= 0; --i)
+			{
+				FCDTRotation* rotation = new FCDTRotation(nullptr, NULL);
+				rotation->SetAxis(*rotationAxises[orderedRotationIndices[i]]);
+				rotation->SetAngle(angles[orderedRotationIndices[i]]);
+				Rot *= rotation->ToMatrix();
+
+				delete rotation;
+				rotation = NULL;
+			}
+		}
+
+		// Translation
+		FMMatrix44 Trans = FMMatrix44::Identity;
+		if (ANIM->IsAnimated(&node->Translation) || !IsEquivalent(ToFMVector3(node->Translation), FMVector3::Zero))
+		{
+			FCDTTranslation* translation = new FCDTTranslation(nullptr, NULL);
+			translation->SetTranslation(ToFMVector3(node->Translation));
+			Trans = translation->ToMatrix();
+
+			delete translation;
+			translation = NULL;
+		}
+
+
+		FMMatrix44 FinalMatrix = Trans * PreRot * Rot;
+
+		FCDTMatrix* colladaTranform = (FCDTMatrix*) colladaNode->AddTransform(FCDTransform::MATRIX);
+		colladaTranform->SetTransform(FinalMatrix);
+		ANIM->AddModelToSample(node, colladaNode, colladaTranform->GetTransform());
+		
 	}
 	else
 	{

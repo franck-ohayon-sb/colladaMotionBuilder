@@ -52,7 +52,7 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 	
 	GetOptions()->setBoneList(true);
 	GetOptions()->setExportingOnlyAnimAndScene(true);
-	GetOptions()->setExportingBakedMatrix(false);
+	GetOptions()->setExportingBakedMatrix(true);
 	GetOptions()->setForceSampling(false);
 	GetOptions()->setCharacterControlerToRetrieveIK(true);
 
