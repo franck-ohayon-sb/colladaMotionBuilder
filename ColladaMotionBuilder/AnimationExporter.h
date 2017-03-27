@@ -21,6 +21,7 @@ class FCDAnimation;
 class FCDAnimationCurve;
 class FCDConversionFunctor;
 class FCDEntity;
+class FCDAnimationClip;
 
 class AnimationExporter : public EntityExporter
 {
@@ -70,6 +71,9 @@ public:
 
 	void AddModelToSample(FBModel* node, FCDEntity* colladaNode, FCDParameterAnimatableMatrix44& colladaTransform);
 	void AddPropertyToSample(FBProperty* property, int index, FCDEntity* colladaEntity, FCDAnimated* colladaAnimated, int animatedIndex, bool isAngle);
+
+	FCDAnimationClip* colladaAnimationClip;
+	bool createColladaAnimationClip;
 
 private:
 	// Helpers

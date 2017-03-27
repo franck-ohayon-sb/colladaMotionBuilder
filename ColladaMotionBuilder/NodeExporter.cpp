@@ -125,6 +125,10 @@ void NodeExporter::ExportScene(FBScene* _scene)
 	exportedNodes.insert(scene->RootModel, CountedNode(colladaScene, 1));
 	ExportEntity(colladaScene, scene->RootModel);
 	
+	// Initialize AnimClip
+	ANIM->colladaAnimationClip = NULL;
+	ANIM->createColladaAnimationClip = true;
+	
 	// Export its children.
 	int childCount = scene->RootModel->Children.GetCount();
 	for (int i = 0; i < childCount; ++i)
