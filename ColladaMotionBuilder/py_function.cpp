@@ -15,7 +15,7 @@ namespace py = boost::python;
 
 
 
-void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
+void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList, bool outputMatrix, bool outputMeterUnit)
 {
 	ColladaExporter* exporter;
 	float currentSampleTime;
@@ -49,10 +49,16 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 #else
 	samplePeriod = 1.0f / 30.0f; // Always use 30 FPS, since I have no way to determine the user's value.
 #endif
+
+	GetOptions()->setExportingBakedMatrix(outputMatrix);
+
+	float scaleUnit = outputMeterUnit ? ScaleCMToMeter : ScaleMeterToCM;
+	GetOptions()->setsScaleUnit(scaleUnit);
+
+	GetOptions()->setExportingClipAnimation(true);
 	
 	GetOptions()->setBoneList(true);
 	GetOptions()->setExportingOnlyAnimAndScene(true);
-	GetOptions()->setExportingBakedMatrix(true);
 	GetOptions()->setForceSampling(false);
 	GetOptions()->setCharacterControlerToRetrieveIK(true);
 
@@ -121,7 +127,7 @@ void MobuColladaExporter(const char* DAEName, int indexTake, py::list boneList)
 //--- Use the Macro BOOST_PYTHON_FUNCTION_OVERLOADS to help define function with default arguments.
 //--- BOOST_PYTHON_FUNCTION_OVERLOADS(Shader__CreateShader_Wrapper_Overloads, ORCreateShader_Wrapper, "minimum number arguments", "maximum number arguments")
 
-BOOST_PYTHON_FUNCTION_OVERLOADS(Wrapper_Overloads, MobuColladaExporter, 3, 3)
+BOOST_PYTHON_FUNCTION_OVERLOADS(Wrapper_Overloads, MobuColladaExporter, 5, 5)
 
 
 //--- Define non-member function used in Python

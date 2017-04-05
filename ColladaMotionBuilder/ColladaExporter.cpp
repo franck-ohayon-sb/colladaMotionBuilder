@@ -124,7 +124,16 @@ void ColladaExporter::ExportAsset()
 	//-----
 
 	// System units
-	// asset->SetUnitConversionFactor(0.01f);
+	if (GetOptions()->getScaleUnit() == ScaleCMToMeter)
+	{
+		asset->SetUnitConversionFactor(1.0f);
+		asset->SetUnitName(FC("meter"));
+	}
+	else if (GetOptions()->getScaleUnit() == ScaleMeterToCM)
+	{
+		asset->SetUnitConversionFactor(0.01f);
+		asset->SetUnitName(FC("centimeter"));
+	}
 
 	// System up-axis
 	// asset->SetUpAxis(FMVector3::YAxis);

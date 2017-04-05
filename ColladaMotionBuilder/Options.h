@@ -9,6 +9,10 @@
 #ifndef _COLLADA_MB_OPTIONS_H_
 #define _COLLADA_MB_OPTIONS_H_
 
+
+#define ScaleMeterToCM 1.0f
+#define ScaleCMToMeter 0.01f
+
 // Only one of these should be contained at the FBToolLibrary level..
 class ColladaOptions
 {
@@ -27,6 +31,9 @@ private:
 	bool useBoneList;
 	bool exportOnlyAnimAndScene;
 	bool exportBakedMatrix;
+	bool exportClipAnimation;
+
+	float scaleUnit;
 
 public:
 	ColladaOptions(); // Reads in from the INI file.
@@ -61,10 +68,14 @@ public:
 	inline bool isExportingOnlyAnimAndScene(){ return exportOnlyAnimAndScene; }
 	inline bool isExportingBakedMatrix(){ return exportBakedMatrix; }
 	inline bool isCharacterControlerUsedToRetrieveIK(){ return useCharacterControlerToRetrieveIK; }
+	inline float getScaleUnit(){ return scaleUnit; }
+	inline bool isExportingClipAnimation() { return exportClipAnimation; }
 
 	inline void setBoneList(bool val){ useBoneList = val; }
 	inline void setExportingOnlyAnimAndScene(bool val){ exportOnlyAnimAndScene = val; }
 	inline void setExportingBakedMatrix(bool val){ exportBakedMatrix = val; }
+	inline void setsScaleUnit(float val){ scaleUnit = val; }
+	inline void setExportingClipAnimation(bool val) { exportClipAnimation = val; }
 
 
 private:

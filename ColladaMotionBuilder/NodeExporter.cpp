@@ -21,6 +21,7 @@
 #include "FCDocument/FCDGeometryInstance.h"
 #include "FCDocument/FCDSceneNode.h"
 #include "FCDocument/FCDSkinController.h"
+#include "FCDocument/FCDAnimationCurve.h"
 
 //
 // NodeExporter
@@ -184,7 +185,7 @@ FCDSceneNode* NodeExporter::ExportNode(FCDSceneNode* colladaParent, FBModel* nod
 			{
 				fm::string VecName(*it);
 
-#define DEBUG_MOBU
+//#define DEBUG_MOBU
 
 #ifdef DEBUG_MOBU
 				if (entity->Selected)
@@ -414,7 +415,7 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		if (ANIM->IsAnimated(&node->Translation) || !IsEquivalent(ToFMVector3(node->Translation), FMVector3::Zero))
 		{
 			FCDTTranslation* translation = new FCDTTranslation(nullptr, NULL);
-			translation->SetTranslation(ToFMVector3(node->Translation));
+			translation->SetTranslation(ToFMVector3(node->Translation)*GetOptions()->getScaleUnit());
 			Trans = translation->ToMatrix();
 
 			delete translation;
@@ -484,19 +485,21 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		if (ANIM->IsAnimated(&node->Translation) || !IsEquivalent(ToFMVector3(node->Translation), FMVector3::Zero))
 		{
 			FCDTTranslation* translation = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			translation->SetTranslation(ToFMVector3(node->Translation));
+			translation->SetTranslation(ToFMVector3(node->Translation)*GetOptions()->getScaleUnit());
 
 			fstring translate("translate");
 			translation->SetSubId(translate);
 
-			ANIMATABLE(&node->Translation, colladaNode, translation->GetTranslation(), -1, NULL, forceSampling);
+			
+			FCDConversionScaleFunctor scaleFunc(GetOptions()->getScaleUnit());
+			ANIMATABLE(&node->Translation, colladaNode, translation->GetTranslation(), -1, &scaleFunc, forceSampling);
 		}
 
 		// Rotation Offset
 		if (!IsEquivalent(rotationOffset, FMVector3::Zero))
 		{
 			FCDTTranslation* translate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			translate->SetTranslation(rotationOffset);
+			translate->SetTranslation(rotationOffset*GetOptions()->getScaleUnit());
 		}
 
 		// Pre-rotation
@@ -526,7 +529,7 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		if (!IsEquivalent(rotationPivot, FMVector3::Zero))
 		{
 			FCDTTranslation* pivotTranslate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			pivotTranslate->SetTranslation(rotationPivot);
+			pivotTranslate->SetTranslation(rotationPivot*GetOptions()->getScaleUnit());
 		}
 
 		// Animatable node rotation
@@ -552,7 +555,7 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		if (!IsEquivalent(rotationPivot, FMVector3::Zero))
 		{
 			FCDTTranslation* pivotTranslate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			pivotTranslate->SetTranslation(-rotationPivot);
+			pivotTranslate->SetTranslation(-rotationPivot*GetOptions()->getScaleUnit());
 		}
 
 		// Scale inheritance. TODO: needs to support all animations on parent scales.
@@ -577,21 +580,21 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		if (!IsEquivalent(scaleOffset, FMVector3::Zero))
 		{
 			FCDTTranslation* translate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			translate->SetTranslation(scaleOffset);
+			translate->SetTranslation(scaleOffset*GetOptions()->getScaleUnit());
 		}
 
 		// Scale Pivot updated offset
 		if (!IsEquivalent(scalePivotUpdateOffset, FMVector3::Zero))
 		{
 			FCDTTranslation* pivotTranslate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			pivotTranslate->SetTranslation(scalePivotUpdateOffset);
+			pivotTranslate->SetTranslation(scalePivotUpdateOffset*GetOptions()->getScaleUnit());
 		}
 
 		// Scale Pivot 
 		if (!IsEquivalent(scalePivot, FMVector3::Zero))
 		{
 			FCDTTranslation* pivotTranslate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			pivotTranslate->SetTranslation(scalePivot);
+			pivotTranslate->SetTranslation(scalePivot*GetOptions()->getScaleUnit());
 		}
 
 		// Scale
@@ -606,14 +609,14 @@ void NodeExporter::ExportTransforms(FCDSceneNode* colladaNode, FBModel* node)
 		if (!IsEquivalent(scalePivot, FMVector3::Zero))
 		{
 			FCDTTranslation* pivotTranslate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			pivotTranslate->SetTranslation(-scalePivot);
+			pivotTranslate->SetTranslation(-scalePivot*GetOptions()->getScaleUnit());
 		}
 
 		// Scale Pivot updated offset Reverse
 		if (!IsEquivalent(scalePivotUpdateOffset, FMVector3::Zero))
 		{
 			FCDTTranslation* pivotTranslate = (FCDTTranslation*) colladaNode->AddTransform(FCDTransform::TRANSLATION);
-			pivotTranslate->SetTranslation(-scalePivotUpdateOffset);
+			pivotTranslate->SetTranslation(-scalePivotUpdateOffset*GetOptions()->getScaleUnit());
 		}
 	}
 
@@ -639,7 +642,7 @@ FCDSceneNode* NodeExporter::ExportPivot(FCDSceneNode* colladaNode, FBModel* node
 	if (!IsEquivalent(pivotTranslation, FMVector3::Zero))
 	{
 		FCDTTranslation* translation = (FCDTTranslation*) colladaPivot->AddTransform(FCDTransform::TRANSLATION);
-		translation->SetTranslation(pivotTranslation);
+		translation->SetTranslation(pivotTranslation*GetOptions()->getScaleUnit());
 	}
 	if (!IsEquivalent(pivotRotation, FMVector3::Zero))
 	{
